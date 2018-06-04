@@ -5,15 +5,21 @@
 	introduceBg: './assets/images/introduce-bg.jpg',
 	detailBg: './assets/images/detail-bg.jpg',
 	introTitle:'./assets/images/intro-title.png',
+	friendTitle:'./assets/images/friend-title.jpg',
 	detailTitle:'./assets/images/detail-title.png',
 	entry:'./assets/images/entry.png',
 	arrow: './assets/images/arrow.png',
+	like: './assets/images/like.png',
+	back: './assets/images/back.png',
 	videoPoster:"./assets/images/video-poster.png",
 	//mask: './assets/images/mask.png',
 	
 	msg:'./assets/images/msg.png',
 	title1:'./assets/images/title1-1.png',
 	zlm:'./assets/images/zlm.jpg',
+	head1:'./assets/images/head1.jpg',
+	head2:'./assets/images/head2.jpg',
+
 	head:'./assets/images/head.png',
 	edit:'./assets/images/edit.png',
 	
@@ -47,6 +53,16 @@ var yongyuchuangxin = { //勇于创新
 	videoUrl: './assets/video/aigangjingye.mp4',
 	imageText: '2011年，以张黎明名字命名的“张黎明创新工作室”应运而生，这是国网天津市电力公司的第一个职工创新工作室。工作室成立以来，张黎明带领同事们开展技术革新400余项，获得国家专利140余个，20多项成果填补智能电网建设空白。'
 }
+
+var ganyufengxian = { //甘于奉献
+	title: imgs.detailTitle,
+	videoPoster: imgs.videoPoster,
+	videoText: '“工作是快乐的。创新让工作更快乐。”张黎明常把这句话挂在嘴边勉励同事、徒弟们。 ',
+	image: imgs.zlm,
+	videoUrl: './assets/video/aigangjingye.mp4',
+	imageText: '2011年，以张黎明名字命名的“张黎明创新工作室”应运而生，这是国网天津市电力公司的第一个职工创新工作室。工作室成立以来，张黎明带领同事们开展技术革新400余项，获得国家专利140余个，20多项成果填补智能电网建设空白。'
+}
+
 var comments = [
 	{
 		headimgurl:imgs.head,
