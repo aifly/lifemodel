@@ -46,6 +46,13 @@
   z-index: -1;
 }
 
+.zmiti-introduce-main-ui .zmiti-logo {
+  position: absolute;
+  width: 140px;
+  right: 30px;
+  top: 30px;
+}
+
 .zmiti-introduce-main-ui.show {
   opacity: 1;
   z-index: 241;
@@ -145,6 +152,11 @@
   -webkit-box-flex: 1;
   line-height: 90px;
   border-right: 1px solid #976f22;
+}
+
+.zmiti-introduce-main-ui .zmiti-nav ul li.active {
+  background: #976f22;
+  color: #423108;
 }
 
 .zmiti-introduce-main-ui .zmiti-nav ul li:last-of-type {

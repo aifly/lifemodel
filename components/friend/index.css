@@ -39,10 +39,98 @@
 .zmiti-friend-main-ui {
   opacity: 0;
   z-index: -1;
-  background: #fff;
+  background: #fdf7eb;
+}
+
+.zmiti-friend-main-ui > section {
+  padding-bottom: 40px;
+}
+
+.zmiti-friend-main-ui > section .zmiti-index-logo {
+  position: absolute;
+  width: 120px;
+  right: 30px;
+  top: 30px;
 }
 
 .zmiti-friend-main-ui.show {
   z-index: 1230;
   opacity: 1;
+}
+
+.zmiti-friend-main-ui .zmiti-friend-C {
+  width: 96%;
+  margin: 40px auto;
+  position: relative;
+  display: -webkit-box;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: start;
+  -webkit-box-align: start;
+  font-size: 28px;
+}
+
+.zmiti-friend-main-ui .zmiti-friend-C > div {
+  margin: 0 10px;
+  -webkit-box-flex: 1;
+}
+
+.zmiti-friend-main-ui .zmiti-friend-C > div:nth-of-type(1) {
+  width: 172px;
+}
+
+.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-nickname {
+  color: #2c4a7c;
+}
+
+.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-link {
+  display: -webkit-box;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  -webkit-box-orient: horizontal;
+  margin-top: 50px;
+  -webkit-box-pack: start;
+}
+
+.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-link > div {
+  margin-right: 20px;
+}
+
+.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-time {
+  margin: 50px 0;
+  display: -webkit-box;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: justify;
+  color: #dcc;
+}
+
+.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-like-list {
+  color: #2c4a7c;
+  line-height: 44px;
+}
+
+.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-like-list img {
+  width: 30px;
+}
+
+.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-comment {
+  margin-top: 40px;
+  font-size: 28px;
+  line-height: 40px;
+}
+
+.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-comment span {
+  color: #2c4a7c;
+}
+
+.zmiti-back {
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
 }

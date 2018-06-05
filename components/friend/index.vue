@@ -2,8 +2,75 @@
 	<transition name='main'>
 	
 		<div class="lt-full zmiti-friend-main-ui " :class="{'show':show}"  ref='page'>
-	
 			
+			<section>
+				<div class="zmiti-index-logo">
+					<img :src="imgs.logo" alt="">
+				</div>
+				<img :src="imgs.friendTitle" alt="">
+				<div class="zmiti-friend-C">
+					<div class="zmiti-head">
+						<img :src="imgs.head1" alt="">
+					</div>
+					<div>
+						<div class="zmiti-friend-nickname">张黎明徒弟张斌</div>
+						<div class="zmiti-friend-content">
+							我很荣幸，能在步入企业之初就找到像张黎明这样的工作标杆。
+						</div>
+
+						<div class="zmiti-friend-link">
+							<div>
+								<img :src="imgs.head2" alt="">
+							</div>
+							<div>
+								<span>中宣部授予张黎明“时代楷模”称号</span>
+							</div>
+						</div>
+						<div class="zmiti-friend-time">
+							<div>3分钟前</div>
+							<div><img :src="imgs.like" alt=""></div>
+						</div>
+
+						<div class="zmiti-friend-like-list">
+							<img :src="imgs.heart" alt="">
+							天津滨海新区区委宣传部张宁，国网天津市电力公司党建工作部主任及明，国网天津滨海供电公司员工张斌，滨海新区花园里小区马秀环老人，塘沽街道新城家园社区居委会主任何丽，张黎明儿子
+						</div>
+
+						<div class="zmiti-friend-comment">
+							<span>滨海新区区委宣传部张宁：</span>
+							张黎明在看似平凡中彰显了一名共产党员的先进本色。
+						</div>
+						<div class="zmiti-friend-comment">
+							<span>国网天津市电力公司党建工作部主任及明：</span>
+							张黎明所展现出的良好的党性修养产生了辐射效应，带动了一批党员群众向他看齐。
+						</div>
+
+						<div class="zmiti-friend-comment">
+							<span>马秀环老人：</span>
+							张师傅比我自己孩子还上心。
+						</div>
+
+						<div class="zmiti-friend-comment">
+							<span>塘沽街道新城家园社区居委会主任何丽：</span>
+							他是我们百姓的贴心人，也是我们身边的榜样。
+						</div>
+
+						<div class="zmiti-friend-comment">
+							<span>张黎明儿子：</span>
+							我和爸爸交流不是很多，因为他平时特别忙，但我能感觉到他对周围的人，对家人，甚至不相识的人都非常好，非常负责任。
+						</div>
+
+						<div class="zmiti-friend-comment">
+							<span>张黎明</span>回复：党的十九大报告已经给我们指明了方向，知识型、技能型、创新型，就是我们蓝领工人的奋斗目标。作为一名基层党员，我会继续在服务群众上下功夫。
+						</div>
+						
+					</div>
+				</div>
+			</section>
+			
+			<div class="zmiti-back" v-tap='[hidePage]'>
+				<img :src="imgs.back" alt="">
+			</div>
 	
 		</div>
 	
@@ -15,11 +82,11 @@
 	
 	import {
 	
-		imgs,
-	
-		mainImgList
+		imgs
 	
 	} from '../lib/assets.js';
+
+	import IScroll from 'iscroll';
 	
 	import $ from 'jquery';
 	
@@ -37,7 +104,7 @@
 				imgs,
 				showTeam: false,
 				showQrcode: false,
-				show: true,
+				show: false,
 				viewW: window.innerWidth,
 				viewH: window.innerHeight,
 				showMasks: false,
@@ -52,10 +119,22 @@
 			share() {
 				this.showMasks = true;
 			},
+			hidePage(){
+				this.show = false;
+			}
 		},
 	
 		mounted() {
 			window.s = this;
+
+			this.scroll = new IScroll(this.$refs['page'],{
+			})
+
+			var {obserable} = this;
+			obserable.on('showFriend',()=>{
+				this.show = true;
+				this.scroll.scrollTo(0,0,1);
+			})
 		}
 	
 	}

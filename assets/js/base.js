@@ -1,24 +1,31 @@
 ﻿var imgs = {
 	play: './assets/images/play.png',
-	logo: './assets/images/logo.png',
+	logo: './assets/images/logo1.png',
 	indexBg: './assets/images/index-bg.jpg',
 	introduceBg: './assets/images/introduce-bg.jpg',
 	detailBg: './assets/images/detail-bg.jpg',
 	introTitle:'./assets/images/intro-title.png',
 	friendTitle:'./assets/images/friend-title.jpg',
 	detailTitle:'./assets/images/detail-title.png',
+	detailTitle1:'./assets/images/detail-title2.png',
+	detailTitle2:'./assets/images/detail-title3.png',
 	entry:'./assets/images/entry.png',
 	arrow: './assets/images/arrow.png',
 	like: './assets/images/like.png',
+	point: './assets/images/point.png',
 	back: './assets/images/back.png',
+	index: './assets/images/index.png',
 	videoPoster:"./assets/images/video-poster.png",
 	//mask: './assets/images/mask.png',
 	
 	msg:'./assets/images/msg.png',
 	title1:'./assets/images/title1-1.png',
 	zlm:'./assets/images/zlm.jpg',
-	head1:'./assets/images/head1.jpg',
-	head2:'./assets/images/head2.jpg',
+	zlm1:'./assets/images/zlm1.jpg',
+	zlm2:'./assets/images/zlm2.jpg',
+	head1:'./assets/images/head2.jpg',
+	head2:'./assets/images/head1.jpg',
+	heart: './assets/images/heart.jpg',
 
 	head:'./assets/images/head.png',
 	edit:'./assets/images/edit.png',
@@ -39,6 +46,7 @@ var texts = {
 
 var aigangjingye = {//爱岗敬业
 	title:imgs.detailTitle,
+	subTitle: '张黎明巡查线路图',
 	videoPoster:imgs.videoPoster,
 	videoText: '在同事眼中，张黎明不仅是个勤于学技术、精于干专业的技术工，更是一个办事认真敬业、值得信任的“实诚人”。 ',
 	image:imgs.zlm,
@@ -46,21 +54,23 @@ var aigangjingye = {//爱岗敬业
 	imageText: '一年冬天，张黎明要在夜间巡查沿线77根电线杆。他蹬着自行车一不小心掉进水渠中，冰水将他的棉裤浸透。线路尚未巡完，上岸后，张黎明忍着逐渐结冰的棉裤散发出的刺骨寒气，跨上自行车，硬是将整条线路逐段不落巡查完才回家换衣服。他说“要是不巡完，我就不放心。'
 }
 var yongyuchuangxin = { //勇于创新
-	title: imgs.detailTitle,
+	title: imgs.detailTitle1,
+	subTitle: '张黎明工作室图',
 	videoPoster: imgs.videoPoster,
 	videoText: '“工作是快乐的。创新让工作更快乐。”张黎明常把这句话挂在嘴边勉励同事、徒弟们。 ',
-	image: imgs.zlm,
-	videoUrl: './assets/video/aigangjingye.mp4',
+	image: imgs.zlm1,
+	videoUrl: './assets/video/yongyuchuangxin.mp4',
 	imageText: '2011年，以张黎明名字命名的“张黎明创新工作室”应运而生，这是国网天津市电力公司的第一个职工创新工作室。工作室成立以来，张黎明带领同事们开展技术革新400余项，获得国家专利140余个，20多项成果填补智能电网建设空白。'
 }
 
 var ganyufengxian = { //甘于奉献
-	title: imgs.detailTitle,
+	title: imgs.detailTitle2,
+	subTitle: '张黎明帮助居民修电',
 	videoPoster: imgs.videoPoster,
-	videoText: '“工作是快乐的。创新让工作更快乐。”张黎明常把这句话挂在嘴边勉励同事、徒弟们。 ',
-	image: imgs.zlm,
-	videoUrl: './assets/video/aigangjingye.mp4',
-	imageText: '2011年，以张黎明名字命名的“张黎明创新工作室”应运而生，这是国网天津市电力公司的第一个职工创新工作室。工作室成立以来，张黎明带领同事们开展技术革新400余项，获得国家专利140余个，20多项成果填补智能电网建设空白。'
+	videoText: '电与老百姓的生活休戚相关，张黎明始终惦记着老百姓的用电需要。除了抢修班班长，他还有一个特殊的“头衔”——滨海黎明共产党员服务队队长。  ',
+	image: imgs.zlm2,
+	videoUrl: './assets/video/ganyufengxian.mp4',
+	imageText: '2017年4月12日，滨海新区新开里社区按事先通知安排实施计划停电检修。断电前，服务队突然接到社区居民打来的电话：她96岁的老母亲瘫痪在床，靠呼吸机维持生命，断电随时有生命危险。|张黎明叫上队员带上发电机火速出发。在现场，他们架设起20米长的入户供电线路，实施了持续11个小时的特殊供电服务。'
 }
 
 var comments = [

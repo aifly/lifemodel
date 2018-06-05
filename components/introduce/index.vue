@@ -2,7 +2,9 @@
 	<transition name='main'>
 	
 		<div class="lt-full zmiti-introduce-main-ui " :class="{'show':show}" :style="{background:'url('+imgs.introduceBg+') no-repeat center center',backgroundSize:'cover'}"  ref='page'>
-
+			<div class="zmiti-logo">
+				<img :src="imgs.logo" alt="">
+			</div>
 			<div class="zmiti-introduce-main">
 				<div class="zmiti-introduce-title">
 					<img :src="imgs.introTitle" alt="">
@@ -24,10 +26,10 @@
 
 			<nav class="zmiti-nav">
 				<ul>
-					<li>爱岗敬业</li>
-					<li>勇于创新</li>
-					<li>甘于奉献</li>
-					<li>
+					<li @touchstart='tabIndex = 0' @touchend='tabIndex = -1' :class="{'active':tabIndex === 0}"  v-tap='[entryDetail,"aigangjingye"]'>爱岗敬业</li>
+					<li @touchstart='tabIndex = 1' @touchend='tabIndex = -1' :class="{'active':tabIndex === 1}" v-tap='[entryDetail,"yongyuchuangxin"]'>勇于创新</li>
+					<li @touchstart='tabIndex = 2' @touchend='tabIndex = -1' :class="{'active':tabIndex === 2}" v-tap='[entryDetail,"ganyufengxian"]'>甘于奉献</li>
+					<li @touchstart='tabIndex = 3' @touchend='tabIndex = -1' :class="{'active':tabIndex === 3}" v-tap='[entryFriend]'>
 						<img :src="imgs.msg" alt="">
 					</li>
 				</ul>
@@ -57,6 +59,7 @@
 			return {
 				imgs,
 				texts,
+				tabIndex:-1,
 				showTeam: false,
 				showQrcode: false,
 				show: false,
@@ -74,6 +77,19 @@
 			share() {
 				this.showMasks = true;
 			},
+			entryDetail(key){
+				var {obserable} = this;
+				obserable.trigger({
+					type:"entryDetail",
+					data:key
+				})
+			},
+			entryFriend(){
+				var {obserable} = this;
+				obserable.trigger({
+					type:"showFriend"
+				})
+			}
 		},
 	
 		mounted() {
@@ -83,11 +99,12 @@
 			this.scroll = new IScroll(this.$refs['zmiti-introduce-wrap'],{
 				scrollbars:true
 			});
-
-			setTimeout(() => {
+ 
+			var {obserable} = this;
+			obserable.on('entryIntro',()=>{
+				this.show = true;
 				this.scroll.refresh();
-			}, 100);
-
+			})
 			 
 		}
 	

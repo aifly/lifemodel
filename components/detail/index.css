@@ -59,7 +59,7 @@
 }
 
 .zmiti-detail-main-ui h1 {
-  height: 100px;
+  height: 150px;
 }
 
 .zmiti-detail-main-ui .zmiti-video-C {
@@ -74,7 +74,24 @@
 .zmiti-detail-main-ui .zmiti-image-text {
   width: 80%;
   margin: 20px  auto;
+}
+
+.zmiti-detail-main-ui .zmiti-video-text div,
+.zmiti-detail-main-ui .zmiti-image-text div {
   text-indent: 2em;
+}
+
+.zmiti-detail-main-ui .zmiti-index-logo {
+  position: absolute;
+  width: 120px;
+  right: 30px;
+  top: 30px;
+}
+
+.zmiti-detail-main-ui .zmiti-subtitle {
+  width: 90%;
+  text-align: right;
+  margin: 0 auto;
 }
 
 .zmiti-detail-main-ui .zmiti-comment {

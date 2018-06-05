@@ -58,15 +58,27 @@
 
 	var _componentsIndexIndex2 = _interopRequireDefault(_componentsIndexIndex);
 
-	var _componentsMainIndex = __webpack_require__(17);
+	var _componentsIntroduceIndex = __webpack_require__(17);
+
+	var _componentsIntroduceIndex2 = _interopRequireDefault(_componentsIntroduceIndex);
+
+	var _componentsFriendIndex = __webpack_require__(23);
+
+	var _componentsFriendIndex2 = _interopRequireDefault(_componentsFriendIndex);
+
+	var _componentsDetailIndex = __webpack_require__(28);
+
+	var _componentsDetailIndex2 = _interopRequireDefault(_componentsDetailIndex);
+
+	var _componentsMainIndex = __webpack_require__(33);
 
 	var _componentsMainIndex2 = _interopRequireDefault(_componentsMainIndex);
 
-	var _componentsMusicIndex = __webpack_require__(22);
+	var _componentsMusicIndex = __webpack_require__(38);
 
 	var _componentsMusicIndex2 = _interopRequireDefault(_componentsMusicIndex);
 
-	var _componentsLibObserable = __webpack_require__(25);
+	var _componentsLibObserable = __webpack_require__(41);
 
 	var _componentsLibObserable2 = _interopRequireDefault(_componentsLibObserable);
 
@@ -80,9 +92,9 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	__webpack_require__(26);
+	__webpack_require__(42);
 
-	var _vueJsTap = __webpack_require__(27);
+	var _vueJsTap = __webpack_require__(43);
 
 	var _vueJsTap2 = _interopRequireDefault(_vueJsTap);
 
@@ -122,8 +134,10 @@
 	 	<audio src='./assets/music/photo.mp3' ref='photo'></audio>
 	 	<audio src='./assets/music/bg.mp3' ref='audio'></audio>
 	 	<audio src='./assets/music/tu.mp3' ref='tu' loop></audio>
-	 */
-		template: '<div>\n\t\t<Music :obserable=\'obserable\'></Music>\n\t\t<Index :pv=\'pv\' :nickname=\'nickname\' :headimgurl=\'headimgurl\'   v-if=\'show && !isShare\'  :obserable=\'obserable\'></Index>\n\t\t<Main :pv=\'pv\' :nickname=\'nickname\' :headimgurl=\'headimgurl\'  v-if=\'show && !isShare\'  :obserable=\'obserable\'></Main>\n\t\t<div  v-if=\'!loaded\' :style=\'{background:"#158ae4"}\' class=\'zmiti-loading lt-full\'>\n\t\t\t<div class=\'zmiti-loading-ui\'>\n\t\t\t\t <a href="#">\n\t\t\t  \t\t<section class=\'zmiti-head\' :style="{background:\'url(./assets/images/logo.png) no-repeat center / cover\'}"></section>\n\t\t\t        <div class="line1"></div>\n\t\t\t        <div class="line2"></div>\n\t\t\t        <div class="line3"></div>\n\t\t\t\t\t<div class=\'zmiti-progress\'>{{width}}%</div>\n\t\t\t    </a>\n\t\t\t</div>\n\t\t</div>\n\n\t\n\t</div>',
+	 	<Music :obserable='obserable'></Music>
+	 	<Main :pv='pv' :nickname='nickname' :headimgurl='headimgurl'  v-if='show && !isShare'  :obserable='obserable'></Main>
+	 	*/
+		template: '<div>\n\t\t<Index :pv=\'pv\' :nickname=\'nickname\' :headimgurl=\'headimgurl\'   v-if=\'show && !isShare\'  :obserable=\'obserable\'></Index>\n\t\t<Introduce :pv=\'pv\' v-if=\'show && !isShare\'  :obserable=\'obserable\'></Introduce>\n\t\t<Detail :pv=\'pv\' v-if=\'show && !isShare\'  :obserable=\'obserable\'></Detail>\n\t\t<Friend :pv=\'pv\' v-if=\'show && !isShare\'  :obserable=\'obserable\'></Friend>\n\t\t<div  v-if=\'!loaded\' :style=\'{background:"#158ae4"}\' class=\'zmiti-loading lt-full\'>\n\t\t\t<div class=\'zmiti-loading-ui\'>\n\t\t\t\t <a href="#">\n\t\t\t  \t\t<section class=\'zmiti-head\' :style="{background:\'url(./assets/images/logo.png) no-repeat center / cover\'}"></section>\n\t\t\t        <div class="line1"></div>\n\t\t\t        <div class="line2"></div>\n\t\t\t        <div class="line3"></div>\n\t\t\t\t\t<div class=\'zmiti-progress\'>{{width}}%</div>\n\t\t\t    </a>\n\t\t\t</div>\n\t\t</div>\n\n\t\n\t</div>',
 		methods: {
 
 			loading: function loading(arr, fn, fnEnd) {
@@ -158,7 +172,7 @@
 					url: window.protocol + '//api.zmiti.com/v2/custom/update_pvnum/',
 					type: 'post',
 					data: {
-						customid: 53
+						customid: 60
 					}
 				}).done(function (data) {
 					if (data.getret === 0) {
@@ -174,7 +188,10 @@
 		components: {
 			Index: _componentsIndexIndex2['default'],
 			Music: _componentsMusicIndex2['default'],
-			Main: _componentsMainIndex2['default']
+			Main: _componentsMainIndex2['default'],
+			Introduce: _componentsIntroduceIndex2['default'],
+			Detail: _componentsDetailIndex2['default'],
+			Friend: _componentsFriendIndex2['default']
 		},
 		mounted: function mounted() {
 			var _this2 = this;
@@ -208,30 +225,12 @@
 				}, 1000);
 			}
 
-			var t = setTimeout(function () {
-
-				window.headImgs = [];
-
-				headimgList.length = 870;
-				headimgList.forEach(function (item, i) {
-					headImgs.push(item.headimgurl);
-				});
-				/*for(var i =1 ;i<=Math.min(100,870 - arr.length);i++){
-	   	//headImgs.push('./assets/images/'+i+'.jpg');
-	   }*/
-
-				arr = arr.concat(headImgs);
-
-				s.loading(arr, function (scale) {
-					s.width = scale * 100 | 0;
-				}, function () {
-					s.show = true;
-					s.loaded = true;
-					obserable.trigger({
-						type: 'initWebgl'
-					});
-				});
-			}, 1);
+			s.loading(arr, function (scale) {
+				s.width = scale * 100 | 0;
+			}, function () {
+				s.show = true;
+				s.loaded = true;
+			});
 
 			window.$ = _jquery2['default'];
 
@@ -243,7 +242,7 @@
 				_this2.randomPv += data;
 				_this2.pv += data;
 			});
-			_componentsLibUtilJs2['default'].getOauthurl(obserable);
+			//zmitiUtil.getOauthurl(obserable);
 			_componentsLibUtilJs2['default'].wxConfig(document.title, window.desc);
 			this.updatePv();
 			return;
@@ -12062,7 +12061,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\project\\openingup\\components\\index\\index.vue"
+	  var id = "F:\\xuchang2018\\project\\lifemodel\\components\\index\\index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -12076,41 +12075,38 @@
 
 	// <template>
 	// 	<div v-tap='[entry]'  class="lt-full zmiti-index-main-ui " :style="{background:'url('+imgs.indexBg+') no-repeat center bottom',backgroundSize:'cover'}"  :class="{'show':show}">
-	//
 	// 		<transition name='index'>
 	// 			<div class="zmiti-index" v-if='!showIndexMask'>
 	// 				<div class="zmiti-title">
 	// 					<img @touchstart='imgStart' :src="imgs.title1">
 	// 				</div>
-	// 				<div class="zmiti-entry" >
-	// 					进入
+	// 				<div class="zmiti-index-img" :style="{WebkitTransform:'translateX('+transX+'px)'}">
+	// 					<img :src="imgs.index" alt="">
 	// 				</div>
+	// 				<div class="zmiti-entry" >
+	// 					<img :src="imgs.entry" alt="">
+	// 				</div>
+	//
+	// 				<canvas :width="viewW" height="700" ref='canvas'>
+	//
+	// 				</canvas>
 	// 			</div>
 	// 		</transition>
-	//
-	// 		<!-- <transition name='mask'>
-	// 			<div class="zmiti-mask lt-full" v-if='showIndexMask' :style="{background:'url('+imgs.mask+') no-repeat center bottom',backgroundSize:'cover'}">
-	//
-	// 			</div>
-	// 		</transition> -->
 	//
 	// 		<transition name='video'>
-	// 			<section v-if='showIndexMask' class="zmiti-vidoe-page">
-	// 				<div class="zmiti-text">习近平总书记在庆祝海南建省办经济特区30周年大会上发表重要讲话</div>
-	// 				<div class="zmiti-video-C" v-show='show' >
-	// 					<video loop='loop' src="http://h5cdn.zhongguowangshi.com/hainan.mp4" x5-playsinline="" ref="video" controls x-webkit-airplay="true"  webkit-playsinline="true" playsinline="true" >
-	// 					</video>
-	// 				</div>
-	// 				<div class="zmiti-text zmiti-text1">让我们一起为新时代全面深化改革开放接力</div>
-	// 			</section>
-	// 		</transition>
+	// 			<div class="zmiti-video lt-full" v-show='showVideo' >
+	// 				<video
+	// 					id="my_video" ref='video'
+	// 					style="object-fit: fill; width: 100%; height: 100%;" preload="load" playsinline="true" webkit-playsinline="true" x-webkit-airplay="allow" airplay="allow" x5-video-player-type="h5" :x5VideoPlayerFullscreen="fullscreen" x5-video-orientation="portrait"
+	// 					:loop='false'
+	// 				:src="vidoeUrl"></video>
 	//
-	// 		<transition name='open'>
-	// 			<div v-if='showIndexMask' class="zmiti-open" v-tap='[open]'>
-	// 				开启接力
 	// 			</div>
 	// 		</transition>
 	//
+	// 		<div class="zmiti-index-logo">
+	// 			<img :src="imgs.logo" alt="">
+	// 		</div>
 	// 	</div>
 	// </template>
 	//
@@ -12131,15 +12127,27 @@
 
 	var _libUtil2 = _interopRequireDefault(_libUtil);
 
+	var _point = __webpack_require__(44);
+
+	var _point2 = _interopRequireDefault(_point);
+
 	exports['default'] = {
 		props: ['obserable', 'nickname', 'pv'],
 		name: 'zmitiindex',
 		data: function data() {
 			return {
 				imgs: _libAssetsJs.imgs,
+				pointW: 0,
+				pointH: 0,
+				points: [],
 				show: true,
 				showIndexMask: false,
-				showMasks: false
+				showMasks: false,
+				transX: -200,
+				showVideo: false,
+				viewW: window.innerWidth,
+				fullscreen: true,
+				vidoeUrl: './assets/video/index1.mp4'
 			};
 		},
 		components: {},
@@ -12156,6 +12164,8 @@
 				var obserable = this.obserable;
 
 				this.showIndexMask = true;
+				this.showVideo = true;
+
 				setTimeout(function () {
 					_this.$refs['video'].addEventListener('play', function () {
 						obserable.trigger({
@@ -12165,35 +12175,69 @@
 					});
 
 					_this.$refs['video'].addEventListener('ended', function () {
+						/* obserable.trigger({
+	     	type:"toggleBgMusic",
+	     	data:true
+	     }); */
+
 						obserable.trigger({
-							type: "toggleBgMusic",
-							data: true
+							type: 'entryIntro'
 						});
 					});
 
-					_this.$refs['video'].addEventListener('pause', function () {
-						_this.show && _this.$refs['video'].play();
-					});
+					/* this.$refs['video'].addEventListener('pause',()=>{
+	    	this.show && this.$refs['video'].play()	
+	    }) */
+
 					_this.$refs['video'].play();
 				}, 200);
 			},
-			open: function open() {
+
+			initPoints: function initPoints() {
 				var _this2 = this;
 
-				_libUtil2['default'].wxConfig('我是' + this.nickname + "，已获得改革开放40周年勋章，一起来吧！", '勋章编号：No.' + this.pv);
-				this.show = false;
-				setTimeout(function () {
-					_this2.$refs['video'].pause();
-					obserable.trigger({
-						type: "toggleBgMusic",
-						data: true
-					});
-				}, 400);
-				var obserable = this.obserable;
+				var canvas = this.$refs['canvas'];
+				var context = canvas.getContext('2d');
 
-				obserable.trigger({
-					type: 'openWebGl'
-				});
+				var width = canvas.width,
+				    height = canvas.height;
+				var img = new Image();
+				img.onload = function () {
+					for (var i = 0; i < 50; i++) {
+						var p = new _point2['default']({
+							img: img,
+							context: context
+						});
+						_this2.points.push(p);
+					}
+				};
+				img.src = _libAssetsJs.imgs.point;
+
+				var animationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame,
+				    m = Math;
+
+				var render = function render() {
+					if (width <= 0) {
+						width = canvas.width, height = canvas.height;
+					}
+					context.clearRect(0, 0, width, height);
+
+					_this2.points.map(function (point, i) {
+						point.angle += point.speed;
+						//point.angle = (point.angle | 0)
+						point.angle %= 360;
+						point.x += m.sin(point.angle / 180 * m.PI) * point.speedX;
+
+						point.y -= 1;
+						if (point.defaultY - point.y > point.maxHeight) {
+							point.y = point.defaultY;
+						}
+						point.update();
+					});
+					!_this2.showIndexMask && animationFrame(render);
+				};
+
+				render();
 			}
 
 		},
@@ -12205,6 +12249,36 @@
 			obserable.on('toggleIndex', function (data) {
 				_this3.show = data.show;
 			});
+
+			this.initPoints();
+
+			var s = this;
+			s.lastX = '';
+			s.lastY = '';
+			var i = 0;
+			var startX, startY;
+			window.addEventListener("deviceorientation", function (event) {
+
+				// document.title = event.beta|0;
+				i++;
+				if (i === 1) {
+					startY = event.beta;
+				}
+
+				var x = event.gamma | 0,
+				    y = event.beta | 0;
+
+				if (x < -35) {
+					x = -35;
+				}
+				if (x > 10) {
+					x = 10;
+				}
+
+				//document.title = x;
+
+				s.transX = x;
+			}, true);
 		}
 	};
 
@@ -12246,7 +12320,7 @@
 
 
 	// module
-	exports.push([module.id, ".lt-full {\r\n  width: 100%;\r\n  height: 100%;\r\n  position: absolute;\r\n  left: 0;\r\n  top: 0; }\r\n\r\n.zmiti-text-overflow {\r\n  overflow: hidden;\r\n  white-space: nowrap;\r\n  word-break: break-all;\r\n  text-overflow: ellipsis;\r\n  -webkit-text-overflow: ellipsis; }\r\n\r\n.zmiti-play {\r\n  width: .8rem;\r\n  height: .8rem;\r\n  border-radius: 50%;\r\n  position: fixed;\r\n  z-index: 1000;\r\n  right: .5rem;\r\n  top: .5rem; }\r\n  .zmiti-play.rotate {\r\n    -webkit-animation: rotate 5s linear infinite;\r\n    animation: rotate 5s linear infinite; }\r\n\r\n@-webkit-keyframes rotate {\r\n  to {\r\n    -webkit-transform: rotate(360deg);\r\n    transform: rotate(360deg); } }\r\n.zmiti-index-main-ui {\r\n  overflow: hidden;\r\n  width: 10rem;\r\n  left: 50% !important;\r\n  margin-left: -375px;\r\n  background: #4081dd;\r\n  opacity: 0;\r\n  z-index: -1; }\r\n  .zmiti-index-main-ui.show {\r\n    opacity: 1;\r\n    z-index: 200; }\r\n  .zmiti-index-main-ui .zmiti-title {\r\n    position: absolute;\r\n    height: 60vh;\r\n    left: 50%;\r\n    top: 14vh;\r\n    z-index: 10;\r\n    -webkit-transform: translate3d(-50%, 0, 0);\r\n    transform: translate3d(-50%, 0, 0); }\r\n    .zmiti-index-main-ui .zmiti-title img {\r\n      height: 100%;\r\n      width: auto; }\r\n  .zmiti-index-main-ui .zmiti-index.index-enter-active, .zmiti-index-main-ui .zmiti-index.index-leave-active {\r\n    -webkit-transition: 1s;\r\n    transition: 1s; }\r\n  .zmiti-index-main-ui .zmiti-index.index-enter, .zmiti-index-main-ui .zmiti-index.index-leave-to {\r\n    opacity: 0; }\r\n  .zmiti-index-main-ui .zmiti-mask {\r\n    z-index: 6; }\r\n    .zmiti-index-main-ui .zmiti-mask.mask-enter-active, .zmiti-index-main-ui .zmiti-mask.mask-leave-active {\r\n      -webkit-transition: 1s;\r\n      transition: 1s; }\r\n    .zmiti-index-main-ui .zmiti-mask.mask-enter, .zmiti-index-main-ui .zmiti-mask.mask-leave-to {\r\n      opacity: 0; }\r\n  .zmiti-index-main-ui .zmiti-vidoe-page {\r\n    width: 750px;\r\n    height: 70vh;\r\n    position: absolute;\r\n    top: 50%;\r\n    -webkit-transform: translate3d(0, -50%, 0);\r\n    transform: translate3d(0, -50%, 0);\r\n    left: 0;\r\n    z-index: 100;\r\n    overflow: hidden; }\r\n    .zmiti-index-main-ui .zmiti-vidoe-page .zmiti-text {\r\n      text-align: center;\r\n      width: 90%;\r\n      margin: 0 auto;\r\n      /*margin-top: 20px;*/\r\n      position: relative;\r\n      line-height: 0.6rem;\r\n      text-align: left;\r\n      z-index: 0; }\r\n    .zmiti-index-main-ui .zmiti-vidoe-page .zmiti-text1 {\r\n      position: absolute;\r\n      bottom: 40px;\r\n      text-align: center;\r\n      width: 100%;\r\n      border-top: 3px solid #fff;\r\n      padding-top: 20px; }\r\n    .zmiti-index-main-ui .zmiti-vidoe-page video {\r\n      z-index: 10;\r\n      position: fixed;\r\n      top: 50%;\r\n      margin-top: -284px;\r\n      width: 100%;\r\n      height: 567px;\r\n      background: #000; }\r\n    .zmiti-index-main-ui .zmiti-vidoe-page.video-enter-active, .zmiti-index-main-ui .zmiti-vidoe-page.video-leave-active {\r\n      -webkit-transition: 4s;\r\n      transition: 4s; }\r\n    .zmiti-index-main-ui .zmiti-vidoe-page.video-enter, .zmiti-index-main-ui .zmiti-vidoe-page.video-leave-to {\r\n      height: 0; }\r\n  .zmiti-index-main-ui .zmiti-open {\r\n    width: 400px;\r\n    height: 80px;\r\n    line-height: 80px;\r\n    position: absolute;\r\n    color: #fff;\r\n    left: 175px;\r\n    bottom: 10vh;\r\n    background: #ff3f37;\r\n    z-index: 102;\r\n    text-align: center;\r\n    border-radius: 40px;\r\n    font-size: 40px; }\r\n    .zmiti-index-main-ui .zmiti-open.open-enter-active, .zmiti-index-main-ui .zmiti-open.open-leave-active {\r\n      -webkit-transition: 1s 3s;\r\n      transition: 1s 3s; }\r\n    .zmiti-index-main-ui .zmiti-open.open-enter, .zmiti-index-main-ui .zmiti-open.open-leave-to {\r\n      opacity: 0; }\r\n  .zmiti-index-main-ui .zmiti-entry {\r\n    width: 2.4rem;\r\n    text-align: center;\r\n    background: #ff3f37;\r\n    line-height: .9rem;\r\n    border-radius: 30px;\r\n    position: absolute;\r\n    left: 3.8rem;\r\n    bottom: 1.5rem;\r\n    z-index: 10;\r\n    color: #fff;\r\n    font-size: .45rem;\r\n    -webkit-animation: scale 1s linear infinite alternate;\r\n    animation: scale 1s linear infinite alternate; }\r\n\r\n@-webkit-keyframes rotate1 {\r\n  to {\r\n    -webkit-transform: rotate(360deg) scale(2);\r\n    transform: rotate(360deg) scale(2);\r\n    opacity: 0; } }\r\n.zmiti-loading {\r\n  z-index: 1000; }\r\n  .zmiti-loading .zmiti-loading-ui {\r\n    width: 6rem;\r\n    left: 2rem;\r\n    position: absolute;\r\n    top: 6rem; }\r\n    .zmiti-loading .zmiti-loading-ui .zmiti-loading-bar {\r\n      width: 2rem;\r\n      border-radius: 10px;\r\n      position: relative;\r\n      margin: 0 auto; }\r\n      .zmiti-loading .zmiti-loading-ui .zmiti-loading-bar:before {\r\n        content: '';\r\n        border-radius: 10px;\r\n        position: absolute;\r\n        left: 0;\r\n        top: 0;\r\n        width: 100%;\r\n        height: 100%;\r\n        box-shadow: 0 0 3px rgba(255, 255, 255, 0.5); }\r\n      .zmiti-loading .zmiti-loading-ui .zmiti-loading-bar .zmiti-target {\r\n        width: 0.4rem;\r\n        height: 0.4rem;\r\n        border-radius: 50%;\r\n        background: #fff;\r\n        left: 50%;\r\n        top: .4rem;\r\n        position: absolute;\r\n        margin-left: -0.2rem;\r\n        -webkit-animation: scale linear 2s infinite alternate;\r\n        animation: scale linear 2s infinite alternate; }\r\n    .zmiti-loading .zmiti-loading-ui .zmiti-progress {\r\n      margin-top: .5rem;\r\n      text-align: center;\r\n      color: #fff;\r\n      font-family: Georgia;\r\n      font-size: .7rem; }\r\n\r\n/*# sourceMappingURL=index.css.map */\r\n", ""]);
+	exports.push([module.id, ".lt-full {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n\n.zmiti-text-overflow {\n  overflow: hidden;\n  white-space: nowrap;\n  word-break: break-all;\n  text-overflow: ellipsis;\n  -webkit-text-overflow: ellipsis;\n}\n\n.zmiti-play {\n  width: .8rem;\n  height: .8rem;\n  border-radius: 50%;\n  position: fixed;\n  z-index: 1000;\n  right: .5rem;\n  top: .5rem;\n}\n\n.zmiti-play.rotate {\n  -webkit-animation: rotate 5s linear infinite;\n  animation: rotate 5s linear infinite;\n}\n\n@-webkit-keyframes rotate {\n  to {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n\n.zmiti-index-main-ui {\n  overflow: hidden;\n  width: 10rem;\n  left: 50% !important;\n  margin-left: -375px;\n  background: #4081dd;\n  opacity: 0;\n  z-index: -1;\n}\n\n.zmiti-index-main-ui.show {\n  opacity: 1;\n  z-index: 200;\n}\n\n.zmiti-index-main-ui .zmiti-title {\n  position: absolute;\n  width: 100vw;\n  left: 50%;\n  top: 6vh;\n  z-index: 10;\n  -webkit-transform: translate3d(-50%, 0, 0);\n  transform: translate3d(-50%, 0, 0);\n}\n\n.zmiti-index-main-ui .zmiti-index-img {\n  position: absolute;\n  bottom: 0;\n  left: -200px;\n  z-index: 10;\n  height: 76vh;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n\n.zmiti-index-main-ui .zmiti-index-img img {\n  width: auto;\n  height: 100%;\n}\n\n.zmiti-index-main-ui .zmiti-index.index-enter-active, .zmiti-index-main-ui .zmiti-index.index-leave-active {\n  -webkit-transition: 1s;\n  transition: 1s;\n}\n\n.zmiti-index-main-ui .zmiti-index.index-enter, .zmiti-index-main-ui .zmiti-index.index-leave-to {\n  opacity: 0;\n}\n\n.zmiti-index-main-ui .zmiti-index canvas {\n  position: absolute;\n  z-index: 10;\n}\n\n.zmiti-index-main-ui .zmiti-mask {\n  z-index: 6;\n}\n\n.zmiti-index-main-ui .zmiti-mask.mask-enter-active, .zmiti-index-main-ui .zmiti-mask.mask-leave-active {\n  -webkit-transition: 1s;\n  transition: 1s;\n}\n\n.zmiti-index-main-ui .zmiti-mask.mask-enter, .zmiti-index-main-ui .zmiti-mask.mask-leave-to {\n  opacity: 0;\n}\n\n.zmiti-index-main-ui .zmiti-video {\n  z-index: 10;\n}\n\n.zmiti-index-main-ui .zmiti-index-logo {\n  width: 140px;\n  position: absolute;\n  bottom: 40px;\n  right: 40px;\n}\n\n.zmiti-index-main-ui .zmiti-entry {\n  width: 2.4rem;\n  text-align: center;\n  line-height: .9rem;\n  border-radius: 30px;\n  position: absolute;\n  left: 3.8rem;\n  bottom: 1.5rem;\n  z-index: 10;\n  -webkit-animation: scale 1s linear infinite alternate;\n  animation: scale 1s linear infinite alternate;\n}\n\n@-webkit-keyframes rotate1 {\n  to {\n    -webkit-transform: rotate(360deg) scale(2);\n    transform: rotate(360deg) scale(2);\n    opacity: 0;\n  }\n}\n\n.zmiti-loading {\n  z-index: 1000;\n}\n\n.zmiti-loading .zmiti-loading-ui {\n  width: 6rem;\n  left: 2rem;\n  position: absolute;\n  top: 6rem;\n}\n\n.zmiti-loading .zmiti-loading-ui .zmiti-loading-bar {\n  width: 2rem;\n  border-radius: 10px;\n  position: relative;\n  margin: 0 auto;\n}\n\n.zmiti-loading .zmiti-loading-ui .zmiti-loading-bar:before {\n  content: '';\n  border-radius: 10px;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  box-shadow: 0 0 3px rgba(255, 255, 255, 0.5);\n}\n\n.zmiti-loading .zmiti-loading-ui .zmiti-loading-bar .zmiti-target {\n  width: 0.4rem;\n  height: 0.4rem;\n  border-radius: 50%;\n  background: #fff;\n  left: 50%;\n  top: .4rem;\n  position: absolute;\n  margin-left: -0.2rem;\n  -webkit-animation: scale linear 2s infinite alternate;\n  animation: scale linear 2s infinite alternate;\n}\n\n.zmiti-loading .zmiti-loading-ui .zmiti-progress {\n  margin-top: .5rem;\n  text-align: center;\n  color: #fff;\n  font-family: Georgia;\n  font-size: .7rem;\n}\n", ""]);
 
 	// exports
 
@@ -12318,7 +12392,7 @@
 
 			var s = this;
 
-			var img = window.baseUrl + '/assets/images/301.jpg';
+			var img = window.baseUrl + '/assets/images/300.jpg';
 
 			var appId = this.wxInfo().wxappid;
 
@@ -12330,7 +12404,7 @@
 
 			_jquery2["default"].ajax({
 				type: 'get',
-				url: window.baseUrl + "/weixin/jssdk.php?type=signature&durl=" + code_durl + '&worksid=' + window.customid,
+				url: "http://h5.zhongguowangshi.com/tree/weixin/jssdk.php?type=signature&durl=" + code_durl + '&worksid=' + window.customid,
 				dataType: 'jsonp',
 				jsonp: "callback",
 				jsonpCallback: "jsonFlickrFeed",
@@ -22374,7 +22448,7 @@
 /* 16 */
 /***/ (function(module, exports) {
 
-	module.exports = "\r\n\t<div v-tap='[entry]'  class=\"lt-full zmiti-index-main-ui \" :style=\"{background:'url('+imgs.indexBg+') no-repeat center bottom',backgroundSize:'cover'}\"  :class=\"{'show':show}\">\r\n\t\t\r\n\t\t<transition name='index'>\r\n\t\t\t<div class=\"zmiti-index\" v-if='!showIndexMask'>\r\n\t\t\t\t<div class=\"zmiti-title\">\r\n\t\t\t\t\t<img @touchstart='imgStart' :src=\"imgs.title1\">\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"zmiti-entry\" >\r\n\t\t\t\t\t进入\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</transition>\r\n\r\n\t\t<!-- <transition name='mask'>\r\n\t\t\t<div class=\"zmiti-mask lt-full\" v-if='showIndexMask' :style=\"{background:'url('+imgs.mask+') no-repeat center bottom',backgroundSize:'cover'}\">\r\n\t\t\t\r\n\t\t\t</div>\r\n\t\t</transition> -->\r\n\t\t\r\n\t\t<transition name='video'>\r\n\t\t\t<section v-if='showIndexMask' class=\"zmiti-vidoe-page\">\r\n\t\t\t\t<div class=\"zmiti-text\">习近平总书记在庆祝海南建省办经济特区30周年大会上发表重要讲话</div>\r\n\t\t\t\t<div class=\"zmiti-video-C\" v-show='show' >\r\n\t\t\t\t\t<video loop='loop' src=\"http://h5cdn.zhongguowangshi.com/hainan.mp4\" x5-playsinline=\"\" ref=\"video\" controls x-webkit-airplay=\"true\"  webkit-playsinline=\"true\" playsinline=\"true\" > \r\n\t\t\t\t\t</video>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"zmiti-text zmiti-text1\">让我们一起为新时代全面深化改革开放接力</div>\r\n\t\t\t</section>\r\n\t\t</transition>\r\n\t\t\r\n\t\t<transition name='open'>\r\n\t\t\t<div v-if='showIndexMask' class=\"zmiti-open\" v-tap='[open]'>\r\n\t\t\t\t开启接力\r\n\t\t\t</div>\r\n\t\t</transition>\r\n\r\n\t</div>\r\n";
+	module.exports = "\r\n\t<div v-tap='[entry]'  class=\"lt-full zmiti-index-main-ui \" :style=\"{background:'url('+imgs.indexBg+') no-repeat center bottom',backgroundSize:'cover'}\"  :class=\"{'show':show}\">\r\n\t\t<transition name='index'>\r\n\t\t\t<div class=\"zmiti-index\" v-if='!showIndexMask'>\r\n\t\t\t\t<div class=\"zmiti-title\">\r\n\t\t\t\t\t<img @touchstart='imgStart' :src=\"imgs.title1\">\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"zmiti-index-img\" :style=\"{WebkitTransform:'translateX('+transX+'px)'}\">\r\n\t\t\t\t\t<img :src=\"imgs.index\" alt=\"\">\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"zmiti-entry\" >\r\n\t\t\t\t\t<img :src=\"imgs.entry\" alt=\"\">\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<canvas :width=\"viewW\" height=\"700\" ref='canvas'>\r\n\r\n\t\t\t\t</canvas>\r\n\t\t\t</div>\r\n\t\t</transition>\r\n\r\n\t\t<transition name='video'>\r\n\t\t\t<div class=\"zmiti-video lt-full\" v-show='showVideo' >\r\n\t\t\t\t<video \r\n\t\t\t\t\tid=\"my_video\" ref='video' \r\n\t\t\t\t\tstyle=\"object-fit: fill; width: 100%; height: 100%;\" preload=\"load\" playsinline=\"true\" webkit-playsinline=\"true\" x-webkit-airplay=\"allow\" airplay=\"allow\" x5-video-player-type=\"h5\" :x5VideoPlayerFullscreen=\"fullscreen\" x5-video-orientation=\"portrait\" \r\n\t\t\t\t\t:loop='false'\r\n\t\t\t\t:src=\"vidoeUrl\"></video>\r\n\t\t\t\t\r\n\t\t\t</div>\r\n\t\t</transition>\r\n\r\n\t\t<div class=\"zmiti-index-logo\">\r\n\t\t\t<img :src=\"imgs.logo\" alt=\"\">\r\n\t\t</div>\r\n\t</div>\r\n";
 
 /***/ }),
 /* 17 */
@@ -22382,7 +22456,7 @@
 
 	var __vue_script__, __vue_template__
 	__vue_script__ = __webpack_require__(18)
-	__vue_template__ = __webpack_require__(21)
+	__vue_template__ = __webpack_require__(22)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -22390,7 +22464,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\project\\openingup\\components\\main\\index.vue"
+	  var id = "F:\\xuchang2018\\project\\lifemodel\\components\\introduce\\index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -22404,38 +22478,47 @@
 
 	// <template>
 	// 	<transition name='main'>
-	// 		<div class="lt-full zmiti-main-main-ui "  :class="{'show':show}" :style="{background:'url('+imgs.bg1+') no-repeat center',backgroundSize:'cover'}" ref='page'>
 	//
-	// 			<section v-if='!createImg'>
-	//
-	// 				<canvas :width='viewW' :height='viewH' ref='canvas'></canvas>
-	// 				<canvas :width='viewW' :height='createCanvasH' ref='canvas1' class="canvas1"></canvas>
-	// 				<div class="zmiti-operator" v-if='isAnimated && !isPreviewed'>
-	// 					<div class='zmiti-pv'>你是第{{pv}}位参与者</div>
-	// 					<div v-if='overView' v-tap='[seeHead]' class="zmiti-myheadimg">查看我的头像的位置</div>
-	// 					<div v-if='!overView'  v-tap='[backToImg]' class="zmiti-myheadimg">回看全景</div>
-	// 					<div v-if='overView' v-tap='[preview]' class="zmiti-preview">预览分享图片</div>
+	// 		<div class="lt-full zmiti-introduce-main-ui " :class="{'show':show}" :style="{background:'url('+imgs.introduceBg+') no-repeat center center',backgroundSize:'cover'}"  ref='page'>
+	// 			<div class="zmiti-logo">
+	// 				<img :src="imgs.logo" alt="">
+	// 			</div>
+	// 			<div class="zmiti-introduce-main">
+	// 				<div class="zmiti-introduce-title">
+	// 					<img :src="imgs.introTitle" alt="">
+	// 					<div>{{texts.zlmIntro}}</div>
 	// 				</div>
-	//
-	// 			</section>
-	//
-	// 			<transition name='zmiti-scale'>
-	// 				<div class="zmiti-createimg" v-if='createImg' >
-	// 					<img :src="createImg">
+	// 				<div class="zmiti-introduce-content">
+	// 					<h2 class="zmiti-introduce-name">
+	// 						{{texts.zlmName}}
+	// 					</h2>
+	// 					<div class="zmiti-introduce-wrap" ref='zmiti-introduce-wrap'>
+	// 						<div>
+	// 							<div v-for='(content,i) in texts.zlmIntroContent' :key="i">
+	// 								{{content}}
+	// 							</div>
+	// 						</div>
+	// 					</div>
 	// 				</div>
-	// 			</transition>
+	// 			</div>
 	//
-	// 			<transition name='btn'>
-	// 				<div class="zmiti-btns" v-if='createImg'>
-	// 					<div v-tap='[restart]'>重新点亮</div>
-	// 					<div v-tap='[share]'>分享</div>
-	// 				</div>
-	// 			</transition>
+	// 			<nav class="zmiti-nav">
+	// 				<ul>
+	// 					<li @touchstart='tabIndex = 0' @touchend='tabIndex = -1' :class="{'active':tabIndex === 0}"  v-tap='[entryDetail,"aigangjingye"]'>爱岗敬业</li>
+	// 					<li @touchstart='tabIndex = 1' @touchend='tabIndex = -1' :class="{'active':tabIndex === 1}" v-tap='[entryDetail,"yongyuchuangxin"]'>勇于创新</li>
+	// 					<li @touchstart='tabIndex = 2' @touchend='tabIndex = -1' :class="{'active':tabIndex === 2}" v-tap='[entryDetail,"ganyufengxian"]'>甘于奉献</li>
+	// 					<li @touchstart='tabIndex = 3' @touchend='tabIndex = -1' :class="{'active':tabIndex === 3}" v-tap='[entryFriend]'>
+	// 						<img :src="imgs.msg" alt="">
+	// 					</li>
+	// 				</ul>
+	// 			</nav>
 	//
 	// 			<div class="zmiti-mask" v-if='showMasks' @touchstart='showMasks = false'>
 	// 				<img :src="imgs.arrow">
 	// 			</div>
+	//
 	// 		</div>
+	//
 	// 	</transition>
 	// </template>
 	//
@@ -22452,13 +22535,17 @@
 
 	var _libAssetsJs = __webpack_require__(13);
 
+	var _libUtil = __webpack_require__(14);
+
+	var _libUtil2 = _interopRequireDefault(_libUtil);
+
 	var _jquery = __webpack_require__(15);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _libUtil = __webpack_require__(14);
+	var _iscroll = __webpack_require__(21);
 
-	var _libUtil2 = _interopRequireDefault(_libUtil);
+	var _iscroll2 = _interopRequireDefault(_iscroll);
 
 	exports['default'] = {
 		props: ['obserable', 'pv', 'randomPv', 'nickname', 'headimgurl'],
@@ -22466,484 +22553,59 @@
 		data: function data() {
 			return {
 				imgs: _libAssetsJs.imgs,
+				texts: texts,
+				tabIndex: -1,
 				showTeam: false,
 				showQrcode: false,
-				show: true,
+				show: false,
 				viewW: window.innerWidth,
 				viewH: window.innerHeight,
-				showMasks: false,
-				dots: [],
-				isPreviewed: false,
-				createCanvasH: Math.min(1206, window.innerHeight),
-				createImg: '',
-				headimgs: [],
-				defaultPosition: [],
-				defaultPosition1: [],
-				pressed: undefined,
-				stop: false,
-				isAnimated: false,
-				overView: true,
-				cameraZ: 90,
-				text: ['40年的改革开放历程', '雄辩地证明只有改革开放才能发展中国', '发展社会主义、发展马克思主义']
-
+				showMasks: false
 			};
 		},
+
 		components: {},
-
 		methods: {
-
 			restart: function restart() {
-
 				window.location.href = window.location.href.split('?')[0];
 			},
-
 			share: function share() {
 				this.showMasks = true;
 			},
+			entryDetail: function entryDetail(key) {
+				var obserable = this.obserable;
 
-			preview: function preview() {
-				var _this = this;
-
-				//预览分享图片
-
-				this.isPreviewed = true;
-				this.point.visible = false;
-				var duration = 3000;
-				duration = Math.random() * duration / 2 + duration / 2;
-
-				new TWEEN.Tween(this.camera.position).to({ z: this.camera.position.z + 20, y: this.viewH > 720 * 2 ? 0 : -12 }, duration).easing(TWEEN.Easing.Exponential.InOut).onComplete(function () {
-					//console.log(this.renderer.domElement.toDataURL())
-
-					var canvasMap = _this.fillText();
-				}).start();
-			},
-
-			backToImg: function backToImg() {
-				var _this2 = this;
-
-				var duration = 3000;
-				duration = Math.random() * duration / 2 + duration / 2;
-
-				new TWEEN.Tween(this.camera.position).to({ z: this.cameraZ, x: 0, y: 0 }, duration).easing(TWEEN.Easing.Exponential.InOut).onUpdate(function () {}).start();
-				var scale = Math.random() * (.6 - .2) + .4 - .3;
-				new TWEEN.Tween(this.myHead.scale).to({ x: scale, y: scale }, duration).easing(TWEEN.Easing.Exponential.InOut).onComplete(function () {
-					_this2.point.visible = true;
-					_this2.overView = true;
-				}).start();
-			},
-
-			seeHead: function seeHead() {
-				var _this3 = this;
-
-				var duration = 3000;
-
-				duration = Math.random() * duration / 2 + duration / 2;
-
-				new TWEEN.Tween(this.camera.position).to({ z: 20, x: this.point.position.x, y: this.point.position.y }, duration).easing(TWEEN.Easing.Exponential.InOut).onComplete(function () {
-					_this3.overView = false;
-				}).start();
-				this.point.visible = false;
-				new TWEEN.Tween(this.myHead.scale).to({ x: 3, y: 3 }, duration).easing(TWEEN.Easing.Exponential.InOut).onUpdate(function () {}).start();
-			},
-
-			initWebgl: function initWebgl() {
-				var _this4 = this;
-
-				//
-				if (this.createImg) {
-					return;
-				}
-				var scene = new THREE.Scene();
-				scene.background = new THREE.Color('#333');
-				this.scene = scene;
-				var camera = new THREE.PerspectiveCamera(45, this.viewW / this.viewH, 1, 1000);
-				camera.position.z = this.cameraZ;
-				camera.position.y = 0;
-				this.camera = camera;
-				var renderer = new THREE.WebGLRenderer();
-				this.renderer = renderer;
-				///renderer.setClearColor(new THREE.Color(0xffffff, 1.0));
-				renderer.setSize(this.viewW, this.viewH);
-				renderer.setPixelRatio(window.devicePixelRatio);
-				scene.add(new THREE.AmbientLight('#f90'));
-
-				var skyBoxGeometry = new THREE.BoxGeometry(180, 240, 400);
-
-				var texture = new THREE.TextureLoader().load(_libAssetsJs.imgs.bg);
-				texture.needsUpdate = true;
-
-				var skyBoxMaterial = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide });
-
-				var skyBox = new THREE.Mesh(skyBoxGeometry, skyBoxMaterial);
-				//skyBox.position.y=20;
-				this.skyBox = skyBox;
-
-				//skyBox.visible = false;
-
-				/*var infoPlane = new THREE.Mesh(new THREE.PlaneGeometry(50,50,20),new THREE.MeshLambertMaterial({
-	   	map:new THREE.Texture(canvasMap),transparent:true}))
-	   infoPlane.position.y = -13;
-	   infoPlane.position.z = 13;*/
-
-				scene.add(camera);
-				scene.add(skyBox);
-				//scene.add(infoPlane);
-				//scene.add(ball);
-				this.$refs['page'].appendChild(renderer.domElement);
-
-				var i = 1;
-				var count = 0;
-				var count1 = 0;
-				var sp = .05;
-				var render = function render() {
-					if (count >= 1) {
-
-						_this4.pressed = false;
-					}
-					renderer.render(scene, camera);
-					!_this4.stop && requestAnimationFrame(render);
-					if (_this4.pressed && _this4.headimgs.length) {
-						/*this.headimgs.forEach((headimg)=>{
-	     	headimg.position.x += headimg.speedX;
-	     	headimg.position.y += headimg.speedY;
-	     	headimg.position.z += headimg.speedZ;
-	     })*/
-					}
-
-					if (_this4.point && _this4.isAnimated) {
-						i += 4;
-						i %= 150;
-						//console.log(Math.sin(Math.PI/180*i),i)
-						_this4.point.scale.x = Math.sin(Math.PI / 180 * i);
-						_this4.point.scale.y = Math.sin(Math.PI / 180 * i);
-					}
-
-					//count1++;
-
-					count1 += 1.2;
-
-					if (_this4.group && _this4.pressed) {
-
-						_this4.group.rotation.y += .01; // Math.PI/180*count1;
-						if (_this4.group.rotation.y >= 0) {
-							_this4.group.rotation.y = 0;
-						}
-					}
-
-					TWEEN.update();
-				};
-				render();
-			},
-
-			fillText: function fillText() {
-				var _this5 = this;
-
-				var canvas = this.$refs['canvas1'];
-				canvas.style.position = 'absolute';
-				canvas.style.top = 'auto';
-				canvas.style.bottom = 0;
-				canvas.style.left = 0;
-				canvas.width = this.viewW;
-				canvas.height = this.viewH;
-				var height = this.createCanvasH * .62;
-				canvas.style.zIndex = 100;
-				var context = canvas.getContext('2d');
-
-				context.save();
-				//this.renderer.domElement.style.opacity =0;
-				context.drawImage(this.renderer.domElement, 0, 0, this.viewW, this.viewH);
-				context.restore();
-
-				context.translate(0, this.viewH * .38);
-				//this.$refs['page'].appendChild(canvas);
-				context.textAlign = 'center';
-				context.font = "30px Georgia";
-				context.fillStyle = '#696b72';
-				context.fillText('勋章编号：No.' + this.pv, this.viewW / 2, 50);
-
-				context.strokeStyle = 'rgba(105,107,114,.4)';
-				context.beginPath();
-				context.lineWidth = 1;
-				context.moveTo(50, 80);
-				context.lineTo(this.viewW - 50, 80);
-				context.stroke();
-
-				var img = new Image();
-				//img.crossOrigin = 'anonymous'
-				img.setAttribute("crossOrigin", 'Anonymous');
-				img.onload = function () {
-					context.drawImage(img, 50, 120, 100, 100);
-				};
-				img.src = this.headimgurl || _libAssetsJs.imgs.myhead;
-
-				context.textAlign = 'start';
-				context.font = "24px Arial";
-				this.drawText(context, '我是' + (this.nickname || "新华社网友") + '，已获得改革开放40周年勋章，一起来吧！', 200, 130, this.viewW - 300);
-
-				var img1 = new Image();
-				img1.onload = function () {
-
-					context.drawImage(img1, (_this5.viewW - 200) / 2, height / 3, 200, 200);
-				};
-				img1.src = _libAssetsJs.imgs.qrcode;
-
-				context.textAlign = 'center';
-				context.fillStyle = '#fff';
-				this.text.forEach(function (t, i) {
-					context.fillText(t, _this5.viewW / 2, height / 1.5 + i * 36);
+				obserable.trigger({
+					type: "entryDetail",
+					data: key
 				});
-
-				var img3 = new Image();
-				img3.onload = function () {
-					context.drawImage(img3, _this5.viewW - 150, height / 1.5 + 1 * 16, 140, 67);
-				};
-				img3.src = _libAssetsJs.imgs.copyright;
-
-				setTimeout(function () {
-					_this5.renderer.domElement.style.opacity = 0;
-					_this5.createImg = canvas.toDataURL();
-					//console.log(canvas.toDataURL())
-				}, 2000);
-
-				//context.fillText("你是第"+this.pv+"位参与者",this.viewW/2,this.viewH/4*3);
-				//this.isAnimated = true;
-				return canvas;
 			},
-			drawText: function drawText(context, t, x, y, w) {
-				var chr = t.split("");
-				var temp = "";
-				var row = [];
+			entryFriend: function entryFriend() {
+				var obserable = this.obserable;
 
-				context.textBaseline = "middle";
-
-				for (var a = 0; a < chr.length; a++) {
-					if (context.measureText(temp).width < w) {
-						;
-					} else {
-						row.push(temp);
-						temp = "";
-					}
-					temp += chr[a];
-				}
-
-				row.push(temp);
-				for (var b = 0; b < row.length; b++) {
-					context.fillText(row[b], x, y + (b + 1) * 34);
-				}
-			},
-			loadingTexture: function loadingTexture() {
-				var arr = [];
-				var imgList = window.headImgs;
-				imgList.forEach(function (item) {
-					var loader = new THREE.TextureLoader();
-					var myloader = loader.load(item);
-					var materials = new THREE.SpriteMaterial({
-						map: myloader
-					});
-
-					arr.push(materials);
+				obserable.trigger({
+					type: "showFriend"
 				});
-
-				this.arr = arr;
-
-				return arr;
-			},
-			createHeadimg: function createHeadimg() {
-				var _this6 = this;
-
-				var k = 20,
-				    k1 = 10;
-
-				var materials = this.arr;
-
-				var group = new THREE.Group();
-				var index = this.dots.length * Math.random() | 0;
-				this.dots.forEach(function (dot, i) {
-					if (index === i) {
-
-						var loader = new THREE.TextureLoader();
-						var myloader = loader.load(_this6.headimgurl || _libAssetsJs.imgs.myhead);
-						var material = new THREE.SpriteMaterial({
-							map: myloader
-						});
-						var sprite = new THREE.Sprite(material);
-						_this6.defaultPosition.push([-(_this6.viewW / 2 - dot.x) / k, (_this6.viewH / 2 - dot.y) / k, 2]);
-						_this6.defaultPosition.push([-(_this6.viewW / 2 - dot.x) / k, (_this6.viewH / 2 - dot.y) / k, 1]);
-						_this6.defaultPosition1.push([-(_this6.viewW / 2 - dot.x) / k, (_this6.viewH / 2 - dot.y) / k, 1]);
-						sprite.position.set((Math.random() * _this6.viewW - _this6.viewW / 2) / k1, (Math.random() * _this6.viewH - _this6.viewH / 2) / k1, 0);
-						var scale = Math.random() * (.6 - .2) + .4 - .3;
-						scale = 1;
-						sprite.scale.set(scale, scale, scale);
-
-						var pointLoader = new THREE.TextureLoader();
-						var pointTexture = pointLoader.load(_libAssetsJs.imgs.point);
-						var plane = new THREE.Mesh(new THREE.CircleGeometry(2, 20, 20), new THREE.MeshLambertMaterial({ map: pointTexture, transparent: true }));
-						plane.position.x = sprite.position.x;
-						plane.position.y = sprite.position.y;
-						plane.position.z = sprite.position.z + 1;
-						_this6.myHead = sprite;
-						sprite.name = 'sprite';
-
-						group.add(sprite);
-						group.add(plane);
-						plane.scale.x = plane.scale.y = 0;
-						_this6.point = plane;
-						_this6.point.visible = false;
-
-						_this6.headimgs.push(plane);
-					} else {
-
-						var sprite = new THREE.Sprite(materials[i % materials.length]);
-						_this6.defaultPosition.push([-(_this6.viewW / 2 - dot.x) / k, (_this6.viewH / 2 - dot.y) / k, 0]);
-
-						var theta = Math.random() * 360 | 0;
-						var phi = Math.random() * 360 | 0;
-
-						var r = 15;
-						var x = r * Math.sin(theta * Math.PI / 180) * Math.cos(phi * Math.PI / 180),
-						    y = r * Math.sin(theta * Math.PI / 180) * Math.sin(phi * Math.PI / 180),
-						    z = r * Math.cos(Math.PI / 180 * theta);
-
-						_this6.defaultPosition1 = _this6.defaultPosition1 || [];
-						//sprite.position.set((Math.random()*this.viewW-this.viewW/2)/k1,(Math.random()*this.viewH-this.viewH/2)/k1,0)
-						_this6.defaultPosition1.push([x, y, z]);
-						sprite.position.set(x, y, z);
-						var scale = Math.random() * .2 + .3;
-						sprite.scale.set(scale, scale, scale);
-
-						group.add(sprite);
-					}
-
-					group.rotation.y = -.7;
-					_this6.group = group;
-
-					if (i % 2 === 0) {
-						sprite.speedX = 0;
-						sprite.speedY = 0;
-						sprite.speedZ = Math.random();
-					} else {
-
-						sprite.speedX = Math.random() * (Math.random() - .5 > 0 ? 1 : -1);
-						sprite.speedY = Math.random() * (Math.random() - .5 > 0 ? 1 : -1);
-						sprite.speedZ = Math.random() * 6 + .2;
-					}
-					_this6.headimgs.push(sprite);
-				});
-				//group.rotation.x = Math.PI/180*-70;
-				this.scene.add(group);
-			},
-			initOffScreenCanvas: function initOffScreenCanvas() {
-				if (this.createImg) {
-					return;
-				}
-				var canvas = document.createElement('canvas');
-				var img = new Image();
-				var myCanavs = this.$refs['canvas'];
-				var myContext = myCanavs.getContext('2d');
-				this.context = myContext;
-				var s = this;
-				img.onload = function () {
-					canvas.width = this.width;
-					canvas.height = this.height;
-					var context = canvas.getContext('2d');
-					context.drawImage(this, 0, 0);
-
-					var imgData = context.getImageData(0, 0, this.width, this.height);
-					var gap = 12;
-
-					for (var x = 0; x < imgData.width; x += gap) {
-						for (var y = 0; y < imgData.height; y += gap) {
-
-							var a = (x + y * imgData.width) * 4;
-							if (imgData.data[a + 3] > 128) {
-								s.dots.push({
-									x: x,
-									y: y,
-									r: imgData.data[a],
-									g: imgData.data[a + 1],
-									b: imgData.data[a + 2],
-									a: imgData.data[a + 3]
-								});
-							}
-						}
-					}
-
-					s.createHeadimg();
-
-					//myContext.putImageData(imgData,30,100);
-				};
-				img.src = _libAssetsJs.imgs.title;
-			},
-			animated: function animated() {
-				//运动完成
-
-				this.skyBox.material.needsUpdate = true;
 			}
 		},
-		mounted: function mounted() {
-			var _this7 = this;
 
-			//this.fillText();
+		mounted: function mounted() {
+			var _this = this;
 
 			window.s = this;
 
-			this.loadingTexture();
-			this.initOffScreenCanvas();
-			this.initWebgl();
+			this.scroll = new _iscroll2['default'](this.$refs['zmiti-introduce-wrap'], {
+				scrollbars: true
+			});
 
 			var obserable = this.obserable;
 
-			obserable.on('initWebgl', function () {
-				_this7.loadingTexture();
-				_this7.initOffScreenCanvas();
-				_this7.initWebgl();
-			});
-			obserable.on('openWebGl', function () {
-
-				_this7.pressed = true;
-				var num = 0;
-				var num1 = 0;
-
-				_this7.headimgs.forEach(function (object, i) {
-
-					var duration = 1300;
-
-					var easing = TWEEN.Easing.Exponential.InOut;
-
-					new TWEEN.Tween(object.scale).to({ x: .5, y: .5, z: .5 }, 600).easing(easing).onComplete(function () {
-						num1 += 1;
-						//object.visible = false;
-						if (num1 >= _this7.defaultPosition.length) {
-
-							_this7.headimgs.forEach(function (object, i) {
-
-								var isMyHead = object.name === 'sprite';
-
-								new TWEEN.Tween(object.position).to({ x: isMyHead ? 0 : Math.random() * 5 * (Math.random() - .5 > 0 ? 1 : -1), y: isMyHead ? 0 : Math.random() * 5 * (Math.random() - .5 > 0 ? 1 : -1), z: isMyHead ? 70 : i % 4 !== 0 ? Math.random() * 400 + 10 : 10 }, Math.random() * duration + duration / 2).delay(i * 2).easing(easing).onComplete(function () {
-									num += 1;
-									if (num >= _this7.defaultPosition.length) {
-										var s = _this7;
-
-										num = 0;
-										_this7.headimgs.forEach(function (object, i) {
-											new TWEEN.Tween(object.position).to({ x: _this7.defaultPosition[i][0], y: _this7.defaultPosition[i][1], z: _this7.defaultPosition[i][2] }, Math.random() * duration + duration / 2).delay(i * 2).easing(easing).onComplete(function () {
-												num += 1;
-												if (num >= _this7.defaultPosition.length) {
-													_this7.skyBox.visible = true;
-													_this7.animated();
-													_this7.isAnimated = true;
-													_this7.point.visible = true;
-												}
-											}).start();
-										});
-									}
-								}).start();
-							});
-						}
-					}).start();
-				});
+			obserable.on('entryIntro', function () {
+				_this.show = true;
+				_this.scroll.refresh();
 			});
 		}
+
 	};
 
 	// </script>
@@ -22984,24 +22646,2121 @@
 
 
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\r\n.lt-full {\r\n  width: 100%;\r\n  height: 100%;\r\n  position: absolute;\r\n  left: 0;\r\n  top: 0; }\r\n\r\n.zmiti-text-overflow {\r\n  overflow: hidden;\r\n  white-space: nowrap;\r\n  word-break: break-all;\r\n  text-overflow: ellipsis;\r\n  -webkit-text-overflow: ellipsis; }\r\n\r\n.zmiti-play {\r\n  width: .8rem;\r\n  height: .8rem;\r\n  border-radius: 50%;\r\n  position: fixed;\r\n  z-index: 1000;\r\n  right: .5rem;\r\n  top: .5rem; }\r\n  .zmiti-play.rotate {\r\n    -webkit-animation: rotate 5s linear infinite;\r\n    animation: rotate 5s linear infinite; }\r\n\r\n@-webkit-keyframes rotate {\r\n  to {\r\n    -webkit-transform: rotate(360deg);\r\n    transform: rotate(360deg); } }\r\n.zmiti-main-main-ui {\r\n  overflow: hidden; }\r\n  .zmiti-main-main-ui > canvas {\r\n    position: absolute;\r\n    left: 0;\r\n    top: 0; }\r\n  .zmiti-main-main-ui .myCanavs {\r\n    bottom: 0;\r\n    top: auto;\r\n    z-index: 100; }\r\n  .zmiti-main-main-ui .canvas1 {\r\n    box-sizing: border-box; }\r\n  .zmiti-main-main-ui .zmiti-operator {\r\n    position: absolute;\r\n    z-index: 102;\r\n    width: 100%;\r\n    height: 26vh;\r\n    bottom: 0;\r\n    left: 0;\r\n    text-align: center; }\r\n    .zmiti-main-main-ui .zmiti-operator .zmiti-myheadimg {\r\n      background: #ff3f37;\r\n      color: #Fff;\r\n      display: inline-block;\r\n      text-align: center;\r\n      padding: 0 30px;\r\n      height: 70px;\r\n      line-height: 70px;\r\n      margin: 30px auto 0;\r\n      border-radius: 30px; }\r\n    .zmiti-main-main-ui .zmiti-operator .zmiti-preview {\r\n      text-align: center;\r\n      color: #fff;\r\n      height: 80px;\r\n      line-height: 80px; }\r\n    .zmiti-main-main-ui .zmiti-operator .zmiti-pv {\r\n      text-align: center;\r\n      color: #fff;\r\n      font-family: Georgia;\r\n      font-size: 34px; }\r\n  .zmiti-main-main-ui .zmiti-createimg {\r\n    position: absolute;\r\n    z-index: 11;\r\n    top: 2vh;\r\n    width: 750px;\r\n    -webkit-transform: scale(0.7);\r\n    transform: scale(0.7);\r\n    -webkit-transform-origin: 50% 20%;\r\n    transform-origin: 50% 20%; }\r\n    .zmiti-main-main-ui .zmiti-createimg.zmiti-scale-enter-active, .zmiti-main-main-ui .zmiti-createimg.zmiti-scale-leave-active {\r\n      -webkit-transition: 0.4s;\r\n      transition: 0.4s; }\r\n    .zmiti-main-main-ui .zmiti-createimg.zmiti-scale-enter, .zmiti-main-main-ui .zmiti-createimg.zmiti-scale-leave-to {\r\n      -webkit-transform: scale(1);\r\n      transform: scale(1); }\r\n    .zmiti-main-main-ui .zmiti-createimg:after {\r\n      content: '\\957F\\6309\\4FDD\\5B58\\56FE\\7247';\r\n      position: absolute;\r\n      color: #fff;\r\n      font-size: .36rem;\r\n      bottom: 0rem;\r\n      width: .4rem;\r\n      left: 100%; }\r\n  .zmiti-main-main-ui .zmiti-btns {\r\n    position: absolute;\r\n    width: 80%;\r\n    z-index: 11;\r\n    left: 10%;\r\n    bottom: 6vh;\r\n    display: -webkit-box;\r\n    -webkit-box-align: center;\r\n    -webkit-box-pack: center;\r\n    -webkit-box-orient: horizontal;\r\n    color: #fff; }\r\n    .zmiti-main-main-ui .zmiti-btns.btn-enter-active, .zmiti-main-main-ui .zmiti-btns.btn-leave-active {\r\n      -webkit-transition: 1s 0.6s;\r\n      transition: 1s 0.6s; }\r\n    .zmiti-main-main-ui .zmiti-btns.btn-enter, .zmiti-main-main-ui .zmiti-btns.btn-leave-to {\r\n      opacity: 0; }\r\n    .zmiti-main-main-ui .zmiti-btns > div {\r\n      width: 200px;\r\n      height: 70px;\r\n      line-height: 70px;\r\n      text-align: center;\r\n      background: #ff3f37;\r\n      border-radius: 40px;\r\n      margin: 0 30px; }\r\n  .zmiti-main-main-ui .zmiti-main-info {\r\n    opacity: 0;\r\n    z-index: -1;\r\n    color: #696b72; }\r\n    .zmiti-main-main-ui .zmiti-main-info.show {\r\n      opacity: 1;\r\n      z-index: 99; }\r\n    .zmiti-main-main-ui .zmiti-main-info > h1 {\r\n      height: 38vh; }\r\n    .zmiti-main-main-ui .zmiti-main-info > section {\r\n      height: 62vh;\r\n      width: 750px;\r\n      box-sizing: border-box; }\r\n    .zmiti-main-main-ui .zmiti-main-info .zmiti-code {\r\n      font-family: Georgia;\r\n      font-size: 34px;\r\n      text-align: center;\r\n      height: 80px;\r\n      width: 650px;\r\n      margin: 0 auto;\r\n      border-bottom: 1px solid rgba(105, 107, 114, 0.4); }\r\n    .zmiti-main-main-ui .zmiti-main-info .zmiti-head {\r\n      display: -webkit-box;\r\n      -webkit-box-align: center;\r\n      -webkit-box-pack: center;\r\n      -webkit-box-orient: horizontal;\r\n      width: 650px;\r\n      margin: 40px auto; }\r\n      .zmiti-main-main-ui .zmiti-main-info .zmiti-head > div:nth-of-type(1) {\r\n        width: 100px; }\r\n      .zmiti-main-main-ui .zmiti-main-info .zmiti-head > div:nth-of-type(2) {\r\n        margin-left: 30px;\r\n        -webkit-box-flex: 1; }\r\n    .zmiti-main-main-ui .zmiti-main-info .zmiti-qrcode {\r\n      margin: 0 auto 30px;\r\n      width: 200px; }\r\n    .zmiti-main-main-ui .zmiti-main-info .zmiti-text {\r\n      font-size: 24px;\r\n      color: #fff;\r\n      text-align: center;\r\n      line-height: 50px; }\r\n    .zmiti-main-main-ui .zmiti-main-info .zmiti-logo {\r\n      position: absolute;\r\n      width: 70px;\r\n      left: 60px;\r\n      bottom: 60px; }\r\n\r\n@-webkit-keyframes ar {\r\n  from {\r\n    margin-top: -5px; }\r\n  to {\r\n    margin-top: 5px; } }\r\n\r\n/*# sourceMappingURL=index.css.map */\r\n", ""]);
+	exports.push([module.id, ".lt-full {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n\n.zmiti-text-overflow {\n  overflow: hidden;\n  white-space: nowrap;\n  word-break: break-all;\n  text-overflow: ellipsis;\n  -webkit-text-overflow: ellipsis;\n}\n\n.zmiti-play {\n  width: .8rem;\n  height: .8rem;\n  border-radius: 50%;\n  position: fixed;\n  z-index: 1000;\n  right: .5rem;\n  top: .5rem;\n}\n\n.zmiti-play.rotate {\n  -webkit-animation: rotate 5s linear infinite;\n  animation: rotate 5s linear infinite;\n}\n\n@-webkit-keyframes rotate {\n  to {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n\n.zmiti-introduce-main-ui {\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  overflow: hidden;\n  opacity: 0;\n  z-index: -1;\n}\n\n.zmiti-introduce-main-ui .zmiti-logo {\n  position: absolute;\n  width: 140px;\n  right: 30px;\n  top: 30px;\n}\n\n.zmiti-introduce-main-ui.show {\n  opacity: 1;\n  z-index: 241;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main {\n  width: 90vw;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-title img {\n  width: 200px;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-title div {\n  margin: 30px 0;\n  color: #504125;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content h2 {\n  color: #8b5e07;\n  font-size: 40px;\n  text-indent: 20px;\n  position: relative;\n  margin: 20px 0;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content h2:before {\n  content: \"\";\n  position: absolute;\n  width: 5px;\n  height: 70%;\n  left: 0;\n  top: 20%;\n  background: #8b5e07;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content .zmiti-introduce-wrap {\n  position: relative;\n  width: 50vw;\n  height: 50vh;\n  overflow: hidden;\n  background: rgba(139, 94, 1, 0.1);\n  color: #504125;\n  padding: 20px 0;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content .zmiti-introduce-wrap > div {\n  padding-bottom: 30px;\n  width: 92%;\n  margin: 0 auto;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content .zmiti-introduce-wrap > div > div {\n  margin: 10px 0;\n  line-height: 40px;\n  text-indent: 2em;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content .zmiti-introduce-wrap .iScrollVerticalScrollbar {\n  background: #c69e50;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content .zmiti-introduce-wrap .iScrollVerticalScrollbar .iScrollIndicator {\n  background: #8b5e07 !important;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav {\n  position: absolute;\n  width: 750px;\n  height: 90px;\n  line-height: 90px;\n  left: 0;\n  bottom: 0;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav:before {\n  content: '';\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  left: 0;\n  top: 0;\n  background: #b88f3f;\n  z-index: -1;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav ul {\n  text-align: center;\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  color: #714a00;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav ul li {\n  -webkit-box-flex: 1;\n  line-height: 90px;\n  border-right: 1px solid #976f22;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav ul li.active {\n  background: #976f22;\n  color: #423108;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav ul li:last-of-type {\n  width: 60px;\n  border: none;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav ul li:last-of-type img {\n  width: 60px;\n}\n\n@-webkit-keyframes ar {\n  from {\n    margin-top: -5px;\n  }\n  to {\n    margin-top: 5px;\n  }\n}\n", ""]);
 
 	// exports
 
 
 /***/ }),
 /* 21 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = "\r\n\t<transition name='main'>\r\n\t\t<div class=\"lt-full zmiti-main-main-ui \"  :class=\"{'show':show}\" :style=\"{background:'url('+imgs.bg1+') no-repeat center',backgroundSize:'cover'}\" ref='page'>\r\n\r\n\t\t\t<section v-if='!createImg'>\r\n\t\t\t\t\r\n\t\t\t\t<canvas :width='viewW' :height='viewH' ref='canvas'></canvas>\r\n\t\t\t\t<canvas :width='viewW' :height='createCanvasH' ref='canvas1' class=\"canvas1\"></canvas>\r\n\t\t\t\t<div class=\"zmiti-operator\" v-if='isAnimated && !isPreviewed'>\r\n\t\t\t\t\t<div class='zmiti-pv'>你是第{{pv}}位参与者</div>\r\n\t\t\t\t\t<div v-if='overView' v-tap='[seeHead]' class=\"zmiti-myheadimg\">查看我的头像的位置</div>\r\n\t\t\t\t\t<div v-if='!overView'  v-tap='[backToImg]' class=\"zmiti-myheadimg\">回看全景</div>\r\n\t\t\t\t\t<div v-if='overView' v-tap='[preview]' class=\"zmiti-preview\">预览分享图片</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t</section>\r\n\r\n\t\t\t<transition name='zmiti-scale'>\r\n\t\t\t\t<div class=\"zmiti-createimg\" v-if='createImg' >\r\n\t\t\t\t\t<img :src=\"createImg\">\r\n\t\t\t\t</div>\r\n\t\t\t</transition>\r\n\r\n\t\t\t<transition name='btn'>\r\n\t\t\t\t<div class=\"zmiti-btns\" v-if='createImg'>\r\n\t\t\t\t\t<div v-tap='[restart]'>重新点亮</div>\r\n\t\t\t\t\t<div v-tap='[share]'>分享</div>\r\n\t\t\t\t</div>\r\n\t\t\t</transition>\r\n\t\t\t\r\n\t\t\t<div class=\"zmiti-mask\" v-if='showMasks' @touchstart='showMasks = false'>\r\n\t\t\t\t<img :src=\"imgs.arrow\">\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</transition>\r\n";
+	var __WEBPACK_AMD_DEFINE_RESULT__;/*! iScroll v5.2.0 ~ (c) 2008-2016 Matteo Spinelli ~ http://cubiq.org/license */
+	(function (window, document, Math) {
+	var rAF = window.requestAnimationFrame	||
+		window.webkitRequestAnimationFrame	||
+		window.mozRequestAnimationFrame		||
+		window.oRequestAnimationFrame		||
+		window.msRequestAnimationFrame		||
+		function (callback) { window.setTimeout(callback, 1000 / 60); };
+
+	var utils = (function () {
+		var me = {};
+
+		var _elementStyle = document.createElement('div').style;
+		var _vendor = (function () {
+			var vendors = ['t', 'webkitT', 'MozT', 'msT', 'OT'],
+				transform,
+				i = 0,
+				l = vendors.length;
+
+			for ( ; i < l; i++ ) {
+				transform = vendors[i] + 'ransform';
+				if ( transform in _elementStyle ) return vendors[i].substr(0, vendors[i].length-1);
+			}
+
+			return false;
+		})();
+
+		function _prefixStyle (style) {
+			if ( _vendor === false ) return false;
+			if ( _vendor === '' ) return style;
+			return _vendor + style.charAt(0).toUpperCase() + style.substr(1);
+		}
+
+		me.getTime = Date.now || function getTime () { return new Date().getTime(); };
+
+		me.extend = function (target, obj) {
+			for ( var i in obj ) {
+				target[i] = obj[i];
+			}
+		};
+
+		me.addEvent = function (el, type, fn, capture) {
+			el.addEventListener(type, fn, !!capture);
+		};
+
+		me.removeEvent = function (el, type, fn, capture) {
+			el.removeEventListener(type, fn, !!capture);
+		};
+
+		me.prefixPointerEvent = function (pointerEvent) {
+			return window.MSPointerEvent ?
+				'MSPointer' + pointerEvent.charAt(7).toUpperCase() + pointerEvent.substr(8):
+				pointerEvent;
+		};
+
+		me.momentum = function (current, start, time, lowerMargin, wrapperSize, deceleration) {
+			var distance = current - start,
+				speed = Math.abs(distance) / time,
+				destination,
+				duration;
+
+			deceleration = deceleration === undefined ? 0.0006 : deceleration;
+
+			destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? -1 : 1 );
+			duration = speed / deceleration;
+
+			if ( destination < lowerMargin ) {
+				destination = wrapperSize ? lowerMargin - ( wrapperSize / 2.5 * ( speed / 8 ) ) : lowerMargin;
+				distance = Math.abs(destination - current);
+				duration = distance / speed;
+			} else if ( destination > 0 ) {
+				destination = wrapperSize ? wrapperSize / 2.5 * ( speed / 8 ) : 0;
+				distance = Math.abs(current) + destination;
+				duration = distance / speed;
+			}
+
+			return {
+				destination: Math.round(destination),
+				duration: duration
+			};
+		};
+
+		var _transform = _prefixStyle('transform');
+
+		me.extend(me, {
+			hasTransform: _transform !== false,
+			hasPerspective: _prefixStyle('perspective') in _elementStyle,
+			hasTouch: 'ontouchstart' in window,
+			hasPointer: !!(window.PointerEvent || window.MSPointerEvent), // IE10 is prefixed
+			hasTransition: _prefixStyle('transition') in _elementStyle
+		});
+
+		/*
+		This should find all Android browsers lower than build 535.19 (both stock browser and webview)
+		- galaxy S2 is ok
+	    - 2.3.6 : `AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1`
+	    - 4.0.4 : `AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30`
+	   - galaxy S3 is badAndroid (stock brower, webview)
+	     `AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30`
+	   - galaxy S4 is badAndroid (stock brower, webview)
+	     `AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30`
+	   - galaxy S5 is OK
+	     `AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36 (Chrome/)`
+	   - galaxy S6 is OK
+	     `AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36 (Chrome/)`
+	  */
+		me.isBadAndroid = (function() {
+			var appVersion = window.navigator.appVersion;
+			// Android browser is not a chrome browser.
+			if (/Android/.test(appVersion) && !(/Chrome\/\d/.test(appVersion))) {
+				var safariVersion = appVersion.match(/Safari\/(\d+.\d)/);
+				if(safariVersion && typeof safariVersion === "object" && safariVersion.length >= 2) {
+					return parseFloat(safariVersion[1]) < 535.19;
+				} else {
+					return true;
+				}
+			} else {
+				return false;
+			}
+		})();
+
+		me.extend(me.style = {}, {
+			transform: _transform,
+			transitionTimingFunction: _prefixStyle('transitionTimingFunction'),
+			transitionDuration: _prefixStyle('transitionDuration'),
+			transitionDelay: _prefixStyle('transitionDelay'),
+			transformOrigin: _prefixStyle('transformOrigin')
+		});
+
+		me.hasClass = function (e, c) {
+			var re = new RegExp("(^|\\s)" + c + "(\\s|$)");
+			return re.test(e.className);
+		};
+
+		me.addClass = function (e, c) {
+			if ( me.hasClass(e, c) ) {
+				return;
+			}
+
+			var newclass = e.className.split(' ');
+			newclass.push(c);
+			e.className = newclass.join(' ');
+		};
+
+		me.removeClass = function (e, c) {
+			if ( !me.hasClass(e, c) ) {
+				return;
+			}
+
+			var re = new RegExp("(^|\\s)" + c + "(\\s|$)", 'g');
+			e.className = e.className.replace(re, ' ');
+		};
+
+		me.offset = function (el) {
+			var left = -el.offsetLeft,
+				top = -el.offsetTop;
+
+			// jshint -W084
+			while (el = el.offsetParent) {
+				left -= el.offsetLeft;
+				top -= el.offsetTop;
+			}
+			// jshint +W084
+
+			return {
+				left: left,
+				top: top
+			};
+		};
+
+		me.preventDefaultException = function (el, exceptions) {
+			for ( var i in exceptions ) {
+				if ( exceptions[i].test(el[i]) ) {
+					return true;
+				}
+			}
+
+			return false;
+		};
+
+		me.extend(me.eventType = {}, {
+			touchstart: 1,
+			touchmove: 1,
+			touchend: 1,
+
+			mousedown: 2,
+			mousemove: 2,
+			mouseup: 2,
+
+			pointerdown: 3,
+			pointermove: 3,
+			pointerup: 3,
+
+			MSPointerDown: 3,
+			MSPointerMove: 3,
+			MSPointerUp: 3
+		});
+
+		me.extend(me.ease = {}, {
+			quadratic: {
+				style: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+				fn: function (k) {
+					return k * ( 2 - k );
+				}
+			},
+			circular: {
+				style: 'cubic-bezier(0.1, 0.57, 0.1, 1)',	// Not properly "circular" but this looks better, it should be (0.075, 0.82, 0.165, 1)
+				fn: function (k) {
+					return Math.sqrt( 1 - ( --k * k ) );
+				}
+			},
+			back: {
+				style: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+				fn: function (k) {
+					var b = 4;
+					return ( k = k - 1 ) * k * ( ( b + 1 ) * k + b ) + 1;
+				}
+			},
+			bounce: {
+				style: '',
+				fn: function (k) {
+					if ( ( k /= 1 ) < ( 1 / 2.75 ) ) {
+						return 7.5625 * k * k;
+					} else if ( k < ( 2 / 2.75 ) ) {
+						return 7.5625 * ( k -= ( 1.5 / 2.75 ) ) * k + 0.75;
+					} else if ( k < ( 2.5 / 2.75 ) ) {
+						return 7.5625 * ( k -= ( 2.25 / 2.75 ) ) * k + 0.9375;
+					} else {
+						return 7.5625 * ( k -= ( 2.625 / 2.75 ) ) * k + 0.984375;
+					}
+				}
+			},
+			elastic: {
+				style: '',
+				fn: function (k) {
+					var f = 0.22,
+						e = 0.4;
+
+					if ( k === 0 ) { return 0; }
+					if ( k == 1 ) { return 1; }
+
+					return ( e * Math.pow( 2, - 10 * k ) * Math.sin( ( k - f / 4 ) * ( 2 * Math.PI ) / f ) + 1 );
+				}
+			}
+		});
+
+		me.tap = function (e, eventName) {
+			var ev = document.createEvent('Event');
+			ev.initEvent(eventName, true, true);
+			ev.pageX = e.pageX;
+			ev.pageY = e.pageY;
+			e.target.dispatchEvent(ev);
+		};
+
+		me.click = function (e) {
+			var target = e.target,
+				ev;
+
+			if ( !(/(SELECT|INPUT|TEXTAREA)/i).test(target.tagName) ) {
+				ev = document.createEvent('MouseEvents');
+				ev.initMouseEvent('click', true, true, e.view, 1,
+					target.screenX, target.screenY, target.clientX, target.clientY,
+					e.ctrlKey, e.altKey, e.shiftKey, e.metaKey,
+					0, null);
+
+				ev._constructed = true;
+				target.dispatchEvent(ev);
+			}
+		};
+
+		return me;
+	})();
+	function IScroll (el, options) {
+		this.wrapper = typeof el == 'string' ? document.querySelector(el) : el;
+		this.scroller = this.wrapper.children[0];
+		this.scrollerStyle = this.scroller.style;		// cache style for better performance
+
+		this.options = {
+
+			resizeScrollbars: true,
+
+			mouseWheelSpeed: 20,
+
+			snapThreshold: 0.334,
+
+	// INSERT POINT: OPTIONS
+			disablePointer : !utils.hasPointer,
+			disableTouch : utils.hasPointer || !utils.hasTouch,
+			disableMouse : utils.hasPointer || utils.hasTouch,
+			startX: 0,
+			startY: 0,
+			scrollY: true,
+			directionLockThreshold: 5,
+			momentum: true,
+
+			bounce: true,
+			bounceTime: 600,
+			bounceEasing: '',
+
+			preventDefault: true,
+			preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/ },
+
+			HWCompositing: true,
+			useTransition: true,
+			useTransform: true,
+			bindToWrapper: typeof window.onmousedown === "undefined"
+		};
+
+		for ( var i in options ) {
+			this.options[i] = options[i];
+		}
+
+		// Normalize options
+		this.translateZ = this.options.HWCompositing && utils.hasPerspective ? ' translateZ(0)' : '';
+
+		this.options.useTransition = utils.hasTransition && this.options.useTransition;
+		this.options.useTransform = utils.hasTransform && this.options.useTransform;
+
+		this.options.eventPassthrough = this.options.eventPassthrough === true ? 'vertical' : this.options.eventPassthrough;
+		this.options.preventDefault = !this.options.eventPassthrough && this.options.preventDefault;
+
+		// If you want eventPassthrough I have to lock one of the axes
+		this.options.scrollY = this.options.eventPassthrough == 'vertical' ? false : this.options.scrollY;
+		this.options.scrollX = this.options.eventPassthrough == 'horizontal' ? false : this.options.scrollX;
+
+		// With eventPassthrough we also need lockDirection mechanism
+		this.options.freeScroll = this.options.freeScroll && !this.options.eventPassthrough;
+		this.options.directionLockThreshold = this.options.eventPassthrough ? 0 : this.options.directionLockThreshold;
+
+		this.options.bounceEasing = typeof this.options.bounceEasing == 'string' ? utils.ease[this.options.bounceEasing] || utils.ease.circular : this.options.bounceEasing;
+
+		this.options.resizePolling = this.options.resizePolling === undefined ? 60 : this.options.resizePolling;
+
+		if ( this.options.tap === true ) {
+			this.options.tap = 'tap';
+		}
+
+		if ( this.options.shrinkScrollbars == 'scale' ) {
+			this.options.useTransition = false;
+		}
+
+		this.options.invertWheelDirection = this.options.invertWheelDirection ? -1 : 1;
+
+	// INSERT POINT: NORMALIZATION
+
+		// Some defaults
+		this.x = 0;
+		this.y = 0;
+		this.directionX = 0;
+		this.directionY = 0;
+		this._events = {};
+
+	// INSERT POINT: DEFAULTS
+
+		this._init();
+		this.refresh();
+
+		this.scrollTo(this.options.startX, this.options.startY);
+		this.enable();
+	}
+
+	IScroll.prototype = {
+		version: '5.2.0',
+
+		_init: function () {
+			this._initEvents();
+
+			if ( this.options.scrollbars || this.options.indicators ) {
+				this._initIndicators();
+			}
+
+			if ( this.options.mouseWheel ) {
+				this._initWheel();
+			}
+
+			if ( this.options.snap ) {
+				this._initSnap();
+			}
+
+			if ( this.options.keyBindings ) {
+				this._initKeys();
+			}
+
+	// INSERT POINT: _init
+
+		},
+
+		destroy: function () {
+			this._initEvents(true);
+			clearTimeout(this.resizeTimeout);
+	 		this.resizeTimeout = null;
+			this._execEvent('destroy');
+		},
+
+		_transitionEnd: function (e) {
+			if ( e.target != this.scroller || !this.isInTransition ) {
+				return;
+			}
+
+			this._transitionTime();
+			if ( !this.resetPosition(this.options.bounceTime) ) {
+				this.isInTransition = false;
+				this._execEvent('scrollEnd');
+			}
+		},
+
+		_start: function (e) {
+			// React to left mouse button only
+			if ( utils.eventType[e.type] != 1 ) {
+			  // for button property
+			  // http://unixpapa.com/js/mouse.html
+			  var button;
+		    if (!e.which) {
+		      /* IE case */
+		      button = (e.button < 2) ? 0 :
+		               ((e.button == 4) ? 1 : 2);
+		    } else {
+		      /* All others */
+		      button = e.button;
+		    }
+				if ( button !== 0 ) {
+					return;
+				}
+			}
+
+			if ( !this.enabled || (this.initiated && utils.eventType[e.type] !== this.initiated) ) {
+				return;
+			}
+
+			if ( this.options.preventDefault && !utils.isBadAndroid && !utils.preventDefaultException(e.target, this.options.preventDefaultException) ) {
+				e.preventDefault();
+			}
+
+			var point = e.touches ? e.touches[0] : e,
+				pos;
+
+			this.initiated	= utils.eventType[e.type];
+			this.moved		= false;
+			this.distX		= 0;
+			this.distY		= 0;
+			this.directionX = 0;
+			this.directionY = 0;
+			this.directionLocked = 0;
+
+			this.startTime = utils.getTime();
+
+			if ( this.options.useTransition && this.isInTransition ) {
+				this._transitionTime();
+				this.isInTransition = false;
+				pos = this.getComputedPosition();
+				this._translate(Math.round(pos.x), Math.round(pos.y));
+				this._execEvent('scrollEnd');
+			} else if ( !this.options.useTransition && this.isAnimating ) {
+				this.isAnimating = false;
+				this._execEvent('scrollEnd');
+			}
+
+			this.startX    = this.x;
+			this.startY    = this.y;
+			this.absStartX = this.x;
+			this.absStartY = this.y;
+			this.pointX    = point.pageX;
+			this.pointY    = point.pageY;
+
+			this._execEvent('beforeScrollStart');
+		},
+
+		_move: function (e) {
+			if ( !this.enabled || utils.eventType[e.type] !== this.initiated ) {
+				return;
+			}
+
+			if ( this.options.preventDefault ) {	// increases performance on Android? TODO: check!
+				e.preventDefault();
+			}
+
+			var point		= e.touches ? e.touches[0] : e,
+				deltaX		= point.pageX - this.pointX,
+				deltaY		= point.pageY - this.pointY,
+				timestamp	= utils.getTime(),
+				newX, newY,
+				absDistX, absDistY;
+
+			this.pointX		= point.pageX;
+			this.pointY		= point.pageY;
+
+			this.distX		+= deltaX;
+			this.distY		+= deltaY;
+			absDistX		= Math.abs(this.distX);
+			absDistY		= Math.abs(this.distY);
+
+			// We need to move at least 10 pixels for the scrolling to initiate
+			if ( timestamp - this.endTime > 300 && (absDistX < 10 && absDistY < 10) ) {
+				return;
+			}
+
+			// If you are scrolling in one direction lock the other
+			if ( !this.directionLocked && !this.options.freeScroll ) {
+				if ( absDistX > absDistY + this.options.directionLockThreshold ) {
+					this.directionLocked = 'h';		// lock horizontally
+				} else if ( absDistY >= absDistX + this.options.directionLockThreshold ) {
+					this.directionLocked = 'v';		// lock vertically
+				} else {
+					this.directionLocked = 'n';		// no lock
+				}
+			}
+
+			if ( this.directionLocked == 'h' ) {
+				if ( this.options.eventPassthrough == 'vertical' ) {
+					e.preventDefault();
+				} else if ( this.options.eventPassthrough == 'horizontal' ) {
+					this.initiated = false;
+					return;
+				}
+
+				deltaY = 0;
+			} else if ( this.directionLocked == 'v' ) {
+				if ( this.options.eventPassthrough == 'horizontal' ) {
+					e.preventDefault();
+				} else if ( this.options.eventPassthrough == 'vertical' ) {
+					this.initiated = false;
+					return;
+				}
+
+				deltaX = 0;
+			}
+
+			deltaX = this.hasHorizontalScroll ? deltaX : 0;
+			deltaY = this.hasVerticalScroll ? deltaY : 0;
+
+			newX = this.x + deltaX;
+			newY = this.y + deltaY;
+
+			// Slow down if outside of the boundaries
+			if ( newX > 0 || newX < this.maxScrollX ) {
+				newX = this.options.bounce ? this.x + deltaX / 3 : newX > 0 ? 0 : this.maxScrollX;
+			}
+			if ( newY > 0 || newY < this.maxScrollY ) {
+				newY = this.options.bounce ? this.y + deltaY / 3 : newY > 0 ? 0 : this.maxScrollY;
+			}
+
+			this.directionX = deltaX > 0 ? -1 : deltaX < 0 ? 1 : 0;
+			this.directionY = deltaY > 0 ? -1 : deltaY < 0 ? 1 : 0;
+
+			if ( !this.moved ) {
+				this._execEvent('scrollStart');
+			}
+
+			this.moved = true;
+
+			this._translate(newX, newY);
+
+	/* REPLACE START: _move */
+
+			if ( timestamp - this.startTime > 300 ) {
+				this.startTime = timestamp;
+				this.startX = this.x;
+				this.startY = this.y;
+			}
+
+	/* REPLACE END: _move */
+
+		},
+
+		_end: function (e) {
+			if ( !this.enabled || utils.eventType[e.type] !== this.initiated ) {
+				return;
+			}
+
+			if ( this.options.preventDefault && !utils.preventDefaultException(e.target, this.options.preventDefaultException) ) {
+				e.preventDefault();
+			}
+
+			var point = e.changedTouches ? e.changedTouches[0] : e,
+				momentumX,
+				momentumY,
+				duration = utils.getTime() - this.startTime,
+				newX = Math.round(this.x),
+				newY = Math.round(this.y),
+				distanceX = Math.abs(newX - this.startX),
+				distanceY = Math.abs(newY - this.startY),
+				time = 0,
+				easing = '';
+
+			this.isInTransition = 0;
+			this.initiated = 0;
+			this.endTime = utils.getTime();
+
+			// reset if we are outside of the boundaries
+			if ( this.resetPosition(this.options.bounceTime) ) {
+				return;
+			}
+
+			this.scrollTo(newX, newY);	// ensures that the last position is rounded
+
+			// we scrolled less than 10 pixels
+			if ( !this.moved ) {
+				if ( this.options.tap ) {
+					utils.tap(e, this.options.tap);
+				}
+
+				if ( this.options.click ) {
+					utils.click(e);
+				}
+
+				this._execEvent('scrollCancel');
+				return;
+			}
+
+			if ( this._events.flick && duration < 200 && distanceX < 100 && distanceY < 100 ) {
+				this._execEvent('flick');
+				return;
+			}
+
+			// start momentum animation if needed
+			if ( this.options.momentum && duration < 300 ) {
+				momentumX = this.hasHorizontalScroll ? utils.momentum(this.x, this.startX, duration, this.maxScrollX, this.options.bounce ? this.wrapperWidth : 0, this.options.deceleration) : { destination: newX, duration: 0 };
+				momentumY = this.hasVerticalScroll ? utils.momentum(this.y, this.startY, duration, this.maxScrollY, this.options.bounce ? this.wrapperHeight : 0, this.options.deceleration) : { destination: newY, duration: 0 };
+				newX = momentumX.destination;
+				newY = momentumY.destination;
+				time = Math.max(momentumX.duration, momentumY.duration);
+				this.isInTransition = 1;
+			}
+
+
+			if ( this.options.snap ) {
+				var snap = this._nearestSnap(newX, newY);
+				this.currentPage = snap;
+				time = this.options.snapSpeed || Math.max(
+						Math.max(
+							Math.min(Math.abs(newX - snap.x), 1000),
+							Math.min(Math.abs(newY - snap.y), 1000)
+						), 300);
+				newX = snap.x;
+				newY = snap.y;
+
+				this.directionX = 0;
+				this.directionY = 0;
+				easing = this.options.bounceEasing;
+			}
+
+	// INSERT POINT: _end
+
+			if ( newX != this.x || newY != this.y ) {
+				// change easing function when scroller goes out of the boundaries
+				if ( newX > 0 || newX < this.maxScrollX || newY > 0 || newY < this.maxScrollY ) {
+					easing = utils.ease.quadratic;
+				}
+
+				this.scrollTo(newX, newY, time, easing);
+				return;
+			}
+
+			this._execEvent('scrollEnd');
+		},
+
+		_resize: function () {
+			var that = this;
+
+			clearTimeout(this.resizeTimeout);
+
+			this.resizeTimeout = setTimeout(function () {
+				that.refresh();
+			}, this.options.resizePolling);
+		},
+
+		resetPosition: function (time) {
+			var x = this.x,
+				y = this.y;
+
+			time = time || 0;
+
+			if ( !this.hasHorizontalScroll || this.x > 0 ) {
+				x = 0;
+			} else if ( this.x < this.maxScrollX ) {
+				x = this.maxScrollX;
+			}
+
+			if ( !this.hasVerticalScroll || this.y > 0 ) {
+				y = 0;
+			} else if ( this.y < this.maxScrollY ) {
+				y = this.maxScrollY;
+			}
+
+			if ( x == this.x && y == this.y ) {
+				return false;
+			}
+
+			this.scrollTo(x, y, time, this.options.bounceEasing);
+
+			return true;
+		},
+
+		disable: function () {
+			this.enabled = false;
+		},
+
+		enable: function () {
+			this.enabled = true;
+		},
+
+		refresh: function () {
+			var rf = this.wrapper.offsetHeight;		// Force reflow
+
+			this.wrapperWidth	= this.wrapper.clientWidth;
+			this.wrapperHeight	= this.wrapper.clientHeight;
+
+	/* REPLACE START: refresh */
+
+			this.scrollerWidth	= this.scroller.offsetWidth;
+			this.scrollerHeight	= this.scroller.offsetHeight;
+
+			this.maxScrollX		= this.wrapperWidth - this.scrollerWidth;
+			this.maxScrollY		= this.wrapperHeight - this.scrollerHeight;
+
+	/* REPLACE END: refresh */
+
+			this.hasHorizontalScroll	= this.options.scrollX && this.maxScrollX < 0;
+			this.hasVerticalScroll		= this.options.scrollY && this.maxScrollY < 0;
+
+			if ( !this.hasHorizontalScroll ) {
+				this.maxScrollX = 0;
+				this.scrollerWidth = this.wrapperWidth;
+			}
+
+			if ( !this.hasVerticalScroll ) {
+				this.maxScrollY = 0;
+				this.scrollerHeight = this.wrapperHeight;
+			}
+
+			this.endTime = 0;
+			this.directionX = 0;
+			this.directionY = 0;
+
+			this.wrapperOffset = utils.offset(this.wrapper);
+
+			this._execEvent('refresh');
+
+			this.resetPosition();
+
+	// INSERT POINT: _refresh
+
+		},
+
+		on: function (type, fn) {
+			if ( !this._events[type] ) {
+				this._events[type] = [];
+			}
+
+			this._events[type].push(fn);
+		},
+
+		off: function (type, fn) {
+			if ( !this._events[type] ) {
+				return;
+			}
+
+			var index = this._events[type].indexOf(fn);
+
+			if ( index > -1 ) {
+				this._events[type].splice(index, 1);
+			}
+		},
+
+		_execEvent: function (type) {
+			if ( !this._events[type] ) {
+				return;
+			}
+
+			var i = 0,
+				l = this._events[type].length;
+
+			if ( !l ) {
+				return;
+			}
+
+			for ( ; i < l; i++ ) {
+				this._events[type][i].apply(this, [].slice.call(arguments, 1));
+			}
+		},
+
+		scrollBy: function (x, y, time, easing) {
+			x = this.x + x;
+			y = this.y + y;
+			time = time || 0;
+
+			this.scrollTo(x, y, time, easing);
+		},
+
+		scrollTo: function (x, y, time, easing) {
+			easing = easing || utils.ease.circular;
+
+			this.isInTransition = this.options.useTransition && time > 0;
+			var transitionType = this.options.useTransition && easing.style;
+			if ( !time || transitionType ) {
+					if(transitionType) {
+						this._transitionTimingFunction(easing.style);
+						this._transitionTime(time);
+					}
+				this._translate(x, y);
+			} else {
+				this._animate(x, y, time, easing.fn);
+			}
+		},
+
+		scrollToElement: function (el, time, offsetX, offsetY, easing) {
+			el = el.nodeType ? el : this.scroller.querySelector(el);
+
+			if ( !el ) {
+				return;
+			}
+
+			var pos = utils.offset(el);
+
+			pos.left -= this.wrapperOffset.left;
+			pos.top  -= this.wrapperOffset.top;
+
+			// if offsetX/Y are true we center the element to the screen
+			if ( offsetX === true ) {
+				offsetX = Math.round(el.offsetWidth / 2 - this.wrapper.offsetWidth / 2);
+			}
+			if ( offsetY === true ) {
+				offsetY = Math.round(el.offsetHeight / 2 - this.wrapper.offsetHeight / 2);
+			}
+
+			pos.left -= offsetX || 0;
+			pos.top  -= offsetY || 0;
+
+			pos.left = pos.left > 0 ? 0 : pos.left < this.maxScrollX ? this.maxScrollX : pos.left;
+			pos.top  = pos.top  > 0 ? 0 : pos.top  < this.maxScrollY ? this.maxScrollY : pos.top;
+
+			time = time === undefined || time === null || time === 'auto' ? Math.max(Math.abs(this.x-pos.left), Math.abs(this.y-pos.top)) : time;
+
+			this.scrollTo(pos.left, pos.top, time, easing);
+		},
+
+		_transitionTime: function (time) {
+			time = time || 0;
+
+			var durationProp = utils.style.transitionDuration;
+			this.scrollerStyle[durationProp] = time + 'ms';
+
+			if ( !time && utils.isBadAndroid ) {
+				this.scrollerStyle[durationProp] = '0.0001ms';
+				// remove 0.0001ms
+				var self = this;
+				rAF(function() {
+					if(self.scrollerStyle[durationProp] === '0.0001ms') {
+						self.scrollerStyle[durationProp] = '0s';
+					}
+				});
+			}
+
+
+			if ( this.indicators ) {
+				for ( var i = this.indicators.length; i--; ) {
+					this.indicators[i].transitionTime(time);
+				}
+			}
+
+
+	// INSERT POINT: _transitionTime
+
+		},
+
+		_transitionTimingFunction: function (easing) {
+			this.scrollerStyle[utils.style.transitionTimingFunction] = easing;
+
+
+			if ( this.indicators ) {
+				for ( var i = this.indicators.length; i--; ) {
+					this.indicators[i].transitionTimingFunction(easing);
+				}
+			}
+
+
+	// INSERT POINT: _transitionTimingFunction
+
+		},
+
+		_translate: function (x, y) {
+			if ( this.options.useTransform ) {
+
+	/* REPLACE START: _translate */
+
+				this.scrollerStyle[utils.style.transform] = 'translate(' + x + 'px,' + y + 'px)' + this.translateZ;
+
+	/* REPLACE END: _translate */
+
+			} else {
+				x = Math.round(x);
+				y = Math.round(y);
+				this.scrollerStyle.left = x + 'px';
+				this.scrollerStyle.top = y + 'px';
+			}
+
+			this.x = x;
+			this.y = y;
+
+
+		if ( this.indicators ) {
+			for ( var i = this.indicators.length; i--; ) {
+				this.indicators[i].updatePosition();
+			}
+		}
+
+
+	// INSERT POINT: _translate
+
+		},
+
+		_initEvents: function (remove) {
+			var eventType = remove ? utils.removeEvent : utils.addEvent,
+				target = this.options.bindToWrapper ? this.wrapper : window;
+
+			eventType(window, 'orientationchange', this);
+			eventType(window, 'resize', this);
+
+			if ( this.options.click ) {
+				eventType(this.wrapper, 'click', this, true);
+			}
+
+			if ( !this.options.disableMouse ) {
+				eventType(this.wrapper, 'mousedown', this);
+				eventType(target, 'mousemove', this);
+				eventType(target, 'mousecancel', this);
+				eventType(target, 'mouseup', this);
+			}
+
+			if ( utils.hasPointer && !this.options.disablePointer ) {
+				eventType(this.wrapper, utils.prefixPointerEvent('pointerdown'), this);
+				eventType(target, utils.prefixPointerEvent('pointermove'), this);
+				eventType(target, utils.prefixPointerEvent('pointercancel'), this);
+				eventType(target, utils.prefixPointerEvent('pointerup'), this);
+			}
+
+			if ( utils.hasTouch && !this.options.disableTouch ) {
+				eventType(this.wrapper, 'touchstart', this);
+				eventType(target, 'touchmove', this);
+				eventType(target, 'touchcancel', this);
+				eventType(target, 'touchend', this);
+			}
+
+			eventType(this.scroller, 'transitionend', this);
+			eventType(this.scroller, 'webkitTransitionEnd', this);
+			eventType(this.scroller, 'oTransitionEnd', this);
+			eventType(this.scroller, 'MSTransitionEnd', this);
+		},
+
+		getComputedPosition: function () {
+			var matrix = window.getComputedStyle(this.scroller, null),
+				x, y;
+
+			if ( this.options.useTransform ) {
+				matrix = matrix[utils.style.transform].split(')')[0].split(', ');
+				x = +(matrix[12] || matrix[4]);
+				y = +(matrix[13] || matrix[5]);
+			} else {
+				x = +matrix.left.replace(/[^-\d.]/g, '');
+				y = +matrix.top.replace(/[^-\d.]/g, '');
+			}
+
+			return { x: x, y: y };
+		},
+		_initIndicators: function () {
+			var interactive = this.options.interactiveScrollbars,
+				customStyle = typeof this.options.scrollbars != 'string',
+				indicators = [],
+				indicator;
+
+			var that = this;
+
+			this.indicators = [];
+
+			if ( this.options.scrollbars ) {
+				// Vertical scrollbar
+				if ( this.options.scrollY ) {
+					indicator = {
+						el: createDefaultScrollbar('v', interactive, this.options.scrollbars),
+						interactive: interactive,
+						defaultScrollbars: true,
+						customStyle: customStyle,
+						resize: this.options.resizeScrollbars,
+						shrink: this.options.shrinkScrollbars,
+						fade: this.options.fadeScrollbars,
+						listenX: false
+					};
+
+					this.wrapper.appendChild(indicator.el);
+					indicators.push(indicator);
+				}
+
+				// Horizontal scrollbar
+				if ( this.options.scrollX ) {
+					indicator = {
+						el: createDefaultScrollbar('h', interactive, this.options.scrollbars),
+						interactive: interactive,
+						defaultScrollbars: true,
+						customStyle: customStyle,
+						resize: this.options.resizeScrollbars,
+						shrink: this.options.shrinkScrollbars,
+						fade: this.options.fadeScrollbars,
+						listenY: false
+					};
+
+					this.wrapper.appendChild(indicator.el);
+					indicators.push(indicator);
+				}
+			}
+
+			if ( this.options.indicators ) {
+				// TODO: check concat compatibility
+				indicators = indicators.concat(this.options.indicators);
+			}
+
+			for ( var i = indicators.length; i--; ) {
+				this.indicators.push( new Indicator(this, indicators[i]) );
+			}
+
+			// TODO: check if we can use array.map (wide compatibility and performance issues)
+			function _indicatorsMap (fn) {
+				if (that.indicators) {
+					for ( var i = that.indicators.length; i--; ) {
+						fn.call(that.indicators[i]);
+					}
+				}
+			}
+
+			if ( this.options.fadeScrollbars ) {
+				this.on('scrollEnd', function () {
+					_indicatorsMap(function () {
+						this.fade();
+					});
+				});
+
+				this.on('scrollCancel', function () {
+					_indicatorsMap(function () {
+						this.fade();
+					});
+				});
+
+				this.on('scrollStart', function () {
+					_indicatorsMap(function () {
+						this.fade(1);
+					});
+				});
+
+				this.on('beforeScrollStart', function () {
+					_indicatorsMap(function () {
+						this.fade(1, true);
+					});
+				});
+			}
+
+
+			this.on('refresh', function () {
+				_indicatorsMap(function () {
+					this.refresh();
+				});
+			});
+
+			this.on('destroy', function () {
+				_indicatorsMap(function () {
+					this.destroy();
+				});
+
+				delete this.indicators;
+			});
+		},
+
+		_initWheel: function () {
+			utils.addEvent(this.wrapper, 'wheel', this);
+			utils.addEvent(this.wrapper, 'mousewheel', this);
+			utils.addEvent(this.wrapper, 'DOMMouseScroll', this);
+
+			this.on('destroy', function () {
+				clearTimeout(this.wheelTimeout);
+				this.wheelTimeout = null;
+				utils.removeEvent(this.wrapper, 'wheel', this);
+				utils.removeEvent(this.wrapper, 'mousewheel', this);
+				utils.removeEvent(this.wrapper, 'DOMMouseScroll', this);
+			});
+		},
+
+		_wheel: function (e) {
+			if ( !this.enabled ) {
+				return;
+			}
+
+			e.preventDefault();
+
+			var wheelDeltaX, wheelDeltaY,
+				newX, newY,
+				that = this;
+
+			if ( this.wheelTimeout === undefined ) {
+				that._execEvent('scrollStart');
+			}
+
+			// Execute the scrollEnd event after 400ms the wheel stopped scrolling
+			clearTimeout(this.wheelTimeout);
+			this.wheelTimeout = setTimeout(function () {
+				if(!that.options.snap) {
+					that._execEvent('scrollEnd');
+				}
+				that.wheelTimeout = undefined;
+			}, 400);
+
+			if ( 'deltaX' in e ) {
+				if (e.deltaMode === 1) {
+					wheelDeltaX = -e.deltaX * this.options.mouseWheelSpeed;
+					wheelDeltaY = -e.deltaY * this.options.mouseWheelSpeed;
+				} else {
+					wheelDeltaX = -e.deltaX;
+					wheelDeltaY = -e.deltaY;
+				}
+			} else if ( 'wheelDeltaX' in e ) {
+				wheelDeltaX = e.wheelDeltaX / 120 * this.options.mouseWheelSpeed;
+				wheelDeltaY = e.wheelDeltaY / 120 * this.options.mouseWheelSpeed;
+			} else if ( 'wheelDelta' in e ) {
+				wheelDeltaX = wheelDeltaY = e.wheelDelta / 120 * this.options.mouseWheelSpeed;
+			} else if ( 'detail' in e ) {
+				wheelDeltaX = wheelDeltaY = -e.detail / 3 * this.options.mouseWheelSpeed;
+			} else {
+				return;
+			}
+
+			wheelDeltaX *= this.options.invertWheelDirection;
+			wheelDeltaY *= this.options.invertWheelDirection;
+
+			if ( !this.hasVerticalScroll ) {
+				wheelDeltaX = wheelDeltaY;
+				wheelDeltaY = 0;
+			}
+
+			if ( this.options.snap ) {
+				newX = this.currentPage.pageX;
+				newY = this.currentPage.pageY;
+
+				if ( wheelDeltaX > 0 ) {
+					newX--;
+				} else if ( wheelDeltaX < 0 ) {
+					newX++;
+				}
+
+				if ( wheelDeltaY > 0 ) {
+					newY--;
+				} else if ( wheelDeltaY < 0 ) {
+					newY++;
+				}
+
+				this.goToPage(newX, newY);
+
+				return;
+			}
+
+			newX = this.x + Math.round(this.hasHorizontalScroll ? wheelDeltaX : 0);
+			newY = this.y + Math.round(this.hasVerticalScroll ? wheelDeltaY : 0);
+
+			this.directionX = wheelDeltaX > 0 ? -1 : wheelDeltaX < 0 ? 1 : 0;
+			this.directionY = wheelDeltaY > 0 ? -1 : wheelDeltaY < 0 ? 1 : 0;
+
+			if ( newX > 0 ) {
+				newX = 0;
+			} else if ( newX < this.maxScrollX ) {
+				newX = this.maxScrollX;
+			}
+
+			if ( newY > 0 ) {
+				newY = 0;
+			} else if ( newY < this.maxScrollY ) {
+				newY = this.maxScrollY;
+			}
+
+			this.scrollTo(newX, newY, 0);
+
+	// INSERT POINT: _wheel
+		},
+
+		_initSnap: function () {
+			this.currentPage = {};
+
+			if ( typeof this.options.snap == 'string' ) {
+				this.options.snap = this.scroller.querySelectorAll(this.options.snap);
+			}
+
+			this.on('refresh', function () {
+				var i = 0, l,
+					m = 0, n,
+					cx, cy,
+					x = 0, y,
+					stepX = this.options.snapStepX || this.wrapperWidth,
+					stepY = this.options.snapStepY || this.wrapperHeight,
+					el;
+
+				this.pages = [];
+
+				if ( !this.wrapperWidth || !this.wrapperHeight || !this.scrollerWidth || !this.scrollerHeight ) {
+					return;
+				}
+
+				if ( this.options.snap === true ) {
+					cx = Math.round( stepX / 2 );
+					cy = Math.round( stepY / 2 );
+
+					while ( x > -this.scrollerWidth ) {
+						this.pages[i] = [];
+						l = 0;
+						y = 0;
+
+						while ( y > -this.scrollerHeight ) {
+							this.pages[i][l] = {
+								x: Math.max(x, this.maxScrollX),
+								y: Math.max(y, this.maxScrollY),
+								width: stepX,
+								height: stepY,
+								cx: x - cx,
+								cy: y - cy
+							};
+
+							y -= stepY;
+							l++;
+						}
+
+						x -= stepX;
+						i++;
+					}
+				} else {
+					el = this.options.snap;
+					l = el.length;
+					n = -1;
+
+					for ( ; i < l; i++ ) {
+						if ( i === 0 || el[i].offsetLeft <= el[i-1].offsetLeft ) {
+							m = 0;
+							n++;
+						}
+
+						if ( !this.pages[m] ) {
+							this.pages[m] = [];
+						}
+
+						x = Math.max(-el[i].offsetLeft, this.maxScrollX);
+						y = Math.max(-el[i].offsetTop, this.maxScrollY);
+						cx = x - Math.round(el[i].offsetWidth / 2);
+						cy = y - Math.round(el[i].offsetHeight / 2);
+
+						this.pages[m][n] = {
+							x: x,
+							y: y,
+							width: el[i].offsetWidth,
+							height: el[i].offsetHeight,
+							cx: cx,
+							cy: cy
+						};
+
+						if ( x > this.maxScrollX ) {
+							m++;
+						}
+					}
+				}
+
+				this.goToPage(this.currentPage.pageX || 0, this.currentPage.pageY || 0, 0);
+
+				// Update snap threshold if needed
+				if ( this.options.snapThreshold % 1 === 0 ) {
+					this.snapThresholdX = this.options.snapThreshold;
+					this.snapThresholdY = this.options.snapThreshold;
+				} else {
+					this.snapThresholdX = Math.round(this.pages[this.currentPage.pageX][this.currentPage.pageY].width * this.options.snapThreshold);
+					this.snapThresholdY = Math.round(this.pages[this.currentPage.pageX][this.currentPage.pageY].height * this.options.snapThreshold);
+				}
+			});
+
+			this.on('flick', function () {
+				var time = this.options.snapSpeed || Math.max(
+						Math.max(
+							Math.min(Math.abs(this.x - this.startX), 1000),
+							Math.min(Math.abs(this.y - this.startY), 1000)
+						), 300);
+
+				this.goToPage(
+					this.currentPage.pageX + this.directionX,
+					this.currentPage.pageY + this.directionY,
+					time
+				);
+			});
+		},
+
+		_nearestSnap: function (x, y) {
+			if ( !this.pages.length ) {
+				return { x: 0, y: 0, pageX: 0, pageY: 0 };
+			}
+
+			var i = 0,
+				l = this.pages.length,
+				m = 0;
+
+			// Check if we exceeded the snap threshold
+			if ( Math.abs(x - this.absStartX) < this.snapThresholdX &&
+				Math.abs(y - this.absStartY) < this.snapThresholdY ) {
+				return this.currentPage;
+			}
+
+			if ( x > 0 ) {
+				x = 0;
+			} else if ( x < this.maxScrollX ) {
+				x = this.maxScrollX;
+			}
+
+			if ( y > 0 ) {
+				y = 0;
+			} else if ( y < this.maxScrollY ) {
+				y = this.maxScrollY;
+			}
+
+			for ( ; i < l; i++ ) {
+				if ( x >= this.pages[i][0].cx ) {
+					x = this.pages[i][0].x;
+					break;
+				}
+			}
+
+			l = this.pages[i].length;
+
+			for ( ; m < l; m++ ) {
+				if ( y >= this.pages[0][m].cy ) {
+					y = this.pages[0][m].y;
+					break;
+				}
+			}
+
+			if ( i == this.currentPage.pageX ) {
+				i += this.directionX;
+
+				if ( i < 0 ) {
+					i = 0;
+				} else if ( i >= this.pages.length ) {
+					i = this.pages.length - 1;
+				}
+
+				x = this.pages[i][0].x;
+			}
+
+			if ( m == this.currentPage.pageY ) {
+				m += this.directionY;
+
+				if ( m < 0 ) {
+					m = 0;
+				} else if ( m >= this.pages[0].length ) {
+					m = this.pages[0].length - 1;
+				}
+
+				y = this.pages[0][m].y;
+			}
+
+			return {
+				x: x,
+				y: y,
+				pageX: i,
+				pageY: m
+			};
+		},
+
+		goToPage: function (x, y, time, easing) {
+			easing = easing || this.options.bounceEasing;
+
+			if ( x >= this.pages.length ) {
+				x = this.pages.length - 1;
+			} else if ( x < 0 ) {
+				x = 0;
+			}
+
+			if ( y >= this.pages[x].length ) {
+				y = this.pages[x].length - 1;
+			} else if ( y < 0 ) {
+				y = 0;
+			}
+
+			var posX = this.pages[x][y].x,
+				posY = this.pages[x][y].y;
+
+			time = time === undefined ? this.options.snapSpeed || Math.max(
+				Math.max(
+					Math.min(Math.abs(posX - this.x), 1000),
+					Math.min(Math.abs(posY - this.y), 1000)
+				), 300) : time;
+
+			this.currentPage = {
+				x: posX,
+				y: posY,
+				pageX: x,
+				pageY: y
+			};
+
+			this.scrollTo(posX, posY, time, easing);
+		},
+
+		next: function (time, easing) {
+			var x = this.currentPage.pageX,
+				y = this.currentPage.pageY;
+
+			x++;
+
+			if ( x >= this.pages.length && this.hasVerticalScroll ) {
+				x = 0;
+				y++;
+			}
+
+			this.goToPage(x, y, time, easing);
+		},
+
+		prev: function (time, easing) {
+			var x = this.currentPage.pageX,
+				y = this.currentPage.pageY;
+
+			x--;
+
+			if ( x < 0 && this.hasVerticalScroll ) {
+				x = 0;
+				y--;
+			}
+
+			this.goToPage(x, y, time, easing);
+		},
+
+		_initKeys: function (e) {
+			// default key bindings
+			var keys = {
+				pageUp: 33,
+				pageDown: 34,
+				end: 35,
+				home: 36,
+				left: 37,
+				up: 38,
+				right: 39,
+				down: 40
+			};
+			var i;
+
+			// if you give me characters I give you keycode
+			if ( typeof this.options.keyBindings == 'object' ) {
+				for ( i in this.options.keyBindings ) {
+					if ( typeof this.options.keyBindings[i] == 'string' ) {
+						this.options.keyBindings[i] = this.options.keyBindings[i].toUpperCase().charCodeAt(0);
+					}
+				}
+			} else {
+				this.options.keyBindings = {};
+			}
+
+			for ( i in keys ) {
+				this.options.keyBindings[i] = this.options.keyBindings[i] || keys[i];
+			}
+
+			utils.addEvent(window, 'keydown', this);
+
+			this.on('destroy', function () {
+				utils.removeEvent(window, 'keydown', this);
+			});
+		},
+
+		_key: function (e) {
+			if ( !this.enabled ) {
+				return;
+			}
+
+			var snap = this.options.snap,	// we are using this alot, better to cache it
+				newX = snap ? this.currentPage.pageX : this.x,
+				newY = snap ? this.currentPage.pageY : this.y,
+				now = utils.getTime(),
+				prevTime = this.keyTime || 0,
+				acceleration = 0.250,
+				pos;
+
+			if ( this.options.useTransition && this.isInTransition ) {
+				pos = this.getComputedPosition();
+
+				this._translate(Math.round(pos.x), Math.round(pos.y));
+				this.isInTransition = false;
+			}
+
+			this.keyAcceleration = now - prevTime < 200 ? Math.min(this.keyAcceleration + acceleration, 50) : 0;
+
+			switch ( e.keyCode ) {
+				case this.options.keyBindings.pageUp:
+					if ( this.hasHorizontalScroll && !this.hasVerticalScroll ) {
+						newX += snap ? 1 : this.wrapperWidth;
+					} else {
+						newY += snap ? 1 : this.wrapperHeight;
+					}
+					break;
+				case this.options.keyBindings.pageDown:
+					if ( this.hasHorizontalScroll && !this.hasVerticalScroll ) {
+						newX -= snap ? 1 : this.wrapperWidth;
+					} else {
+						newY -= snap ? 1 : this.wrapperHeight;
+					}
+					break;
+				case this.options.keyBindings.end:
+					newX = snap ? this.pages.length-1 : this.maxScrollX;
+					newY = snap ? this.pages[0].length-1 : this.maxScrollY;
+					break;
+				case this.options.keyBindings.home:
+					newX = 0;
+					newY = 0;
+					break;
+				case this.options.keyBindings.left:
+					newX += snap ? -1 : 5 + this.keyAcceleration>>0;
+					break;
+				case this.options.keyBindings.up:
+					newY += snap ? 1 : 5 + this.keyAcceleration>>0;
+					break;
+				case this.options.keyBindings.right:
+					newX -= snap ? -1 : 5 + this.keyAcceleration>>0;
+					break;
+				case this.options.keyBindings.down:
+					newY -= snap ? 1 : 5 + this.keyAcceleration>>0;
+					break;
+				default:
+					return;
+			}
+
+			if ( snap ) {
+				this.goToPage(newX, newY);
+				return;
+			}
+
+			if ( newX > 0 ) {
+				newX = 0;
+				this.keyAcceleration = 0;
+			} else if ( newX < this.maxScrollX ) {
+				newX = this.maxScrollX;
+				this.keyAcceleration = 0;
+			}
+
+			if ( newY > 0 ) {
+				newY = 0;
+				this.keyAcceleration = 0;
+			} else if ( newY < this.maxScrollY ) {
+				newY = this.maxScrollY;
+				this.keyAcceleration = 0;
+			}
+
+			this.scrollTo(newX, newY, 0);
+
+			this.keyTime = now;
+		},
+
+		_animate: function (destX, destY, duration, easingFn) {
+			var that = this,
+				startX = this.x,
+				startY = this.y,
+				startTime = utils.getTime(),
+				destTime = startTime + duration;
+
+			function step () {
+				var now = utils.getTime(),
+					newX, newY,
+					easing;
+
+				if ( now >= destTime ) {
+					that.isAnimating = false;
+					that._translate(destX, destY);
+
+					if ( !that.resetPosition(that.options.bounceTime) ) {
+						that._execEvent('scrollEnd');
+					}
+
+					return;
+				}
+
+				now = ( now - startTime ) / duration;
+				easing = easingFn(now);
+				newX = ( destX - startX ) * easing + startX;
+				newY = ( destY - startY ) * easing + startY;
+				that._translate(newX, newY);
+
+				if ( that.isAnimating ) {
+					rAF(step);
+				}
+			}
+
+			this.isAnimating = true;
+			step();
+		},
+		handleEvent: function (e) {
+			switch ( e.type ) {
+				case 'touchstart':
+				case 'pointerdown':
+				case 'MSPointerDown':
+				case 'mousedown':
+					this._start(e);
+					break;
+				case 'touchmove':
+				case 'pointermove':
+				case 'MSPointerMove':
+				case 'mousemove':
+					this._move(e);
+					break;
+				case 'touchend':
+				case 'pointerup':
+				case 'MSPointerUp':
+				case 'mouseup':
+				case 'touchcancel':
+				case 'pointercancel':
+				case 'MSPointerCancel':
+				case 'mousecancel':
+					this._end(e);
+					break;
+				case 'orientationchange':
+				case 'resize':
+					this._resize();
+					break;
+				case 'transitionend':
+				case 'webkitTransitionEnd':
+				case 'oTransitionEnd':
+				case 'MSTransitionEnd':
+					this._transitionEnd(e);
+					break;
+				case 'wheel':
+				case 'DOMMouseScroll':
+				case 'mousewheel':
+					this._wheel(e);
+					break;
+				case 'keydown':
+					this._key(e);
+					break;
+				case 'click':
+					if ( this.enabled && !e._constructed ) {
+						e.preventDefault();
+						e.stopPropagation();
+					}
+					break;
+			}
+		}
+	};
+	function createDefaultScrollbar (direction, interactive, type) {
+		var scrollbar = document.createElement('div'),
+			indicator = document.createElement('div');
+
+		if ( type === true ) {
+			scrollbar.style.cssText = 'position:absolute;z-index:9999';
+			indicator.style.cssText = '-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:absolute;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.9);border-radius:3px';
+		}
+
+		indicator.className = 'iScrollIndicator';
+
+		if ( direction == 'h' ) {
+			if ( type === true ) {
+				scrollbar.style.cssText += ';height:7px;left:2px;right:2px;bottom:0';
+				indicator.style.height = '100%';
+			}
+			scrollbar.className = 'iScrollHorizontalScrollbar';
+		} else {
+			if ( type === true ) {
+				scrollbar.style.cssText += ';width:7px;bottom:2px;top:2px;right:1px';
+				indicator.style.width = '100%';
+			}
+			scrollbar.className = 'iScrollVerticalScrollbar';
+		}
+
+		scrollbar.style.cssText += ';overflow:hidden';
+
+		if ( !interactive ) {
+			scrollbar.style.pointerEvents = 'none';
+		}
+
+		scrollbar.appendChild(indicator);
+
+		return scrollbar;
+	}
+
+	function Indicator (scroller, options) {
+		this.wrapper = typeof options.el == 'string' ? document.querySelector(options.el) : options.el;
+		this.wrapperStyle = this.wrapper.style;
+		this.indicator = this.wrapper.children[0];
+		this.indicatorStyle = this.indicator.style;
+		this.scroller = scroller;
+
+		this.options = {
+			listenX: true,
+			listenY: true,
+			interactive: false,
+			resize: true,
+			defaultScrollbars: false,
+			shrink: false,
+			fade: false,
+			speedRatioX: 0,
+			speedRatioY: 0
+		};
+
+		for ( var i in options ) {
+			this.options[i] = options[i];
+		}
+
+		this.sizeRatioX = 1;
+		this.sizeRatioY = 1;
+		this.maxPosX = 0;
+		this.maxPosY = 0;
+
+		if ( this.options.interactive ) {
+			if ( !this.options.disableTouch ) {
+				utils.addEvent(this.indicator, 'touchstart', this);
+				utils.addEvent(window, 'touchend', this);
+			}
+			if ( !this.options.disablePointer ) {
+				utils.addEvent(this.indicator, utils.prefixPointerEvent('pointerdown'), this);
+				utils.addEvent(window, utils.prefixPointerEvent('pointerup'), this);
+			}
+			if ( !this.options.disableMouse ) {
+				utils.addEvent(this.indicator, 'mousedown', this);
+				utils.addEvent(window, 'mouseup', this);
+			}
+		}
+
+		if ( this.options.fade ) {
+			this.wrapperStyle[utils.style.transform] = this.scroller.translateZ;
+			var durationProp = utils.style.transitionDuration;
+			this.wrapperStyle[durationProp] = utils.isBadAndroid ? '0.0001ms' : '0ms';
+			// remove 0.0001ms
+			var self = this;
+			if(utils.isBadAndroid) {
+				rAF(function() {
+					if(self.wrapperStyle[durationProp] === '0.0001ms') {
+						self.wrapperStyle[durationProp] = '0s';
+					}
+				});
+			}
+			this.wrapperStyle.opacity = '0';
+		}
+	}
+
+	Indicator.prototype = {
+		handleEvent: function (e) {
+			switch ( e.type ) {
+				case 'touchstart':
+				case 'pointerdown':
+				case 'MSPointerDown':
+				case 'mousedown':
+					this._start(e);
+					break;
+				case 'touchmove':
+				case 'pointermove':
+				case 'MSPointerMove':
+				case 'mousemove':
+					this._move(e);
+					break;
+				case 'touchend':
+				case 'pointerup':
+				case 'MSPointerUp':
+				case 'mouseup':
+				case 'touchcancel':
+				case 'pointercancel':
+				case 'MSPointerCancel':
+				case 'mousecancel':
+					this._end(e);
+					break;
+			}
+		},
+
+		destroy: function () {
+			if ( this.options.fadeScrollbars ) {
+				clearTimeout(this.fadeTimeout);
+				this.fadeTimeout = null;
+			}
+			if ( this.options.interactive ) {
+				utils.removeEvent(this.indicator, 'touchstart', this);
+				utils.removeEvent(this.indicator, utils.prefixPointerEvent('pointerdown'), this);
+				utils.removeEvent(this.indicator, 'mousedown', this);
+
+				utils.removeEvent(window, 'touchmove', this);
+				utils.removeEvent(window, utils.prefixPointerEvent('pointermove'), this);
+				utils.removeEvent(window, 'mousemove', this);
+
+				utils.removeEvent(window, 'touchend', this);
+				utils.removeEvent(window, utils.prefixPointerEvent('pointerup'), this);
+				utils.removeEvent(window, 'mouseup', this);
+			}
+
+			if ( this.options.defaultScrollbars ) {
+				this.wrapper.parentNode.removeChild(this.wrapper);
+			}
+		},
+
+		_start: function (e) {
+			var point = e.touches ? e.touches[0] : e;
+
+			e.preventDefault();
+			e.stopPropagation();
+
+			this.transitionTime();
+
+			this.initiated = true;
+			this.moved = false;
+			this.lastPointX	= point.pageX;
+			this.lastPointY	= point.pageY;
+
+			this.startTime	= utils.getTime();
+
+			if ( !this.options.disableTouch ) {
+				utils.addEvent(window, 'touchmove', this);
+			}
+			if ( !this.options.disablePointer ) {
+				utils.addEvent(window, utils.prefixPointerEvent('pointermove'), this);
+			}
+			if ( !this.options.disableMouse ) {
+				utils.addEvent(window, 'mousemove', this);
+			}
+
+			this.scroller._execEvent('beforeScrollStart');
+		},
+
+		_move: function (e) {
+			var point = e.touches ? e.touches[0] : e,
+				deltaX, deltaY,
+				newX, newY,
+				timestamp = utils.getTime();
+
+			if ( !this.moved ) {
+				this.scroller._execEvent('scrollStart');
+			}
+
+			this.moved = true;
+
+			deltaX = point.pageX - this.lastPointX;
+			this.lastPointX = point.pageX;
+
+			deltaY = point.pageY - this.lastPointY;
+			this.lastPointY = point.pageY;
+
+			newX = this.x + deltaX;
+			newY = this.y + deltaY;
+
+			this._pos(newX, newY);
+
+	// INSERT POINT: indicator._move
+
+			e.preventDefault();
+			e.stopPropagation();
+		},
+
+		_end: function (e) {
+			if ( !this.initiated ) {
+				return;
+			}
+
+			this.initiated = false;
+
+			e.preventDefault();
+			e.stopPropagation();
+
+			utils.removeEvent(window, 'touchmove', this);
+			utils.removeEvent(window, utils.prefixPointerEvent('pointermove'), this);
+			utils.removeEvent(window, 'mousemove', this);
+
+			if ( this.scroller.options.snap ) {
+				var snap = this.scroller._nearestSnap(this.scroller.x, this.scroller.y);
+
+				var time = this.options.snapSpeed || Math.max(
+						Math.max(
+							Math.min(Math.abs(this.scroller.x - snap.x), 1000),
+							Math.min(Math.abs(this.scroller.y - snap.y), 1000)
+						), 300);
+
+				if ( this.scroller.x != snap.x || this.scroller.y != snap.y ) {
+					this.scroller.directionX = 0;
+					this.scroller.directionY = 0;
+					this.scroller.currentPage = snap;
+					this.scroller.scrollTo(snap.x, snap.y, time, this.scroller.options.bounceEasing);
+				}
+			}
+
+			if ( this.moved ) {
+				this.scroller._execEvent('scrollEnd');
+			}
+		},
+
+		transitionTime: function (time) {
+			time = time || 0;
+			var durationProp = utils.style.transitionDuration;
+			this.indicatorStyle[durationProp] = time + 'ms';
+
+			if ( !time && utils.isBadAndroid ) {
+				this.indicatorStyle[durationProp] = '0.0001ms';
+				// remove 0.0001ms
+				var self = this;
+				rAF(function() {
+					if(self.indicatorStyle[durationProp] === '0.0001ms') {
+						self.indicatorStyle[durationProp] = '0s';
+					}
+				});
+			}
+		},
+
+		transitionTimingFunction: function (easing) {
+			this.indicatorStyle[utils.style.transitionTimingFunction] = easing;
+		},
+
+		refresh: function () {
+			this.transitionTime();
+
+			if ( this.options.listenX && !this.options.listenY ) {
+				this.indicatorStyle.display = this.scroller.hasHorizontalScroll ? 'block' : 'none';
+			} else if ( this.options.listenY && !this.options.listenX ) {
+				this.indicatorStyle.display = this.scroller.hasVerticalScroll ? 'block' : 'none';
+			} else {
+				this.indicatorStyle.display = this.scroller.hasHorizontalScroll || this.scroller.hasVerticalScroll ? 'block' : 'none';
+			}
+
+			if ( this.scroller.hasHorizontalScroll && this.scroller.hasVerticalScroll ) {
+				utils.addClass(this.wrapper, 'iScrollBothScrollbars');
+				utils.removeClass(this.wrapper, 'iScrollLoneScrollbar');
+
+				if ( this.options.defaultScrollbars && this.options.customStyle ) {
+					if ( this.options.listenX ) {
+						this.wrapper.style.right = '8px';
+					} else {
+						this.wrapper.style.bottom = '8px';
+					}
+				}
+			} else {
+				utils.removeClass(this.wrapper, 'iScrollBothScrollbars');
+				utils.addClass(this.wrapper, 'iScrollLoneScrollbar');
+
+				if ( this.options.defaultScrollbars && this.options.customStyle ) {
+					if ( this.options.listenX ) {
+						this.wrapper.style.right = '2px';
+					} else {
+						this.wrapper.style.bottom = '2px';
+					}
+				}
+			}
+
+			var r = this.wrapper.offsetHeight;	// force refresh
+
+			if ( this.options.listenX ) {
+				this.wrapperWidth = this.wrapper.clientWidth;
+				if ( this.options.resize ) {
+					this.indicatorWidth = Math.max(Math.round(this.wrapperWidth * this.wrapperWidth / (this.scroller.scrollerWidth || this.wrapperWidth || 1)), 8);
+					this.indicatorStyle.width = this.indicatorWidth + 'px';
+				} else {
+					this.indicatorWidth = this.indicator.clientWidth;
+				}
+
+				this.maxPosX = this.wrapperWidth - this.indicatorWidth;
+
+				if ( this.options.shrink == 'clip' ) {
+					this.minBoundaryX = -this.indicatorWidth + 8;
+					this.maxBoundaryX = this.wrapperWidth - 8;
+				} else {
+					this.minBoundaryX = 0;
+					this.maxBoundaryX = this.maxPosX;
+				}
+
+				this.sizeRatioX = this.options.speedRatioX || (this.scroller.maxScrollX && (this.maxPosX / this.scroller.maxScrollX));
+			}
+
+			if ( this.options.listenY ) {
+				this.wrapperHeight = this.wrapper.clientHeight;
+				if ( this.options.resize ) {
+					this.indicatorHeight = Math.max(Math.round(this.wrapperHeight * this.wrapperHeight / (this.scroller.scrollerHeight || this.wrapperHeight || 1)), 8);
+					this.indicatorStyle.height = this.indicatorHeight + 'px';
+				} else {
+					this.indicatorHeight = this.indicator.clientHeight;
+				}
+
+				this.maxPosY = this.wrapperHeight - this.indicatorHeight;
+
+				if ( this.options.shrink == 'clip' ) {
+					this.minBoundaryY = -this.indicatorHeight + 8;
+					this.maxBoundaryY = this.wrapperHeight - 8;
+				} else {
+					this.minBoundaryY = 0;
+					this.maxBoundaryY = this.maxPosY;
+				}
+
+				this.maxPosY = this.wrapperHeight - this.indicatorHeight;
+				this.sizeRatioY = this.options.speedRatioY || (this.scroller.maxScrollY && (this.maxPosY / this.scroller.maxScrollY));
+			}
+
+			this.updatePosition();
+		},
+
+		updatePosition: function () {
+			var x = this.options.listenX && Math.round(this.sizeRatioX * this.scroller.x) || 0,
+				y = this.options.listenY && Math.round(this.sizeRatioY * this.scroller.y) || 0;
+
+			if ( !this.options.ignoreBoundaries ) {
+				if ( x < this.minBoundaryX ) {
+					if ( this.options.shrink == 'scale' ) {
+						this.width = Math.max(this.indicatorWidth + x, 8);
+						this.indicatorStyle.width = this.width + 'px';
+					}
+					x = this.minBoundaryX;
+				} else if ( x > this.maxBoundaryX ) {
+					if ( this.options.shrink == 'scale' ) {
+						this.width = Math.max(this.indicatorWidth - (x - this.maxPosX), 8);
+						this.indicatorStyle.width = this.width + 'px';
+						x = this.maxPosX + this.indicatorWidth - this.width;
+					} else {
+						x = this.maxBoundaryX;
+					}
+				} else if ( this.options.shrink == 'scale' && this.width != this.indicatorWidth ) {
+					this.width = this.indicatorWidth;
+					this.indicatorStyle.width = this.width + 'px';
+				}
+
+				if ( y < this.minBoundaryY ) {
+					if ( this.options.shrink == 'scale' ) {
+						this.height = Math.max(this.indicatorHeight + y * 3, 8);
+						this.indicatorStyle.height = this.height + 'px';
+					}
+					y = this.minBoundaryY;
+				} else if ( y > this.maxBoundaryY ) {
+					if ( this.options.shrink == 'scale' ) {
+						this.height = Math.max(this.indicatorHeight - (y - this.maxPosY) * 3, 8);
+						this.indicatorStyle.height = this.height + 'px';
+						y = this.maxPosY + this.indicatorHeight - this.height;
+					} else {
+						y = this.maxBoundaryY;
+					}
+				} else if ( this.options.shrink == 'scale' && this.height != this.indicatorHeight ) {
+					this.height = this.indicatorHeight;
+					this.indicatorStyle.height = this.height + 'px';
+				}
+			}
+
+			this.x = x;
+			this.y = y;
+
+			if ( this.scroller.options.useTransform ) {
+				this.indicatorStyle[utils.style.transform] = 'translate(' + x + 'px,' + y + 'px)' + this.scroller.translateZ;
+			} else {
+				this.indicatorStyle.left = x + 'px';
+				this.indicatorStyle.top = y + 'px';
+			}
+		},
+
+		_pos: function (x, y) {
+			if ( x < 0 ) {
+				x = 0;
+			} else if ( x > this.maxPosX ) {
+				x = this.maxPosX;
+			}
+
+			if ( y < 0 ) {
+				y = 0;
+			} else if ( y > this.maxPosY ) {
+				y = this.maxPosY;
+			}
+
+			x = this.options.listenX ? Math.round(x / this.sizeRatioX) : this.scroller.x;
+			y = this.options.listenY ? Math.round(y / this.sizeRatioY) : this.scroller.y;
+
+			this.scroller.scrollTo(x, y);
+		},
+
+		fade: function (val, hold) {
+			if ( hold && !this.visible ) {
+				return;
+			}
+
+			clearTimeout(this.fadeTimeout);
+			this.fadeTimeout = null;
+
+			var time = val ? 250 : 500,
+				delay = val ? 0 : 300;
+
+			val = val ? '1' : '0';
+
+			this.wrapperStyle[utils.style.transitionDuration] = time + 'ms';
+
+			this.fadeTimeout = setTimeout((function (val) {
+				this.wrapperStyle.opacity = val;
+				this.visible = +val;
+			}).bind(this, val), delay);
+		}
+	};
+
+	IScroll.utils = utils;
+
+	if ( typeof module != 'undefined' && module.exports ) {
+		module.exports = IScroll;
+	} else if ( true ) {
+	        !(__WEBPACK_AMD_DEFINE_RESULT__ = function () { return IScroll; }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {
+		window.IScroll = IScroll;
+	}
+
+	})(window, document, Math);
+
 
 /***/ }),
 /* 22 */
+/***/ (function(module, exports) {
+
+	module.exports = "\r\n\t<transition name='main'>\r\n\t\r\n\t\t<div class=\"lt-full zmiti-introduce-main-ui \" :class=\"{'show':show}\" :style=\"{background:'url('+imgs.introduceBg+') no-repeat center center',backgroundSize:'cover'}\"  ref='page'>\r\n\t\t\t<div class=\"zmiti-logo\">\r\n\t\t\t\t<img :src=\"imgs.logo\" alt=\"\">\r\n\t\t\t</div>\r\n\t\t\t<div class=\"zmiti-introduce-main\">\r\n\t\t\t\t<div class=\"zmiti-introduce-title\">\r\n\t\t\t\t\t<img :src=\"imgs.introTitle\" alt=\"\">\r\n\t\t\t\t\t<div>{{texts.zlmIntro}}</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"zmiti-introduce-content\">\r\n\t\t\t\t\t<h2 class=\"zmiti-introduce-name\">\r\n\t\t\t\t\t\t{{texts.zlmName}}\r\n\t\t\t\t\t</h2>\r\n\t\t\t\t\t<div class=\"zmiti-introduce-wrap\" ref='zmiti-introduce-wrap'>\r\n\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t<div v-for='(content,i) in texts.zlmIntroContent' :key=\"i\">\r\n\t\t\t\t\t\t\t\t{{content}}\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\r\n\t\t\t<nav class=\"zmiti-nav\">\r\n\t\t\t\t<ul>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 0' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 0}\"  v-tap='[entryDetail,\"aigangjingye\"]'>爱岗敬业</li>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 1' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 1}\" v-tap='[entryDetail,\"yongyuchuangxin\"]'>勇于创新</li>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 2' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 2}\" v-tap='[entryDetail,\"ganyufengxian\"]'>甘于奉献</li>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 3' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 3}\" v-tap='[entryFriend]'>\r\n\t\t\t\t\t\t<img :src=\"imgs.msg\" alt=\"\">\r\n\t\t\t\t\t</li>\r\n\t\t\t\t</ul>\r\n\t\t\t</nav>\r\n\r\n\t\t\t<div class=\"zmiti-mask\" v-if='showMasks' @touchstart='showMasks = false'>\r\n\t\t\t\t<img :src=\"imgs.arrow\">\r\n\t\t\t</div>\r\n\t\r\n\t\t</div>\r\n\t\r\n\t</transition>\r\n";
+
+/***/ }),
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(23)
-	__vue_template__ = __webpack_require__(24)
+	__vue_script__ = __webpack_require__(24)
+	__vue_template__ = __webpack_require__(27)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -23009,7 +24768,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\project\\openingup\\components\\music\\index.vue"
+	  var id = "F:\\xuchang2018\\project\\lifemodel\\components\\friend\\index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -23018,7 +24777,629 @@
 	})()}
 
 /***/ }),
-/* 23 */
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// <template>
+	// 	<transition name='main'>
+	//
+	// 		<div class="lt-full zmiti-friend-main-ui " :class="{'show':show}"  ref='page'>
+	//
+	// 			<section>
+	// 				<div class="zmiti-index-logo">
+	// 					<img :src="imgs.logo" alt="">
+	// 				</div>
+	// 				<img :src="imgs.friendTitle" alt="">
+	// 				<div class="zmiti-friend-C">
+	// 					<div class="zmiti-head">
+	// 						<img :src="imgs.head1" alt="">
+	// 					</div>
+	// 					<div>
+	// 						<div class="zmiti-friend-nickname">张黎明徒弟张斌</div>
+	// 						<div class="zmiti-friend-content">
+	// 							我很荣幸，能在步入企业之初就找到像张黎明这样的工作标杆。
+	// 						</div>
+	//
+	// 						<div class="zmiti-friend-link">
+	// 							<div>
+	// 								<img :src="imgs.head2" alt="">
+	// 							</div>
+	// 							<div>
+	// 								<span>中宣部授予张黎明“时代楷模”称号</span>
+	// 							</div>
+	// 						</div>
+	// 						<div class="zmiti-friend-time">
+	// 							<div>3分钟前</div>
+	// 							<div><img :src="imgs.like" alt=""></div>
+	// 						</div>
+	//
+	// 						<div class="zmiti-friend-like-list">
+	// 							<img :src="imgs.heart" alt="">
+	// 							天津滨海新区区委宣传部张宁，国网天津市电力公司党建工作部主任及明，国网天津滨海供电公司员工张斌，滨海新区花园里小区马秀环老人，塘沽街道新城家园社区居委会主任何丽，张黎明儿子
+	// 						</div>
+	//
+	// 						<div class="zmiti-friend-comment">
+	// 							<span>滨海新区区委宣传部张宁：</span>
+	// 							张黎明在看似平凡中彰显了一名共产党员的先进本色。
+	// 						</div>
+	// 						<div class="zmiti-friend-comment">
+	// 							<span>国网天津市电力公司党建工作部主任及明：</span>
+	// 							张黎明所展现出的良好的党性修养产生了辐射效应，带动了一批党员群众向他看齐。
+	// 						</div>
+	//
+	// 						<div class="zmiti-friend-comment">
+	// 							<span>马秀环老人：</span>
+	// 							张师傅比我自己孩子还上心。
+	// 						</div>
+	//
+	// 						<div class="zmiti-friend-comment">
+	// 							<span>塘沽街道新城家园社区居委会主任何丽：</span>
+	// 							他是我们百姓的贴心人，也是我们身边的榜样。
+	// 						</div>
+	//
+	// 						<div class="zmiti-friend-comment">
+	// 							<span>张黎明儿子：</span>
+	// 							我和爸爸交流不是很多，因为他平时特别忙，但我能感觉到他对周围的人，对家人，甚至不相识的人都非常好，非常负责任。
+	// 						</div>
+	//
+	// 						<div class="zmiti-friend-comment">
+	// 							<span>张黎明</span>回复：党的十九大报告已经给我们指明了方向，知识型、技能型、创新型，就是我们蓝领工人的奋斗目标。作为一名基层党员，我会继续在服务群众上下功夫。
+	// 						</div>
+	//
+	// 					</div>
+	// 				</div>
+	// 			</section>
+	//
+	// 			<div class="zmiti-back" v-tap='[hidePage]'>
+	// 				<img :src="imgs.back" alt="">
+	// 			</div>
+	//
+	// 		</div>
+	//
+	// 	</transition>
+	// </template>
+	//
+	// <script>
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+		value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	__webpack_require__(25);
+
+	var _libAssetsJs = __webpack_require__(13);
+
+	var _iscroll = __webpack_require__(21);
+
+	var _iscroll2 = _interopRequireDefault(_iscroll);
+
+	var _jquery = __webpack_require__(15);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _libUtil = __webpack_require__(14);
+
+	var _libUtil2 = _interopRequireDefault(_libUtil);
+
+	exports['default'] = {
+
+		props: ['obserable', 'pv', 'randomPv', 'nickname', 'headimgurl'],
+
+		name: 'zmitiindex',
+
+		data: function data() {
+
+			return {
+				imgs: _libAssetsJs.imgs,
+				showTeam: false,
+				showQrcode: false,
+				show: false,
+				viewW: window.innerWidth,
+				viewH: window.innerHeight,
+				showMasks: false
+			};
+		},
+
+		components: {},
+		methods: {
+			restart: function restart() {
+				window.location.href = window.location.href.split('?')[0];
+			},
+			share: function share() {
+				this.showMasks = true;
+			},
+			hidePage: function hidePage() {
+				this.show = false;
+			}
+		},
+
+		mounted: function mounted() {
+			var _this = this;
+
+			window.s = this;
+
+			this.scroll = new _iscroll2['default'](this.$refs['page'], {});
+
+			var obserable = this.obserable;
+
+			obserable.on('showFriend', function () {
+				_this.show = true;
+				_this.scroll.scrollTo(0, 0, 1);
+			});
+		}
+
+	};
+
+	// </script>
+	module.exports = exports['default'];
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(26);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(8)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../node_modules/css-loader/index.js!./index.css", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!./index.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(7)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".lt-full {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n\n.zmiti-text-overflow {\n  overflow: hidden;\n  white-space: nowrap;\n  word-break: break-all;\n  text-overflow: ellipsis;\n  -webkit-text-overflow: ellipsis;\n}\n\n.zmiti-play {\n  width: .8rem;\n  height: .8rem;\n  border-radius: 50%;\n  position: fixed;\n  z-index: 1000;\n  right: .5rem;\n  top: .5rem;\n}\n\n.zmiti-play.rotate {\n  -webkit-animation: rotate 5s linear infinite;\n  animation: rotate 5s linear infinite;\n}\n\n@-webkit-keyframes rotate {\n  to {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n\n.zmiti-friend-main-ui {\n  opacity: 0;\n  z-index: -1;\n  background: #fdf7eb;\n}\n\n.zmiti-friend-main-ui > section {\n  padding-bottom: 40px;\n}\n\n.zmiti-friend-main-ui > section .zmiti-index-logo {\n  position: absolute;\n  width: 120px;\n  right: 30px;\n  top: 30px;\n}\n\n.zmiti-friend-main-ui.show {\n  z-index: 1230;\n  opacity: 1;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C {\n  width: 96%;\n  margin: 40px auto;\n  position: relative;\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  -webkit-box-pack: start;\n  -webkit-box-align: start;\n  font-size: 28px;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C > div {\n  margin: 0 10px;\n  -webkit-box-flex: 1;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C > div:nth-of-type(1) {\n  width: 172px;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-nickname {\n  color: #2c4a7c;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-link {\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  margin-top: 50px;\n  -webkit-box-pack: start;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-link > div {\n  margin-right: 20px;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-time {\n  margin: 50px 0;\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  -webkit-box-pack: justify;\n  color: #dcc;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-like-list {\n  color: #2c4a7c;\n  line-height: 44px;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-like-list img {\n  width: 30px;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-comment {\n  margin-top: 40px;\n  font-size: 28px;\n  line-height: 40px;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-comment span {\n  color: #2c4a7c;\n}\n\n.zmiti-back {\n  width: 100px;\n  height: 100px;\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  z-index: 100;\n}\n", ""]);
+
+	// exports
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports) {
+
+	module.exports = "\r\n\t<transition name='main'>\r\n\t\r\n\t\t<div class=\"lt-full zmiti-friend-main-ui \" :class=\"{'show':show}\"  ref='page'>\r\n\t\t\t\r\n\t\t\t<section>\r\n\t\t\t\t<div class=\"zmiti-index-logo\">\r\n\t\t\t\t\t<img :src=\"imgs.logo\" alt=\"\">\r\n\t\t\t\t</div>\r\n\t\t\t\t<img :src=\"imgs.friendTitle\" alt=\"\">\r\n\t\t\t\t<div class=\"zmiti-friend-C\">\r\n\t\t\t\t\t<div class=\"zmiti-head\">\r\n\t\t\t\t\t\t<img :src=\"imgs.head1\" alt=\"\">\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div>\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-nickname\">张黎明徒弟张斌</div>\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-content\">\r\n\t\t\t\t\t\t\t我很荣幸，能在步入企业之初就找到像张黎明这样的工作标杆。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-link\">\r\n\t\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t\t<img :src=\"imgs.head2\" alt=\"\">\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t\t<span>中宣部授予张黎明“时代楷模”称号</span>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-time\">\r\n\t\t\t\t\t\t\t<div>3分钟前</div>\r\n\t\t\t\t\t\t\t<div><img :src=\"imgs.like\" alt=\"\"></div>\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-like-list\">\r\n\t\t\t\t\t\t\t<img :src=\"imgs.heart\" alt=\"\">\r\n\t\t\t\t\t\t\t天津滨海新区区委宣传部张宁，国网天津市电力公司党建工作部主任及明，国网天津滨海供电公司员工张斌，滨海新区花园里小区马秀环老人，塘沽街道新城家园社区居委会主任何丽，张黎明儿子\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>滨海新区区委宣传部张宁：</span>\r\n\t\t\t\t\t\t\t张黎明在看似平凡中彰显了一名共产党员的先进本色。\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>国网天津市电力公司党建工作部主任及明：</span>\r\n\t\t\t\t\t\t\t张黎明所展现出的良好的党性修养产生了辐射效应，带动了一批党员群众向他看齐。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>马秀环老人：</span>\r\n\t\t\t\t\t\t\t张师傅比我自己孩子还上心。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>塘沽街道新城家园社区居委会主任何丽：</span>\r\n\t\t\t\t\t\t\t他是我们百姓的贴心人，也是我们身边的榜样。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>张黎明儿子：</span>\r\n\t\t\t\t\t\t\t我和爸爸交流不是很多，因为他平时特别忙，但我能感觉到他对周围的人，对家人，甚至不相识的人都非常好，非常负责任。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>张黎明</span>回复：党的十九大报告已经给我们指明了方向，知识型、技能型、创新型，就是我们蓝领工人的奋斗目标。作为一名基层党员，我会继续在服务群众上下功夫。\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</section>\r\n\t\t\t\r\n\t\t\t<div class=\"zmiti-back\" v-tap='[hidePage]'>\r\n\t\t\t\t<img :src=\"imgs.back\" alt=\"\">\r\n\t\t\t</div>\r\n\t\r\n\t\t</div>\r\n\t\r\n\t</transition>\r\n";
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(29)
+	__vue_template__ = __webpack_require__(32)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "F:\\xuchang2018\\project\\lifemodel\\components\\detail\\index.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// <template>
+	// 	<transition name='main'>
+	//
+	// 		<div class="lt-full zmiti-detail-main-ui " :class="{'show':show}"  ref='page'>
+	//
+	// 			<div :style="{background:'url('+imgs.detailBg+') no-repeat center top',backgroundSize:'cover'}">
+	// 				<div class="zmiti-index-logo">
+	// 					<img :src="imgs.logo" alt="">
+	// 				</div>
+	//
+	// 				<h1></h1>
+	// 				<div class="zmiti-detail-title">
+	// 					<img :src="data.title" alt="">
+	// 				</div>
+	//
+	// 				<div v-tap='[toggleVideo]' v-if='data.videoPoster' class="zmiti-video-C" :style="{background:showVideo?'transparent':'url('+data.videoPoster+') no-repeat center'}">
+	// 					<video :style="{opacity:showVideo?1:0}" :src="data.videoUrl" x5-playsinline="" ref="video" controls x-webkit-airplay="true"  webkit-playsinline="true" playsinline="true" >
+	// 					</video>
+	// 				</div>
+	// 				<div class="zmiti-video-text">
+	// 					{{data.videoText}}
+	// 				</div>
+	// 				<div class="zmiti-image">
+	// 					<img :src="data.image" alt="">
+	// 				</div>
+	//
+	// 				<div class="zmiti-subtitle">
+	// 					{{data.subTitle}}
+	// 				</div>
+	//
+	// 				<div class="zmiti-image-text" v-if='data.imageText'>
+	// 					<div v-for='(text,i) in data.imageText.split("|")' :key='i'>
+	// 						{{text}}
+	// 					</div>
+	// 				</div>
+	//
+	// 				<div class="zmiti-comment">
+	// 					<h2>
+	// 						<div>精选留言</div>
+	// 						<div>
+	// 							<img :src="imgs.edit" alt="">
+	// 							<span>写留言</span>
+	// 						</div>
+	// 					</h2>
+	//
+	// 					<div v-for="(comment,i) in comments" :key="i" class="zmiti-comment-item">
+	// 						<div>
+	// 							<img :src="comment.headimgurl" alt="">
+	// 						</div>
+	// 						<div>
+	// 							<div>{{comment.name}}</div>
+	// 							<div>{{comment.content}}</div>
+	// 						</div>
+	// 					</div>
+	//
+	// 					<div class="zmiti-more" v-tap='[entryFriend]'>
+	// 						查看更多
+	// 					</div>
+	//
+	// 				</div>
+	// 			</div>
+	// 			<section class="zmiti-back" v-tap='[hidePage]'>
+	// 				<img :src="imgs.back" alt="">
+	// 			</section>
+	// 		</div>
+	//
+	// 	</transition>
+	// </template>
+	//
+	// <script>
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+		value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	__webpack_require__(30);
+
+	var _libAssetsJs = __webpack_require__(13);
+
+	var _jquery = __webpack_require__(15);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _libUtil = __webpack_require__(14);
+
+	var _libUtil2 = _interopRequireDefault(_libUtil);
+
+	var _iscroll = __webpack_require__(21);
+
+	var _iscroll2 = _interopRequireDefault(_iscroll);
+
+	exports['default'] = {
+
+		props: ['obserable', 'pv', 'randomPv', 'nickname', 'headimgurl'],
+
+		name: 'zmitiindex',
+
+		data: function data() {
+
+			return {
+				imgs: _libAssetsJs.imgs,
+				texts: texts,
+				comments: comments,
+				showTeam: false,
+				showQrcode: false,
+				showVideo: false,
+				show: false,
+				viewW: window.innerWidth,
+				viewH: window.innerHeight,
+				showMasks: false,
+				data: {}
+			};
+		},
+
+		components: {},
+		methods: {
+
+			hidePage: function hidePage() {
+				this.data = {};
+				this.show = false;
+				var video = this.$refs['video'];
+				video.pause();
+			},
+			entryFriend: function entryFriend() {
+				var obserable = this.obserable;
+
+				obserable.trigger({
+					type: 'showFriend'
+				});
+				var video = this.$refs['video'];
+				video.pause();
+			},
+			toggleVideo: function toggleVideo() {
+				var _this = this;
+
+				this.showVideo = true;
+				var video = this.$refs['video'];
+				video.play();
+
+				setTimeout(function () {
+					_this.scroll.refresh();
+				}, 1000);
+				//video[video.paused?'play':'pause']();
+			}
+		},
+
+		mounted: function mounted() {
+			var _this2 = this;
+
+			window.s = this;
+			this.scroll = new _iscroll2['default'](this.$refs['page'], {});
+
+			//this.data = window.aigangjingye;
+
+			var obserable = this.obserable;
+
+			obserable.on('entryDetail', function (key) {
+				_this2.show = true;
+				_this2.data = window[key];
+				_this2.scroll.scrollTo(0, 0, 1);
+				_this2.scroll.refresh();
+				setTimeout(function () {
+					_this2.toggleVideo();
+				}, 400);
+			});
+		}
+
+	};
+
+	// </script>
+	module.exports = exports['default'];
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(31);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(8)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../node_modules/css-loader/index.js!./index.css", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!./index.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(7)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".lt-full {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n\n.zmiti-text-overflow {\n  overflow: hidden;\n  white-space: nowrap;\n  word-break: break-all;\n  text-overflow: ellipsis;\n  -webkit-text-overflow: ellipsis;\n}\n\n.zmiti-play {\n  width: .8rem;\n  height: .8rem;\n  border-radius: 50%;\n  position: fixed;\n  z-index: 1000;\n  right: .5rem;\n  top: .5rem;\n}\n\n.zmiti-play.rotate {\n  -webkit-animation: rotate 5s linear infinite;\n  animation: rotate 5s linear infinite;\n}\n\n@-webkit-keyframes rotate {\n  to {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n\n.zmiti-detail-main-ui {\n  background: #fff;\n  color: #504125;\n  z-index: -1;\n  opacity: 0;\n  overflow: hidden;\n}\n\n.zmiti-detail-main-ui.show {\n  z-index: 1230;\n  opacity: 1;\n}\n\n.zmiti-detail-main-ui > div {\n  min-height: 1888px;\n}\n\n.zmiti-detail-main-ui .zmiti-detail-title {\n  width: 80%;\n  margin: 0 auto;\n}\n\n.zmiti-detail-main-ui h1 {\n  height: 150px;\n}\n\n.zmiti-detail-main-ui .zmiti-video-C {\n  width: 750px;\n}\n\n.zmiti-detail-main-ui .zmiti-video-C video {\n  width: 100%;\n}\n\n.zmiti-detail-main-ui .zmiti-video-text,\n.zmiti-detail-main-ui .zmiti-image-text {\n  width: 80%;\n  margin: 20px  auto;\n}\n\n.zmiti-detail-main-ui .zmiti-video-text div,\n.zmiti-detail-main-ui .zmiti-image-text div {\n  text-indent: 2em;\n}\n\n.zmiti-detail-main-ui .zmiti-index-logo {\n  position: absolute;\n  width: 120px;\n  right: 30px;\n  top: 30px;\n}\n\n.zmiti-detail-main-ui .zmiti-subtitle {\n  width: 90%;\n  text-align: right;\n  margin: 0 auto;\n}\n\n.zmiti-detail-main-ui .zmiti-comment {\n  margin-top: 120px;\n  position: relative;\n  background: #fff;\n}\n\n.zmiti-detail-main-ui .zmiti-comment:before {\n  content: '';\n  position: absolute;\n  width: 100%;\n  height: 40px;\n  z-index: -1;\n  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);\n}\n\n.zmiti-detail-main-ui .zmiti-comment:after {\n  content: '';\n  position: absolute;\n  width: 100%;\n  height: 40px;\n  z-index: -1;\n  left: 0;\n  bottom: -5px;\n  background: #fff;\n}\n\n.zmiti-detail-main-ui .zmiti-comment h2 {\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  -webkit-box-pack: justify;\n  width: 90%;\n  font-weight: normal;\n  margin: 0 auto;\n  font-size: 30px;\n  height: 80px;\n}\n\n.zmiti-detail-main-ui .zmiti-comment h2 > div:nth-of-type(1) {\n  color: #a0a0a0;\n}\n\n.zmiti-detail-main-ui .zmiti-comment h2 span {\n  color: #4a586c;\n}\n\n.zmiti-detail-main-ui .zmiti-comment h2 img {\n  width: 30px;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-comment-item {\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  width: 90%;\n  margin: 20px auto;\n  -webkit-box-align: start;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-comment-item > div {\n  margin: 0 10px;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-comment-item > div:nth-of-type(1) {\n  -webkit-box-flex: 1;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-comment-item > div:nth-of-type(2) {\n  -webkit-box-flex: 11;\n  color: #282727;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-comment-item > div:nth-of-type(2) > div {\n  font-size: 28px;\n  line-height: 40px;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-comment-item > div:nth-of-type(2) > div:nth-of-type(1) {\n  color: #a0a0a0;\n  font-size: 24px;\n  margin-top: -5px;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-more {\n  border-top: 1px solid #e9e4d8;\n  text-align: center;\n  height: 100px;\n  color: #787878;\n  line-height: 100px;\n}\n\n.zmiti-detail-main-ui .zmiti-image-text {\n  font-size: 28px;\n  line-height: 42px;\n}\n\n.zmiti-detail-main-ui .zmiti-image {\n  width: 90%;\n  margin: 80px auto 20px;\n  background: #ead7a4;\n  padding: 10px;\n  position: relative;\n}\n\n.zmiti-detail-main-ui .zmiti-image:before {\n  content: '';\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  left: 0;\n  top: 0;\n  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);\n}\n", ""]);
+
+	// exports
+
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports) {
+
+	module.exports = "\r\n\t<transition name='main'>\r\n\t\r\n\t\t<div class=\"lt-full zmiti-detail-main-ui \" :class=\"{'show':show}\"  ref='page'>\r\n\r\n\t\t\t<div :style=\"{background:'url('+imgs.detailBg+') no-repeat center top',backgroundSize:'cover'}\">\r\n\t\t\t\t<div class=\"zmiti-index-logo\">\r\n\t\t\t\t\t<img :src=\"imgs.logo\" alt=\"\">\r\n\t\t\t\t</div>\r\n\t\t\t\t\r\n\t\t\t\t<h1></h1>\r\n\t\t\t\t<div class=\"zmiti-detail-title\">\r\n\t\t\t\t\t<img :src=\"data.title\" alt=\"\">\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div v-tap='[toggleVideo]' v-if='data.videoPoster' class=\"zmiti-video-C\" :style=\"{background:showVideo?'transparent':'url('+data.videoPoster+') no-repeat center'}\">\r\n\t\t\t\t\t<video :style=\"{opacity:showVideo?1:0}\" :src=\"data.videoUrl\" x5-playsinline=\"\" ref=\"video\" controls x-webkit-airplay=\"true\"  webkit-playsinline=\"true\" playsinline=\"true\" > \r\n\t\t\t\t\t</video>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"zmiti-video-text\">\r\n\t\t\t\t\t{{data.videoText}}\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"zmiti-image\">\r\n\t\t\t\t\t<img :src=\"data.image\" alt=\"\">\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div class=\"zmiti-subtitle\">\r\n\t\t\t\t\t{{data.subTitle}}\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div class=\"zmiti-image-text\" v-if='data.imageText'>\r\n\t\t\t\t\t<div v-for='(text,i) in data.imageText.split(\"|\")' :key='i'>\r\n\t\t\t\t\t\t{{text}}\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div class=\"zmiti-comment\">\r\n\t\t\t\t\t<h2>\r\n\t\t\t\t\t\t<div>精选留言</div>\r\n\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t<img :src=\"imgs.edit\" alt=\"\">\r\n\t\t\t\t\t\t\t<span>写留言</span>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</h2>\r\n\t\t\t\t\t\r\n\t\t\t\t\t<div v-for=\"(comment,i) in comments\" :key=\"i\" class=\"zmiti-comment-item\">\r\n\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t<img :src=\"comment.headimgurl\" alt=\"\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t<div>{{comment.name}}</div>\r\n\t\t\t\t\t\t\t<div>{{comment.content}}</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t\r\n\t\t\t\t\t<div class=\"zmiti-more\" v-tap='[entryFriend]'>\r\n\t\t\t\t\t\t查看更多\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t<section class=\"zmiti-back\" v-tap='[hidePage]'>\r\n\t\t\t\t<img :src=\"imgs.back\" alt=\"\">\r\n\t\t\t</section>\r\n\t\t</div>\r\n\t\r\n\t</transition>\r\n";
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(34)
+	__vue_template__ = __webpack_require__(37)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "F:\\xuchang2018\\project\\lifemodel\\components\\main\\index.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// <template>
+	// 	<transition name='main'>
+	//
+	// 		<div class="lt-full zmiti-main-main-ui " :class="{'show':show}"  ref='page'>
+	//
+	// 			<div class="zmiti-mask" v-if='showMasks' @touchstart='showMasks = false'>
+	//
+	// 				<img :src="imgs.arrow">
+	//
+	// 			</div>
+	//
+	// 		</div>
+	//
+	// 	</transition>
+	// </template>
+	//
+	// <script>
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+		value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	__webpack_require__(35);
+
+	var _libAssetsJs = __webpack_require__(13);
+
+	var _jquery = __webpack_require__(15);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _libUtil = __webpack_require__(14);
+
+	var _libUtil2 = _interopRequireDefault(_libUtil);
+
+	exports['default'] = {
+
+		props: ['obserable', 'pv', 'randomPv', 'nickname', 'headimgurl'],
+
+		name: 'zmitiindex',
+
+		data: function data() {
+
+			return {
+				imgs: _libAssetsJs.imgs,
+				showTeam: false,
+				showQrcode: false,
+				show: true,
+				viewW: window.innerWidth,
+				viewH: window.innerHeight,
+				showMasks: false
+			};
+		},
+
+		components: {},
+		methods: {
+			restart: function restart() {
+				window.location.href = window.location.href.split('?')[0];
+			},
+			share: function share() {
+				this.showMasks = true;
+			}
+		},
+
+		mounted: function mounted() {
+			window.s = this;
+		}
+
+	};
+
+	// </script>
+	module.exports = exports['default'];
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(36);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(8)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../node_modules/css-loader/index.js!./index.css", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!./index.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(7)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "@charset \"UTF-8\";\r\n.lt-full {\r\n  width: 100%;\r\n  height: 100%;\r\n  position: absolute;\r\n  left: 0;\r\n  top: 0; }\r\n\r\n.zmiti-text-overflow {\r\n  overflow: hidden;\r\n  white-space: nowrap;\r\n  word-break: break-all;\r\n  text-overflow: ellipsis;\r\n  -webkit-text-overflow: ellipsis; }\r\n\r\n.zmiti-play {\r\n  width: .8rem;\r\n  height: .8rem;\r\n  border-radius: 50%;\r\n  position: fixed;\r\n  z-index: 1000;\r\n  right: .5rem;\r\n  top: .5rem; }\r\n  .zmiti-play.rotate {\r\n    -webkit-animation: rotate 5s linear infinite;\r\n    animation: rotate 5s linear infinite; }\r\n\r\n@-webkit-keyframes rotate {\r\n  to {\r\n    -webkit-transform: rotate(360deg);\r\n    transform: rotate(360deg); } }\r\n.zmiti-main-main-ui {\r\n  overflow: hidden; }\r\n  .zmiti-main-main-ui > canvas {\r\n    position: absolute;\r\n    left: 0;\r\n    top: 0; }\r\n  .zmiti-main-main-ui .myCanavs {\r\n    bottom: 0;\r\n    top: auto;\r\n    z-index: 100; }\r\n  .zmiti-main-main-ui .canvas1 {\r\n    box-sizing: border-box; }\r\n  .zmiti-main-main-ui .zmiti-operator {\r\n    position: absolute;\r\n    z-index: 102;\r\n    width: 100%;\r\n    height: 26vh;\r\n    bottom: 0;\r\n    left: 0;\r\n    text-align: center; }\r\n    .zmiti-main-main-ui .zmiti-operator .zmiti-myheadimg {\r\n      background: #ff3f37;\r\n      color: #Fff;\r\n      display: inline-block;\r\n      text-align: center;\r\n      padding: 0 30px;\r\n      height: 70px;\r\n      line-height: 70px;\r\n      margin: 30px auto 0;\r\n      border-radius: 30px; }\r\n    .zmiti-main-main-ui .zmiti-operator .zmiti-preview {\r\n      text-align: center;\r\n      color: #fff;\r\n      height: 80px;\r\n      line-height: 80px; }\r\n    .zmiti-main-main-ui .zmiti-operator .zmiti-pv {\r\n      text-align: center;\r\n      color: #fff;\r\n      font-family: Georgia;\r\n      font-size: 34px; }\r\n  .zmiti-main-main-ui .zmiti-createimg {\r\n    position: absolute;\r\n    z-index: 11;\r\n    top: 2vh;\r\n    width: 750px;\r\n    -webkit-transform: scale(0.7);\r\n    transform: scale(0.7);\r\n    -webkit-transform-origin: 50% 20%;\r\n    transform-origin: 50% 20%; }\r\n    .zmiti-main-main-ui .zmiti-createimg.zmiti-scale-enter-active, .zmiti-main-main-ui .zmiti-createimg.zmiti-scale-leave-active {\r\n      -webkit-transition: 0.4s;\r\n      transition: 0.4s; }\r\n    .zmiti-main-main-ui .zmiti-createimg.zmiti-scale-enter, .zmiti-main-main-ui .zmiti-createimg.zmiti-scale-leave-to {\r\n      -webkit-transform: scale(1);\r\n      transform: scale(1); }\r\n    .zmiti-main-main-ui .zmiti-createimg:after {\r\n      content: '\\957F\\6309\\4FDD\\5B58\\56FE\\7247';\r\n      position: absolute;\r\n      color: #fff;\r\n      font-size: .36rem;\r\n      bottom: 0rem;\r\n      width: .4rem;\r\n      left: 100%; }\r\n  .zmiti-main-main-ui .zmiti-btns {\r\n    position: absolute;\r\n    width: 80%;\r\n    z-index: 11;\r\n    left: 10%;\r\n    bottom: 6vh;\r\n    display: -webkit-box;\r\n    -webkit-box-align: center;\r\n    -webkit-box-pack: center;\r\n    -webkit-box-orient: horizontal;\r\n    color: #fff; }\r\n    .zmiti-main-main-ui .zmiti-btns.btn-enter-active, .zmiti-main-main-ui .zmiti-btns.btn-leave-active {\r\n      -webkit-transition: 1s 0.6s;\r\n      transition: 1s 0.6s; }\r\n    .zmiti-main-main-ui .zmiti-btns.btn-enter, .zmiti-main-main-ui .zmiti-btns.btn-leave-to {\r\n      opacity: 0; }\r\n    .zmiti-main-main-ui .zmiti-btns > div {\r\n      width: 200px;\r\n      height: 70px;\r\n      line-height: 70px;\r\n      text-align: center;\r\n      background: #ff3f37;\r\n      border-radius: 40px;\r\n      margin: 0 30px; }\r\n  .zmiti-main-main-ui .zmiti-main-info {\r\n    opacity: 0;\r\n    z-index: -1;\r\n    color: #696b72; }\r\n    .zmiti-main-main-ui .zmiti-main-info.show {\r\n      opacity: 1;\r\n      z-index: 99; }\r\n    .zmiti-main-main-ui .zmiti-main-info > h1 {\r\n      height: 38vh; }\r\n    .zmiti-main-main-ui .zmiti-main-info > section {\r\n      height: 62vh;\r\n      width: 750px;\r\n      box-sizing: border-box; }\r\n    .zmiti-main-main-ui .zmiti-main-info .zmiti-code {\r\n      font-family: Georgia;\r\n      font-size: 34px;\r\n      text-align: center;\r\n      height: 80px;\r\n      width: 650px;\r\n      margin: 0 auto;\r\n      border-bottom: 1px solid rgba(105, 107, 114, 0.4); }\r\n    .zmiti-main-main-ui .zmiti-main-info .zmiti-head {\r\n      display: -webkit-box;\r\n      -webkit-box-align: center;\r\n      -webkit-box-pack: center;\r\n      -webkit-box-orient: horizontal;\r\n      width: 650px;\r\n      margin: 40px auto; }\r\n      .zmiti-main-main-ui .zmiti-main-info .zmiti-head > div:nth-of-type(1) {\r\n        width: 100px; }\r\n      .zmiti-main-main-ui .zmiti-main-info .zmiti-head > div:nth-of-type(2) {\r\n        margin-left: 30px;\r\n        -webkit-box-flex: 1; }\r\n    .zmiti-main-main-ui .zmiti-main-info .zmiti-qrcode {\r\n      margin: 0 auto 30px;\r\n      width: 200px; }\r\n    .zmiti-main-main-ui .zmiti-main-info .zmiti-text {\r\n      font-size: 24px;\r\n      color: #fff;\r\n      text-align: center;\r\n      line-height: 50px; }\r\n    .zmiti-main-main-ui .zmiti-main-info .zmiti-logo {\r\n      position: absolute;\r\n      width: 70px;\r\n      left: 60px;\r\n      bottom: 60px; }\r\n\r\n@-webkit-keyframes ar {\r\n  from {\r\n    margin-top: -5px; }\r\n  to {\r\n    margin-top: 5px; } }\r\n\r\n/*# sourceMappingURL=index.css.map */\r\n", ""]);
+
+	// exports
+
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports) {
+
+	module.exports = "\r\n\t<transition name='main'>\r\n\t\r\n\t\t<div class=\"lt-full zmiti-main-main-ui \" :class=\"{'show':show}\"  ref='page'>\r\n\t\r\n\t\t\t<div class=\"zmiti-mask\" v-if='showMasks' @touchstart='showMasks = false'>\r\n\t\r\n\t\t\t\t<img :src=\"imgs.arrow\">\r\n\t\r\n\t\t\t</div>\r\n\t\r\n\t\t</div>\r\n\t\r\n\t</transition>\r\n";
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(39)
+	__vue_template__ = __webpack_require__(40)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "F:\\xuchang2018\\project\\lifemodel\\components\\music\\index.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ }),
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// <template>
@@ -23182,13 +25563,13 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 24 */
+/* 40 */
 /***/ (function(module, exports) {
 
 	module.exports = "\r\n\t<div  class=\"lt-full zmiti-music-main-ui\" :style='{height:\"10vh\"}'>\r\n\t\t<audio ref='music' v-for='audio in audios' :src='audio.src' :autoplay=\"audio.autoplay\" :loop=\"audio.loop\"></audio>\r\n\r\n\t\t<div  @click='toggleMusic' class='zmiti-play' :class='{\"rotate\":rotate}' :style=\"playStyle\">\r\n\t\t\t<img  :src='imgs.play'/>\r\n\t\t</div>\r\n\t</div>\r\n";
 
 /***/ }),
-/* 25 */
+/* 41 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -23252,7 +25633,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 26 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23367,7 +25748,7 @@
 	});
 
 /***/ }),
-/* 27 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -23461,6 +25842,80 @@
 	   }
 	}))
 
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	        value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Point = (function () {
+	        function Point(option) {
+	                _classCallCheck(this, Point);
+
+	                this.x = option.x || Math.random() * option.context.canvas.width;
+	                this.y = option.y || Math.random() * option.context.canvas.height;
+
+	                this.defaultX = this.x;
+	                this.defaultY = this.y;
+	                this.img = option.img;
+
+	                this.angle = 0;
+
+	                this.maxHeight = Math.random() * 100 + 100;
+
+	                this.iNow = 0;
+
+	                this.speed = Math.random() * 2;
+	                this.context = option.context;
+
+	                this.size = Math.random() * 10;
+
+	                this.speedX = Math.random();
+
+	                this.rotate = Math.random() * 360 / 180 * Math.PI;
+	                this.render();
+	        }
+
+	        _createClass(Point, [{
+	                key: "render",
+	                value: function render() {
+	                        var context = this.context;
+	                        var defaultX = this.defaultX;
+	                        var defaultY = this.defaultY;
+	                        var img = this.img;
+	                        var x = this.x;
+	                        var y = this.y;
+	                        var size = this.size;
+	                        var maxHeight = this.maxHeight;
+	                        var rotate = this.rotate;
+	                        var iNow = this.iNow;
+
+	                        context.save();
+	                        context.rotate = rotate;
+	                        context.drawImage(img, x, y, size, size);
+	                        context.restore();
+	                }
+	        }, {
+	                key: "update",
+	                value: function update() {
+	                        this.render();
+	                }
+	        }]);
+
+	        return Point;
+	})();
+
+	exports["default"] = Point;
+	module.exports = exports["default"];
 
 /***/ })
 /******/ ]);
