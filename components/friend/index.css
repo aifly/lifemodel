@@ -43,14 +43,14 @@
 }
 
 .zmiti-friend-main-ui > section {
-  padding-bottom: 40px;
+  padding-bottom: 60px;
 }
 
 .zmiti-friend-main-ui > section .zmiti-index-logo {
   position: absolute;
-  width: 120px;
-  right: 30px;
-  top: 30px;
+  width: 180px;
+  right: 20px;
+  top: 20px;
 }
 
 .zmiti-friend-main-ui.show {
@@ -89,7 +89,7 @@
   -webkit-box-align: center;
   -webkit-box-pack: center;
   -webkit-box-orient: horizontal;
-  margin-top: 50px;
+  margin-top: 10px;
   -webkit-box-pack: start;
 }
 
@@ -124,6 +124,19 @@
 
 .zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-comment span {
   color: #2c4a7c;
+}
+
+.zmiti-friend-main-ui .zmiti-copyright {
+  height: 70px;
+  line-height: 70px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid #ebd7a4;
+  color: #a2853b;
+  font-size: 26px;
 }
 
 .zmiti-back {

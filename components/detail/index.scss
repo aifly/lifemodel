@@ -29,7 +29,7 @@ $color: #fffb88;
 	}
 
 	h1{
-		height: 150px;
+		height: 200px;
 	}
 
 	.zmiti-video-C{
@@ -51,11 +51,14 @@ $color: #fffb88;
 
 		}
 	}
+	.zmiti-video-text{
+		text-indent: 2em;
+	}
 	.zmiti-index-logo{
 		@include pos(a);
-		width: 120px;
+		width: 180px;
 		right: 30px;
-		top: 30px;
+		top: 20px;
 	}
 	.zmiti-subtitle{
 		width: 90%;

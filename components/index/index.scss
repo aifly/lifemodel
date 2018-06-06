@@ -23,7 +23,7 @@ $bgColor: #4081dd;
 		@include pos(a);
 		width:100vw;
 		left: 50%;
-		top: 6vh;
+		top: 24vh;
 		z-index: 10;
 		@include transform(translate3d(-50%,0,0));
 		img{
@@ -34,9 +34,9 @@ $bgColor: #4081dd;
 		@include pos(a);
 		bottom: 0;
 		left: -200px;
-		z-index: 10;
-		height:76vh;
-		@include transition(.2s);
+		z-index: 8;
+		height:70vh;
+		@include transition_transform(.2s);
 		img{
 			width: auto;
 			height: 100%;
@@ -53,9 +53,8 @@ $bgColor: #4081dd;
 
 		canvas{
 			@include pos(a);
-
+			bottom: 100px;
 			z-index: 10;
-			
 		}
 	}
 
@@ -77,10 +76,11 @@ $bgColor: #4081dd;
 
 
 	.zmiti-index-logo{
-		width: 140px;
+		width: 180px;
 		@include pos(a);
 		bottom: 40px;
 		right: 40px;
+		z-index: 9;
 	}
 
 	

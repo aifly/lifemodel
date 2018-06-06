@@ -1,9 +1,10 @@
 ﻿var imgs = {
 	play: './assets/images/play.png',
 	logo: './assets/images/logo1.png',
-	indexBg: './assets/images/index-bg.jpg',
+	indexBg: './assets/images/index-bg1.jpg',
 	introduceBg: './assets/images/introduce-bg.jpg',
 	detailBg: './assets/images/detail-bg.jpg',
+	teamBg: './assets/images/team-bg.jpg',
 	introTitle:'./assets/images/intro-title.png',
 	friendTitle:'./assets/images/friend-title.jpg',
 	detailTitle:'./assets/images/detail-title.png',
@@ -36,7 +37,7 @@ var texts = {
 	zlmIntro: '5月28日，中宣部授予张黎明同志“时代楷模”称号。',
 	zlmName: '张黎明',
 	zlmIntroContent:[
-		'张黎明，国家电网天津滨海供电公司运维检修部配电抢修一班班长、滨海黎明共产党员服务队队长，曾荣获全国优秀共产党员、全国劳动模范、全国五一劳动奖章、全国职工职业道德建设标兵、全国岗位学雷锋标兵等多项荣誉，党的十九大代表。',
+		'国家电网天津滨海供电公司运维检修部配电抢修一班班长、滨海黎明共产党员服务队队长，曾荣获全国优秀共产党员、全国劳动模范、全国五一劳动奖章、全国职工职业道德建设标兵、全国岗位学雷锋标兵等多项荣誉，党的十九大代表。',
 		'他爱岗敬业，工作30多年来始终奋战在电力抢修一线，累计巡线8万多公里，完成故障抢修作业近2万次，被誉为电力抢修的“活地图”。',
 		'他勇于创新，先后实现技术革新400余项，20多项填补电力行业空白，是知识型、技能型、创新型劳动者的杰出代表。',
 		'他甘于奉献，模范践行全心全意为人民服务的根本宗旨，带领黎明共产党员服务队，十年如一日开展学雷锋志愿服务，用爱心搭起了企业与群众的“连心桥”。'
@@ -50,7 +51,7 @@ var aigangjingye = {//爱岗敬业
 	videoPoster:imgs.videoPoster,
 	videoText: '在同事眼中，张黎明不仅是个勤于学技术、精于干专业的技术工，更是一个办事认真敬业、值得信任的“实诚人”。 ',
 	image:imgs.zlm,
-	videoUrl:'./assets/video/aigangjingye.mp4',
+	videoUrl:'./assets/video/aigangjingye1.mp4',
 	imageText: '一年冬天，张黎明要在夜间巡查沿线77根电线杆。他蹬着自行车一不小心掉进水渠中，冰水将他的棉裤浸透。线路尚未巡完，上岸后，张黎明忍着逐渐结冰的棉裤散发出的刺骨寒气，跨上自行车，硬是将整条线路逐段不落巡查完才回家换衣服。他说“要是不巡完，我就不放心。'
 }
 var yongyuchuangxin = { //勇于创新

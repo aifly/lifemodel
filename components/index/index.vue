@@ -1,5 +1,5 @@
 <template>
-	<div v-tap='[entry]'  class="lt-full zmiti-index-main-ui " :style="{background:'url('+imgs.indexBg+') no-repeat center bottom',backgroundSize:'cover'}"  :class="{'show':show}">
+	<div v-tap='[entry]'  class="lt-full zmiti-index-main-ui " :style="{background:'url('+imgs.indexBg+') no-repeat center top',backgroundSize:'cover'}"  :class="{'show':show}">
 		<transition name='index'>
 			<div class="zmiti-index" v-if='!showIndexMask'>
 				<div class="zmiti-title">
@@ -12,7 +12,7 @@
 					<img :src="imgs.entry" alt="">
 				</div>
 
-				<canvas :width="viewW" height="700" ref='canvas'>
+				<canvas :width="viewW" height="500" ref='canvas'>
 
 				</canvas>
 			</div>
@@ -111,7 +111,7 @@
 					height = canvas.height;
 				var img = new Image();
 				img.onload = ()=>{
-					for(var i = 0 ;i<50;i++){
+					for(var i = 0 ;i<100;i++){
 						var p = new Point({
 							img,
 							context,

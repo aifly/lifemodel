@@ -59,7 +59,7 @@
 }
 
 .zmiti-detail-main-ui h1 {
-  height: 150px;
+  height: 200px;
 }
 
 .zmiti-detail-main-ui .zmiti-video-C {
@@ -81,11 +81,15 @@
   text-indent: 2em;
 }
 
+.zmiti-detail-main-ui .zmiti-video-text {
+  text-indent: 2em;
+}
+
 .zmiti-detail-main-ui .zmiti-index-logo {
   position: absolute;
-  width: 120px;
+  width: 180px;
   right: 30px;
-  top: 30px;
+  top: 20px;
 }
 
 .zmiti-detail-main-ui .zmiti-subtitle {
