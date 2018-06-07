@@ -1,10 +1,10 @@
 ﻿@import "../css/base.scss";
 .zmiti-team-main-ui{
-	z-index: 102;
+	z-index: 102222;
 	@include displayBox(horizontal);
 	&.team-enter-active,
 	&.team-leave-active {
-		@include transition(1s);
+		@include transition(.5s);
 	}
 
 	&.team-enter,
@@ -26,7 +26,7 @@
 					label{
 						opacity:0;
 					}
-					width: 110px;
+					width: 90px;
 					//border:1px solid red;
 					@include displayBox(horizontal);
 					-webkit-box-pack:justify;
@@ -34,7 +34,7 @@
 				&:nth-of-type(2){
 					//border:1px solid red;
 					-webkit-box-flex:1;
-					margin-left: 40px;
+					margin-left: 20px;
 					@include pos(r);
 					&:before{
 						content:"：";

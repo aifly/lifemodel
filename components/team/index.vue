@@ -1,55 +1,68 @@
 <template>
 	<transition name="team">
-		<div v-tap='[hideTeam]' v-if='showTeam' class="lt-full zmiti-team-main-ui" :style="{background:'url('+imgs.teamBg+') no-repeat center center',backgroundSize:'cover'}">
+		<div v-tap='[hideTeam]' v-show='showTeam' class="lt-full zmiti-team-main-ui" :style="{background:'url('+imgs.teamBg+') no-repeat center center',backgroundSize:'cover'}">
 			<div class="zmiti-team-main">
 				<div>
 					<aside>
-						<div>出</div>
-						<div>品</div>
-						<div>人</div>
+						出品人
 					</aside> 
-					<aside class="zmiti-chupin">
-						<span>陈凯星、</span> <span>冯瑛冰、</span><span>余孝忠、</span><span>余孝忠</span>
+					<aside>
+						<span>陈凯星、</span> <span>冯瑛冰、</span><span>杨维成</span>
 					</aside>
 				</div>
 				<div>
 					<aside>
-						<div>监</div>
-						<div><label for="">品</label></div>
-						<div><label for="">人</label></div>
-						<div>制</div>
+						总监制
 					</aside> 
 					<aside>
-						<span>陈凯星、</span> <span>冯瑛冰、</span><span>余孝忠</span>
+						<span>葛素表、</span><span>刘元旭</span>
 					</aside>
 				</div>
 
 				<div>
 					<aside>
-						<div>监</div>
-						<div><label for="">品</label></div>
-						<div><label for="">人</label></div>
-						<div>制</div>
+						策<label for="">策</label>划
 					</aside> 
 					<aside>
-						<span>陈凯星、</span> <span>冯瑛冰、</span><span>余孝忠</span>
+						<span>陈知春</span>
 					</aside>
 				</div>
 
 				<div>
 					<aside>
-						<div>监</div>
-						<div><label for="">品</label></div>
-						<div><label for="">人</label></div>
-						<div>制</div>
+						监<label for="">人</label>制
 					</aside> 
 					<aside>
-						<span>陈凯星、</span> <span>冯瑛冰、</span><span>余孝忠</span>
+						<span>牟　帆</span>
 					</aside>
 				</div>
 
 				<div>
-					麟腾传媒技术支持
+					<aside>
+						记<label for="">人</label>者
+					</aside> 
+					<aside>
+						<span>毛振华</span>
+					</aside>
+				</div>
+				<div>
+					<aside>
+						文<label for="">人</label>案
+					</aside> 
+					<aside>
+						<span>李京泽</span>
+					</aside>
+				</div>
+				<div>
+					<aside>
+						制<label for="">人</label>作
+					</aside> 
+					<aside>
+						<span>麟腾传媒</span>
+					</aside>
+				</div>
+				<div>
+					新华社新媒体中心、新华社天津分社联合出品
 				</div>
 			</div>
 		</div>
@@ -87,7 +100,9 @@
 		mounted(){
 
 			this.obserable.on('showTeam',()=>{
+			 
 				this.showTeam = true;
+				
 			})
 		
 

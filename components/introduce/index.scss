@@ -86,6 +86,15 @@ $color: #fffb88;
 
 	}
 
+	.zmiti-team-entry{
+		@include pos(a);
+		z-index: 10;
+		bottom: 120px;
+		right: 50px;
+		text-decoration: underline;
+		color:#714a00;
+	}
+
 	.zmiti-nav{
 		@include pos(a);
 		width:$viewW;

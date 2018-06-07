@@ -22587,10 +22587,14 @@
 	// 				</ul>
 	// 			</nav>
 	//
+	// 			<div class="zmiti-team-entry" v-tap='[showTeamPage]'>制作团队</div>
+	//
 	// 			<div class="zmiti-mask" v-if='showMasks' @touchstart='showMasks = false'>
 	// 				<img :src="imgs.arrow">
 	// 			</div>
-	//
+	// 			<div>
+	// 				<Team :obserable='obserable'></Team>
+	// 			</div>
 	// 		</div>
 	//
 	// 	</transition>
@@ -22621,6 +22625,10 @@
 
 	var _iscroll2 = _interopRequireDefault(_iscroll);
 
+	var _teamIndex = __webpack_require__(28);
+
+	var _teamIndex2 = _interopRequireDefault(_teamIndex);
+
 	exports['default'] = {
 		props: ['obserable', 'pv', 'randomPv', 'nickname', 'headimgurl'],
 		name: 'zmitiindex',
@@ -22631,14 +22639,16 @@
 				tabIndex: -1,
 				showTeam: false,
 				showQrcode: false,
-				show: false,
+				show: true,
 				viewW: window.innerWidth,
 				viewH: window.innerHeight,
 				showMasks: false
 			};
 		},
 
-		components: {},
+		components: {
+			Team: _teamIndex2['default']
+		},
 		methods: {
 			restart: function restart() {
 				window.location.href = window.location.href.split('?')[0];
@@ -22659,6 +22669,11 @@
 
 				obserable.trigger({
 					type: "showFriend"
+				});
+			},
+			showTeamPage: function showTeamPage() {
+				this.obserable.trigger({
+					type: 'showTeam'
 				});
 			}
 		},
@@ -22720,7 +22735,7 @@
 
 
 	// module
-	exports.push([module.id, ".lt-full {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n\n.zmiti-text-overflow {\n  overflow: hidden;\n  white-space: nowrap;\n  word-break: break-all;\n  text-overflow: ellipsis;\n  -webkit-text-overflow: ellipsis;\n}\n\n.zmiti-play {\n  width: .8rem;\n  height: .8rem;\n  border-radius: 50%;\n  position: fixed;\n  z-index: 1000;\n  right: .5rem;\n  top: .5rem;\n}\n\n.zmiti-play.rotate {\n  -webkit-animation: rotate 5s linear infinite;\n  animation: rotate 5s linear infinite;\n}\n\n@-webkit-keyframes rotate {\n  to {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n\n.zmiti-introduce-main-ui {\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  overflow: hidden;\n  opacity: 0;\n  z-index: -1;\n}\n\n.zmiti-introduce-main-ui .zmiti-logo {\n  position: absolute;\n  width: 180px;\n  right: 30px;\n  top: 30px;\n}\n\n.zmiti-introduce-main-ui.show {\n  opacity: 1;\n  z-index: 241;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main {\n  width: 90vw;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-title img {\n  width: 200px;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-title div {\n  margin: 30px 0;\n  color: #504125;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content h2 {\n  color: #8b5e07;\n  font-size: 40px;\n  text-indent: 20px;\n  position: relative;\n  margin: 20px 0;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content h2:before {\n  content: \"\";\n  position: absolute;\n  width: 5px;\n  height: 70%;\n  left: 0;\n  top: 20%;\n  background: #8b5e07;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content .zmiti-introduce-wrap {\n  position: relative;\n  width: 50vw;\n  height: 50vh;\n  overflow: hidden;\n  background: rgba(139, 94, 1, 0.1);\n  color: #504125;\n  padding: 20px 0;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content .zmiti-introduce-wrap > div {\n  padding-bottom: 30px;\n  width: 92%;\n  margin: 0 auto;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content .zmiti-introduce-wrap > div > div {\n  margin: 10px 0;\n  line-height: 40px;\n  text-indent: 2em;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content .zmiti-introduce-wrap .iScrollVerticalScrollbar {\n  background: #c69e50;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content .zmiti-introduce-wrap .iScrollVerticalScrollbar .iScrollIndicator {\n  background: #8b5e07 !important;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav {\n  position: absolute;\n  width: 750px;\n  height: 90px;\n  line-height: 90px;\n  left: 0;\n  bottom: 0;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav:before {\n  content: '';\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  left: 0;\n  top: 0;\n  background: #b88f3f;\n  z-index: -1;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav ul {\n  text-align: center;\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  color: #714a00;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav ul li {\n  -webkit-box-flex: 1;\n  line-height: 90px;\n  border-right: 1px solid #976f22;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav ul li.active {\n  background: #976f22;\n  color: #423108;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav ul li:last-of-type {\n  width: 60px;\n  border: none;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav ul li:last-of-type img {\n  width: 60px;\n}\n\n@-webkit-keyframes ar {\n  from {\n    margin-top: -5px;\n  }\n  to {\n    margin-top: 5px;\n  }\n}\n", ""]);
+	exports.push([module.id, ".lt-full {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n\n.zmiti-text-overflow {\n  overflow: hidden;\n  white-space: nowrap;\n  word-break: break-all;\n  text-overflow: ellipsis;\n  -webkit-text-overflow: ellipsis;\n}\n\n.zmiti-play {\n  width: .8rem;\n  height: .8rem;\n  border-radius: 50%;\n  position: fixed;\n  z-index: 1000;\n  right: .5rem;\n  top: .5rem;\n}\n\n.zmiti-play.rotate {\n  -webkit-animation: rotate 5s linear infinite;\n  animation: rotate 5s linear infinite;\n}\n\n@-webkit-keyframes rotate {\n  to {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n\n.zmiti-introduce-main-ui {\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  overflow: hidden;\n  opacity: 0;\n  z-index: -1;\n}\n\n.zmiti-introduce-main-ui .zmiti-logo {\n  position: absolute;\n  width: 180px;\n  right: 30px;\n  top: 30px;\n}\n\n.zmiti-introduce-main-ui.show {\n  opacity: 1;\n  z-index: 241;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main {\n  width: 90vw;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-title img {\n  width: 200px;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-title div {\n  margin: 30px 0;\n  color: #504125;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content h2 {\n  color: #8b5e07;\n  font-size: 40px;\n  text-indent: 20px;\n  position: relative;\n  margin: 20px 0;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content h2:before {\n  content: \"\";\n  position: absolute;\n  width: 5px;\n  height: 70%;\n  left: 0;\n  top: 20%;\n  background: #8b5e07;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content .zmiti-introduce-wrap {\n  position: relative;\n  width: 50vw;\n  height: 50vh;\n  overflow: hidden;\n  background: rgba(139, 94, 1, 0.1);\n  color: #504125;\n  padding: 20px 0;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content .zmiti-introduce-wrap > div {\n  padding-bottom: 30px;\n  width: 92%;\n  margin: 0 auto;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content .zmiti-introduce-wrap > div > div {\n  margin: 10px 0;\n  line-height: 40px;\n  text-indent: 2em;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content .zmiti-introduce-wrap .iScrollVerticalScrollbar {\n  background: #c69e50;\n}\n\n.zmiti-introduce-main-ui .zmiti-introduce-main .zmiti-introduce-content .zmiti-introduce-wrap .iScrollVerticalScrollbar .iScrollIndicator {\n  background: #8b5e07 !important;\n}\n\n.zmiti-introduce-main-ui .zmiti-team-entry {\n  position: absolute;\n  z-index: 10;\n  bottom: 120px;\n  right: 50px;\n  text-decoration: underline;\n  color: #714a00;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav {\n  position: absolute;\n  width: 750px;\n  height: 90px;\n  line-height: 90px;\n  left: 0;\n  bottom: 0;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav:before {\n  content: '';\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  left: 0;\n  top: 0;\n  background: #b88f3f;\n  z-index: -1;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav ul {\n  text-align: center;\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  color: #714a00;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav ul li {\n  -webkit-box-flex: 1;\n  line-height: 90px;\n  border-right: 1px solid #976f22;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav ul li.active {\n  background: #976f22;\n  color: #423108;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav ul li:last-of-type {\n  width: 60px;\n  border: none;\n}\n\n.zmiti-introduce-main-ui .zmiti-nav ul li:last-of-type img {\n  width: 60px;\n}\n\n@-webkit-keyframes ar {\n  from {\n    margin-top: -5px;\n  }\n  to {\n    margin-top: 5px;\n  }\n}\n", ""]);
 
 	// exports
 
@@ -24826,7 +24841,7 @@
 /* 23 */
 /***/ (function(module, exports) {
 
-	module.exports = "\r\n\t<transition name='main'>\r\n\t\r\n\t\t<div class=\"lt-full zmiti-introduce-main-ui \" :class=\"{'show':show}\" :style=\"{background:'url('+imgs.introduceBg+') no-repeat center center',backgroundSize:'cover'}\"  ref='page'>\r\n\t\t\t<div class=\"zmiti-logo\">\r\n\t\t\t\t<img :src=\"imgs.logo\" alt=\"\">\r\n\t\t\t</div>\r\n\t\t\t<div class=\"zmiti-introduce-main\">\r\n\t\t\t\t<div class=\"zmiti-introduce-title\">\r\n\t\t\t\t\t<img :src=\"imgs.introTitle\" alt=\"\">\r\n\t\t\t\t\t<div>{{texts.zlmIntro}}</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"zmiti-introduce-content\">\r\n\t\t\t\t\t<h2 class=\"zmiti-introduce-name\">\r\n\t\t\t\t\t\t{{texts.zlmName}}\r\n\t\t\t\t\t</h2>\r\n\t\t\t\t\t<div class=\"zmiti-introduce-wrap\" ref='zmiti-introduce-wrap'>\r\n\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t<div v-for='(content,i) in texts.zlmIntroContent' :key=\"i\">\r\n\t\t\t\t\t\t\t\t{{content}}\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\r\n\t\t\t<nav class=\"zmiti-nav\">\r\n\t\t\t\t<ul>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 0' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 0}\"  v-tap='[entryDetail,\"aigangjingye\"]'>爱岗敬业</li>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 1' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 1}\" v-tap='[entryDetail,\"yongyuchuangxin\"]'>勇于创新</li>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 2' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 2}\" v-tap='[entryDetail,\"ganyufengxian\"]'>甘于奉献</li>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 3' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 3}\" v-tap='[entryFriend]'>\r\n\t\t\t\t\t\t<img :src=\"imgs.msg\" alt=\"\">\r\n\t\t\t\t\t</li>\r\n\t\t\t\t</ul>\r\n\t\t\t</nav>\r\n\r\n\t\t\t<div class=\"zmiti-mask\" v-if='showMasks' @touchstart='showMasks = false'>\r\n\t\t\t\t<img :src=\"imgs.arrow\">\r\n\t\t\t</div>\r\n\t\r\n\t\t</div>\r\n\t\r\n\t</transition>\r\n";
+	module.exports = "\r\n\t<transition name='main'>\r\n\t\r\n\t\t<div class=\"lt-full zmiti-introduce-main-ui \" :class=\"{'show':show}\" :style=\"{background:'url('+imgs.introduceBg+') no-repeat center center',backgroundSize:'cover'}\"  ref='page'>\r\n\t\t\t<div class=\"zmiti-logo\">\r\n\t\t\t\t<img :src=\"imgs.logo\" alt=\"\">\r\n\t\t\t</div>\r\n\t\t\t<div class=\"zmiti-introduce-main\">\r\n\t\t\t\t<div class=\"zmiti-introduce-title\">\r\n\t\t\t\t\t<img :src=\"imgs.introTitle\" alt=\"\">\r\n\t\t\t\t\t<div>{{texts.zlmIntro}}</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"zmiti-introduce-content\">\r\n\t\t\t\t\t<h2 class=\"zmiti-introduce-name\">\r\n\t\t\t\t\t\t{{texts.zlmName}}\r\n\t\t\t\t\t</h2>\r\n\t\t\t\t\t<div class=\"zmiti-introduce-wrap\" ref='zmiti-introduce-wrap'>\r\n\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t<div v-for='(content,i) in texts.zlmIntroContent' :key=\"i\">\r\n\t\t\t\t\t\t\t\t{{content}}\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\r\n\t\t\t<nav class=\"zmiti-nav\">\r\n\t\t\t\t<ul>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 0' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 0}\"  v-tap='[entryDetail,\"aigangjingye\"]'>爱岗敬业</li>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 1' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 1}\" v-tap='[entryDetail,\"yongyuchuangxin\"]'>勇于创新</li>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 2' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 2}\" v-tap='[entryDetail,\"ganyufengxian\"]'>甘于奉献</li>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 3' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 3}\" v-tap='[entryFriend]'>\r\n\t\t\t\t\t\t<img :src=\"imgs.msg\" alt=\"\">\r\n\t\t\t\t\t</li>\r\n\t\t\t\t</ul>\r\n\t\t\t</nav>\r\n\r\n\t\t\t<div class=\"zmiti-team-entry\" v-tap='[showTeamPage]'>制作团队</div>\r\n\r\n\t\t\t<div class=\"zmiti-mask\" v-if='showMasks' @touchstart='showMasks = false'>\r\n\t\t\t\t<img :src=\"imgs.arrow\">\r\n\t\t\t</div>\r\n\t\t\t<div>\r\n\t\t\t\t<Team :obserable='obserable'></Team>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\r\n\t</transition>\r\n";
 
 /***/ }),
 /* 24 */
@@ -24927,7 +24942,7 @@
 	// 					</div>
 	//
 	// 				</div>
-	// 				<div class="zmiti-copyright" v-tap='[showTeamPage]'>
+	// 				<div class="zmiti-copyright" v-tap='[showTeamPage]' v-if='false'>
 	// 					制作团队
 	// 				</div>
 	// 			</section>
@@ -24935,7 +24950,6 @@
 	// 			<div class="zmiti-back" v-tap='[hidePage]'>
 	// 				<img :src="imgs.back" alt="">
 	// 			</div>
-	// 			<Team :obserable='obserable'></Team>
 	// 		</div>
 	//
 	// 	</transition>
@@ -25097,56 +25111,69 @@
 
 	// <template>
 	// 	<transition name="team">
-	// 		<div v-tap='[hideTeam]' v-if='showTeam' class="lt-full zmiti-team-main-ui" :style="{background:'url('+imgs.teamBg+') no-repeat center center',backgroundSize:'cover'}">
+	// 		<div v-tap='[hideTeam]' v-show='showTeam' class="lt-full zmiti-team-main-ui" :style="{background:'url('+imgs.teamBg+') no-repeat center center',backgroundSize:'cover'}">
 	// 			<div class="zmiti-team-main">
 	// 				<div>
 	// 					<aside>
-	// 						<div>出</div>
-	// 						<div>品</div>
-	// 						<div>人</div>
+	// 						出品人
 	// 					</aside>
-	// 					<aside class="zmiti-chupin">
-	// 						<span>陈凯星、</span> <span>冯瑛冰、</span><span>余孝忠、</span><span>余孝忠</span>
+	// 					<aside>
+	// 						<span>陈凯星、</span> <span>冯瑛冰、</span><span>杨维成</span>
 	// 					</aside>
 	// 				</div>
 	// 				<div>
 	// 					<aside>
-	// 						<div>监</div>
-	// 						<div><label for="">品</label></div>
-	// 						<div><label for="">人</label></div>
-	// 						<div>制</div>
+	// 						总监制
 	// 					</aside>
 	// 					<aside>
-	// 						<span>陈凯星、</span> <span>冯瑛冰、</span><span>余孝忠</span>
+	// 						<span>葛素表、</span><span>刘元旭</span>
 	// 					</aside>
 	// 				</div>
 	//
 	// 				<div>
 	// 					<aside>
-	// 						<div>监</div>
-	// 						<div><label for="">品</label></div>
-	// 						<div><label for="">人</label></div>
-	// 						<div>制</div>
+	// 						策<label for="">策</label>划
 	// 					</aside>
 	// 					<aside>
-	// 						<span>陈凯星、</span> <span>冯瑛冰、</span><span>余孝忠</span>
+	// 						<span>陈知春</span>
 	// 					</aside>
 	// 				</div>
 	//
 	// 				<div>
 	// 					<aside>
-	// 						<div>监</div>
-	// 						<div><label for="">品</label></div>
-	// 						<div><label for="">人</label></div>
-	// 						<div>制</div>
+	// 						监<label for="">人</label>制
 	// 					</aside>
 	// 					<aside>
-	// 						<span>陈凯星、</span> <span>冯瑛冰、</span><span>余孝忠</span>
+	// 						<span>牟　帆</span>
 	// 					</aside>
 	// 				</div>
 	//
 	// 				<div>
-	// 					麟腾传媒技术支持
+	// 					<aside>
+	// 						记<label for="">人</label>者
+	// 					</aside>
+	// 					<aside>
+	// 						<span>毛振华</span>
+	// 					</aside>
+	// 				</div>
+	// 				<div>
+	// 					<aside>
+	// 						文<label for="">人</label>案
+	// 					</aside>
+	// 					<aside>
+	// 						<span>李京泽</span>
+	// 					</aside>
+	// 				</div>
+	// 				<div>
+	// 					<aside>
+	// 						制<label for="">人</label>作
+	// 					</aside>
+	// 					<aside>
+	// 						<span>麟腾传媒</span>
+	// 					</aside>
+	// 				</div>
+	// 				<div>
+	// 					新华社新媒体中心、新华社天津分社联合出品
 	// 				</div>
 	// 			</div>
 	// 		</div>
@@ -25196,6 +25223,7 @@
 			var _this = this;
 
 			this.obserable.on('showTeam', function () {
+
 				_this.showTeam = true;
 			});
 		}
@@ -25239,7 +25267,7 @@
 
 
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n.lt-full {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n\n.zmiti-text-overflow {\n  overflow: hidden;\n  white-space: nowrap;\n  word-break: break-all;\n  text-overflow: ellipsis;\n  -webkit-text-overflow: ellipsis;\n}\n\n.zmiti-play {\n  width: .8rem;\n  height: .8rem;\n  border-radius: 50%;\n  position: fixed;\n  z-index: 1000;\n  right: .5rem;\n  top: .5rem;\n}\n\n.zmiti-play.rotate {\n  -webkit-animation: rotate 5s linear infinite;\n  animation: rotate 5s linear infinite;\n}\n\n@-webkit-keyframes rotate {\n  to {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n\n.zmiti-team-main-ui {\n  z-index: 102;\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n}\n\n.zmiti-team-main-ui.team-enter-active, .zmiti-team-main-ui.team-leave-active {\n  -webkit-transition: 1s;\n  transition: 1s;\n}\n\n.zmiti-team-main-ui.team-enter, .zmiti-team-main-ui.team-leave-to {\n  opacity: 0;\n}\n\n.zmiti-team-main-ui .zmiti-team-main {\n  width: 67%;\n  color: #b37e16;\n  min-height: 500px;\n  font-size: 28px;\n}\n\n.zmiti-team-main-ui .zmiti-team-main > div {\n  margin-top: 20px;\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  -webkit-box-pack: justify;\n  -webkit-box-align: start;\n  width: 100%;\n}\n\n.zmiti-team-main-ui .zmiti-team-main > div aside:nth-of-type(1) {\n  font-weight: bold;\n  width: 110px;\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  -webkit-box-pack: justify;\n}\n\n.zmiti-team-main-ui .zmiti-team-main > div aside:nth-of-type(1) label {\n  opacity: 0;\n}\n\n.zmiti-team-main-ui .zmiti-team-main > div aside:nth-of-type(2) {\n  -webkit-box-flex: 1;\n  margin-left: 40px;\n  position: relative;\n}\n\n.zmiti-team-main-ui .zmiti-team-main > div aside:nth-of-type(2):before {\n  content: \"\\FF1A\";\n  position: absolute;\n  left: -26px;\n}\n\n.zmiti-team-main-ui .zmiti-team-main > div aside.zmiti-chupin:before {\n  content: \"\\FF1A\";\n  position: absolute;\n  left: -28px;\n}\n\n.zmiti-team-main-ui .zmiti-team-main > div:nth-of-type(1) span:nth-of-type(1) {\n  letter-spacing: 0;\n}\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n.lt-full {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n\n.zmiti-text-overflow {\n  overflow: hidden;\n  white-space: nowrap;\n  word-break: break-all;\n  text-overflow: ellipsis;\n  -webkit-text-overflow: ellipsis;\n}\n\n.zmiti-play {\n  width: .8rem;\n  height: .8rem;\n  border-radius: 50%;\n  position: fixed;\n  z-index: 1000;\n  right: .5rem;\n  top: .5rem;\n}\n\n.zmiti-play.rotate {\n  -webkit-animation: rotate 5s linear infinite;\n  animation: rotate 5s linear infinite;\n}\n\n@-webkit-keyframes rotate {\n  to {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n\n.zmiti-team-main-ui {\n  z-index: 102222;\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n}\n\n.zmiti-team-main-ui.team-enter-active, .zmiti-team-main-ui.team-leave-active {\n  -webkit-transition: 0.5s;\n  transition: 0.5s;\n}\n\n.zmiti-team-main-ui.team-enter, .zmiti-team-main-ui.team-leave-to {\n  opacity: 0;\n}\n\n.zmiti-team-main-ui .zmiti-team-main {\n  width: 67%;\n  color: #b37e16;\n  min-height: 500px;\n  font-size: 28px;\n}\n\n.zmiti-team-main-ui .zmiti-team-main > div {\n  margin-top: 20px;\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  -webkit-box-pack: justify;\n  -webkit-box-align: start;\n  width: 100%;\n}\n\n.zmiti-team-main-ui .zmiti-team-main > div aside:nth-of-type(1) {\n  font-weight: bold;\n  width: 90px;\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  -webkit-box-pack: justify;\n}\n\n.zmiti-team-main-ui .zmiti-team-main > div aside:nth-of-type(1) label {\n  opacity: 0;\n}\n\n.zmiti-team-main-ui .zmiti-team-main > div aside:nth-of-type(2) {\n  -webkit-box-flex: 1;\n  margin-left: 20px;\n  position: relative;\n}\n\n.zmiti-team-main-ui .zmiti-team-main > div aside:nth-of-type(2):before {\n  content: \"\\FF1A\";\n  position: absolute;\n  left: -26px;\n}\n\n.zmiti-team-main-ui .zmiti-team-main > div aside.zmiti-chupin:before {\n  content: \"\\FF1A\";\n  position: absolute;\n  left: -28px;\n}\n\n.zmiti-team-main-ui .zmiti-team-main > div:nth-of-type(1) span:nth-of-type(1) {\n  letter-spacing: 0;\n}\n", ""]);
 
 	// exports
 
@@ -25248,13 +25276,13 @@
 /* 32 */
 /***/ (function(module, exports) {
 
-	module.exports = "\r\n\t<transition name=\"team\">\r\n\t\t<div v-tap='[hideTeam]' v-if='showTeam' class=\"lt-full zmiti-team-main-ui\" :style=\"{background:'url('+imgs.teamBg+') no-repeat center center',backgroundSize:'cover'}\">\r\n\t\t\t<div class=\"zmiti-team-main\">\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<div>出</div>\r\n\t\t\t\t\t\t<div>品</div>\r\n\t\t\t\t\t\t<div>人</div>\r\n\t\t\t\t\t</aside> \r\n\t\t\t\t\t<aside class=\"zmiti-chupin\">\r\n\t\t\t\t\t\t<span>陈凯星、</span> <span>冯瑛冰、</span><span>余孝忠、</span><span>余孝忠</span>\r\n\t\t\t\t\t</aside>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<div>监</div>\r\n\t\t\t\t\t\t<div><label for=\"\">品</label></div>\r\n\t\t\t\t\t\t<div><label for=\"\">人</label></div>\r\n\t\t\t\t\t\t<div>制</div>\r\n\t\t\t\t\t</aside> \r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<span>陈凯星、</span> <span>冯瑛冰、</span><span>余孝忠</span>\r\n\t\t\t\t\t</aside>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<div>监</div>\r\n\t\t\t\t\t\t<div><label for=\"\">品</label></div>\r\n\t\t\t\t\t\t<div><label for=\"\">人</label></div>\r\n\t\t\t\t\t\t<div>制</div>\r\n\t\t\t\t\t</aside> \r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<span>陈凯星、</span> <span>冯瑛冰、</span><span>余孝忠</span>\r\n\t\t\t\t\t</aside>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<div>监</div>\r\n\t\t\t\t\t\t<div><label for=\"\">品</label></div>\r\n\t\t\t\t\t\t<div><label for=\"\">人</label></div>\r\n\t\t\t\t\t\t<div>制</div>\r\n\t\t\t\t\t</aside> \r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<span>陈凯星、</span> <span>冯瑛冰、</span><span>余孝忠</span>\r\n\t\t\t\t\t</aside>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div>\r\n\t\t\t\t\t麟腾传媒技术支持\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</transition>\r\n";
+	module.exports = "\r\n\t<transition name=\"team\">\r\n\t\t<div v-tap='[hideTeam]' v-show='showTeam' class=\"lt-full zmiti-team-main-ui\" :style=\"{background:'url('+imgs.teamBg+') no-repeat center center',backgroundSize:'cover'}\">\r\n\t\t\t<div class=\"zmiti-team-main\">\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t出品人\r\n\t\t\t\t\t</aside> \r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<span>陈凯星、</span> <span>冯瑛冰、</span><span>杨维成</span>\r\n\t\t\t\t\t</aside>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t总监制\r\n\t\t\t\t\t</aside> \r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<span>葛素表、</span><span>刘元旭</span>\r\n\t\t\t\t\t</aside>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t策<label for=\"\">策</label>划\r\n\t\t\t\t\t</aside> \r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<span>陈知春</span>\r\n\t\t\t\t\t</aside>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t监<label for=\"\">人</label>制\r\n\t\t\t\t\t</aside> \r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<span>牟　帆</span>\r\n\t\t\t\t\t</aside>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t记<label for=\"\">人</label>者\r\n\t\t\t\t\t</aside> \r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<span>毛振华</span>\r\n\t\t\t\t\t</aside>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t文<label for=\"\">人</label>案\r\n\t\t\t\t\t</aside> \r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<span>李京泽</span>\r\n\t\t\t\t\t</aside>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t制<label for=\"\">人</label>作\r\n\t\t\t\t\t</aside> \r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<span>麟腾传媒</span>\r\n\t\t\t\t\t</aside>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div>\r\n\t\t\t\t\t新华社新媒体中心、新华社天津分社联合出品\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</transition>\r\n";
 
 /***/ }),
 /* 33 */
 /***/ (function(module, exports) {
 
-	module.exports = "\r\n\t<transition name='main'>\r\n\t\r\n\t\t<div class=\"lt-full zmiti-friend-main-ui \" :class=\"{'show':show}\"  ref='page'>\r\n\t\t\t\r\n\t\t\t<section>\r\n\t\t\t\t<div class=\"zmiti-index-logo\">\r\n\t\t\t\t\t<img :src=\"imgs.logo\" alt=\"\">\r\n\t\t\t\t</div>\r\n\t\t\t\t<img :src=\"imgs.friendTitle\" alt=\"\">\r\n\t\t\t\t<div class=\"zmiti-friend-C\">\r\n\t\t\t\t\t<div class=\"zmiti-head\">\r\n\t\t\t\t\t\t<img :src=\"imgs.head1\" alt=\"\">\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div>\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-nickname\">国家电网</div>\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-content\">\r\n\t\t\t\t\t\t\t<div class=\"zmiti-friend-link\">\r\n\t\t\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t\t\t<img :src=\"imgs.head2\" alt=\"\">\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t\t\t<span>中宣部授予张黎明“时代楷模”称号</span>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-time\">\r\n\t\t\t\t\t\t\t<div>3分钟前</div>\r\n\t\t\t\t\t\t\t<div><img :src=\"imgs.like\" alt=\"\"></div>\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-like-list\">\r\n\t\t\t\t\t\t\t<img :src=\"imgs.heart\" alt=\"\">\r\n\t\t\t\t\t\t\t滨海新区区委宣传部张宁，国网天津市电力公司党建工作部主任及明，国网天津滨海供电公司员工张斌，马秀环老人，塘沽街道新城家园社区居委会主任何丽，张黎明儿子\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>滨海新区区委宣传部张宁：</span>\r\n\t\t\t\t\t\t\t张黎明在看似平凡中彰显了一名共产党员的先进本色。\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>国网天津市电力公司党建工作部主任及明：</span>\r\n\t\t\t\t\t\t\t张黎明所展现出的良好的党性修养产生了辐射效应，带动了一批党员群众向他看齐。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>国网天津滨海供电公司员工张斌：</span>\r\n\t\t\t\t\t\t\t我很荣幸，能在步入企业之初就找到像张黎明这样的工作标杆。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>马秀环老人：</span>\r\n\t\t\t\t\t\t\t张师傅比我自己孩子还上心。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>塘沽街道新城家园社区居委会主任何丽：</span>\r\n\t\t\t\t\t\t\t他是我们百姓的贴心人，也是我们身边的榜样。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>张黎明儿子：</span>\r\n\t\t\t\t\t\t\t我和爸爸交流不是很多，因为他平时特别忙，但我能感觉到他对周围的人，对家人，甚至不相识的人都非常好，非常负责任。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>张黎明</span>回复：党的十九大报告已经给我们指明了方向，知识型、技能型、创新型，就是我们蓝领工人的奋斗目标。作为一名基层党员，我会继续在服务群众上下功夫。\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t</div>\r\n\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"zmiti-copyright\" v-tap='[showTeamPage]'>\r\n\t\t\t\t\t制作团队\r\n\t\t\t\t</div>\r\n\t\t\t</section>\r\n\t\t\t\r\n\t\t\t<div class=\"zmiti-back\" v-tap='[hidePage]'>\r\n\t\t\t\t<img :src=\"imgs.back\" alt=\"\">\r\n\t\t\t</div>\r\n\t\t\t<Team :obserable='obserable'></Team>\r\n\t\t</div>\r\n\t\r\n\t</transition>\r\n";
+	module.exports = "\r\n\t<transition name='main'>\r\n\t\r\n\t\t<div class=\"lt-full zmiti-friend-main-ui \" :class=\"{'show':show}\"  ref='page'>\r\n\t\t\t\r\n\t\t\t<section>\r\n\t\t\t\t<div class=\"zmiti-index-logo\">\r\n\t\t\t\t\t<img :src=\"imgs.logo\" alt=\"\">\r\n\t\t\t\t</div>\r\n\t\t\t\t<img :src=\"imgs.friendTitle\" alt=\"\">\r\n\t\t\t\t<div class=\"zmiti-friend-C\">\r\n\t\t\t\t\t<div class=\"zmiti-head\">\r\n\t\t\t\t\t\t<img :src=\"imgs.head1\" alt=\"\">\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div>\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-nickname\">国家电网</div>\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-content\">\r\n\t\t\t\t\t\t\t<div class=\"zmiti-friend-link\">\r\n\t\t\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t\t\t<img :src=\"imgs.head2\" alt=\"\">\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t\t\t<span>中宣部授予张黎明“时代楷模”称号</span>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-time\">\r\n\t\t\t\t\t\t\t<div>3分钟前</div>\r\n\t\t\t\t\t\t\t<div><img :src=\"imgs.like\" alt=\"\"></div>\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-like-list\">\r\n\t\t\t\t\t\t\t<img :src=\"imgs.heart\" alt=\"\">\r\n\t\t\t\t\t\t\t滨海新区区委宣传部张宁，国网天津市电力公司党建工作部主任及明，国网天津滨海供电公司员工张斌，马秀环老人，塘沽街道新城家园社区居委会主任何丽，张黎明儿子\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>滨海新区区委宣传部张宁：</span>\r\n\t\t\t\t\t\t\t张黎明在看似平凡中彰显了一名共产党员的先进本色。\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>国网天津市电力公司党建工作部主任及明：</span>\r\n\t\t\t\t\t\t\t张黎明所展现出的良好的党性修养产生了辐射效应，带动了一批党员群众向他看齐。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>国网天津滨海供电公司员工张斌：</span>\r\n\t\t\t\t\t\t\t我很荣幸，能在步入企业之初就找到像张黎明这样的工作标杆。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>马秀环老人：</span>\r\n\t\t\t\t\t\t\t张师傅比我自己孩子还上心。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>塘沽街道新城家园社区居委会主任何丽：</span>\r\n\t\t\t\t\t\t\t他是我们百姓的贴心人，也是我们身边的榜样。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>张黎明儿子：</span>\r\n\t\t\t\t\t\t\t我和爸爸交流不是很多，因为他平时特别忙，但我能感觉到他对周围的人，对家人，甚至不相识的人都非常好，非常负责任。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>张黎明</span>回复：党的十九大报告已经给我们指明了方向，知识型、技能型、创新型，就是我们蓝领工人的奋斗目标。作为一名基层党员，我会继续在服务群众上下功夫。\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t</div>\r\n\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"zmiti-copyright\" v-tap='[showTeamPage]' v-if='false'>\r\n\t\t\t\t\t制作团队\r\n\t\t\t\t</div>\r\n\t\t\t</section>\r\n\t\t\t\r\n\t\t\t<div class=\"zmiti-back\" v-tap='[hidePage]'>\r\n\t\t\t\t<img :src=\"imgs.back\" alt=\"\">\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\r\n\t</transition>\r\n";
 
 /***/ }),
 /* 34 */
@@ -25492,7 +25520,7 @@
 
 
 	// module
-	exports.push([module.id, ".lt-full {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n\n.zmiti-text-overflow {\n  overflow: hidden;\n  white-space: nowrap;\n  word-break: break-all;\n  text-overflow: ellipsis;\n  -webkit-text-overflow: ellipsis;\n}\n\n.zmiti-play {\n  width: .8rem;\n  height: .8rem;\n  border-radius: 50%;\n  position: fixed;\n  z-index: 1000;\n  right: .5rem;\n  top: .5rem;\n}\n\n.zmiti-play.rotate {\n  -webkit-animation: rotate 5s linear infinite;\n  animation: rotate 5s linear infinite;\n}\n\n@-webkit-keyframes rotate {\n  to {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n\n.zmiti-detail-main-ui {\n  background: #fff;\n  color: #504125;\n  z-index: -1;\n  opacity: 0;\n  overflow: hidden;\n}\n\n.zmiti-detail-main-ui.show {\n  z-index: 1230;\n  opacity: 1;\n}\n\n.zmiti-detail-main-ui > div {\n  min-height: 1888px;\n}\n\n.zmiti-detail-main-ui .zmiti-detail-title {\n  width: 80%;\n  margin: 0 auto;\n}\n\n.zmiti-detail-main-ui h1 {\n  height: 200px;\n}\n\n.zmiti-detail-main-ui .zmiti-video-C {\n  width: 750px;\n}\n\n.zmiti-detail-main-ui .zmiti-video-C video {\n  width: 100%;\n}\n\n.zmiti-detail-main-ui .zmiti-video-text,\n.zmiti-detail-main-ui .zmiti-image-text {\n  width: 80%;\n  margin: 20px  auto;\n}\n\n.zmiti-detail-main-ui .zmiti-video-text div,\n.zmiti-detail-main-ui .zmiti-image-text div {\n  text-indent: 2em;\n}\n\n.zmiti-detail-main-ui .zmiti-video-text {\n  text-indent: 2em;\n}\n\n.zmiti-detail-main-ui .zmiti-index-logo {\n  position: absolute;\n  width: 180px;\n  right: 30px;\n  top: 20px;\n}\n\n.zmiti-detail-main-ui .zmiti-subtitle {\n  width: 90%;\n  text-align: right;\n  margin: 0 auto;\n}\n\n.zmiti-detail-main-ui .zmiti-comment {\n  margin-top: 120px;\n  position: relative;\n  background: #fff;\n}\n\n.zmiti-detail-main-ui .zmiti-comment:before {\n  content: '';\n  position: absolute;\n  width: 100%;\n  height: 40px;\n  z-index: -1;\n  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);\n}\n\n.zmiti-detail-main-ui .zmiti-comment:after {\n  content: '';\n  position: absolute;\n  width: 100%;\n  height: 40px;\n  z-index: -1;\n  left: 0;\n  bottom: -5px;\n  background: #fff;\n}\n\n.zmiti-detail-main-ui .zmiti-comment h2 {\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  -webkit-box-pack: justify;\n  width: 90%;\n  font-weight: normal;\n  margin: 0 auto;\n  font-size: 30px;\n  height: 80px;\n}\n\n.zmiti-detail-main-ui .zmiti-comment h2 > div:nth-of-type(1) {\n  color: #a0a0a0;\n}\n\n.zmiti-detail-main-ui .zmiti-comment h2 span {\n  color: #4a586c;\n}\n\n.zmiti-detail-main-ui .zmiti-comment h2 img {\n  width: 30px;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-comment-item {\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  width: 90%;\n  margin: 20px auto;\n  -webkit-box-align: start;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-comment-item > div {\n  margin: 0 10px;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-comment-item > div:nth-of-type(1) {\n  -webkit-box-flex: 1;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-comment-item > div:nth-of-type(2) {\n  -webkit-box-flex: 11;\n  color: #282727;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-comment-item > div:nth-of-type(2) > div {\n  font-size: 28px;\n  line-height: 40px;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-comment-item > div:nth-of-type(2) > div:nth-of-type(1) {\n  color: #a0a0a0;\n  font-size: 24px;\n  margin-top: -5px;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-more {\n  border-top: 1px solid #e9e4d8;\n  text-align: center;\n  height: 100px;\n  color: #787878;\n  line-height: 100px;\n}\n\n.zmiti-detail-main-ui .zmiti-image-text {\n  font-size: 28px;\n  line-height: 42px;\n}\n\n.zmiti-detail-main-ui .zmiti-image {\n  width: 90%;\n  margin: 80px auto 20px;\n  background: #ead7a4;\n  padding: 10px;\n  position: relative;\n}\n\n.zmiti-detail-main-ui .zmiti-image:before {\n  content: '';\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  left: 0;\n  top: 0;\n  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);\n}\n", ""]);
+	exports.push([module.id, ".lt-full {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n\n.zmiti-text-overflow {\n  overflow: hidden;\n  white-space: nowrap;\n  word-break: break-all;\n  text-overflow: ellipsis;\n  -webkit-text-overflow: ellipsis;\n}\n\n.zmiti-play {\n  width: .8rem;\n  height: .8rem;\n  border-radius: 50%;\n  position: fixed;\n  z-index: 1000;\n  right: .5rem;\n  top: .5rem;\n}\n\n.zmiti-play.rotate {\n  -webkit-animation: rotate 5s linear infinite;\n  animation: rotate 5s linear infinite;\n}\n\n@-webkit-keyframes rotate {\n  to {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n\n.zmiti-detail-main-ui {\n  background: #fff;\n  color: #504125;\n  z-index: -1;\n  opacity: 0;\n  overflow: hidden;\n}\n\n.zmiti-detail-main-ui.show {\n  z-index: 1230;\n  opacity: 1;\n}\n\n.zmiti-detail-main-ui > div {\n  min-height: 1888px;\n}\n\n.zmiti-detail-main-ui .zmiti-detail-title {\n  width: 80%;\n  margin: 0 auto;\n}\n\n.zmiti-detail-main-ui h1 {\n  height: 200px;\n}\n\n.zmiti-detail-main-ui .zmiti-video-C {\n  width: 750px;\n}\n\n.zmiti-detail-main-ui .zmiti-video-C video {\n  width: 100%;\n}\n\n.zmiti-detail-main-ui .zmiti-video-text,\n.zmiti-detail-main-ui .zmiti-image-text {\n  width: 80%;\n  margin: 20px  auto;\n}\n\n.zmiti-detail-main-ui .zmiti-video-text div,\n.zmiti-detail-main-ui .zmiti-image-text div {\n  text-indent: 2em;\n}\n\n.zmiti-detail-main-ui .zmiti-video-text {\n  text-indent: 2em;\n}\n\n.zmiti-detail-main-ui .zmiti-index-logo {\n  position: absolute;\n  width: 160px;\n  right: 30px;\n  top: 20px;\n}\n\n.zmiti-detail-main-ui .zmiti-subtitle {\n  width: 90%;\n  text-align: right;\n  margin: 0 auto;\n}\n\n.zmiti-detail-main-ui .zmiti-comment {\n  margin-top: 120px;\n  position: relative;\n  background: #fff;\n}\n\n.zmiti-detail-main-ui .zmiti-comment:before {\n  content: '';\n  position: absolute;\n  width: 100%;\n  height: 40px;\n  z-index: -1;\n  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);\n}\n\n.zmiti-detail-main-ui .zmiti-comment:after {\n  content: '';\n  position: absolute;\n  width: 100%;\n  height: 40px;\n  z-index: -1;\n  left: 0;\n  bottom: -5px;\n  background: #fff;\n}\n\n.zmiti-detail-main-ui .zmiti-comment h2 {\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  -webkit-box-pack: justify;\n  width: 90%;\n  font-weight: normal;\n  margin: 0 auto;\n  font-size: 30px;\n  height: 80px;\n}\n\n.zmiti-detail-main-ui .zmiti-comment h2 > div:nth-of-type(1) {\n  color: #a0a0a0;\n}\n\n.zmiti-detail-main-ui .zmiti-comment h2 span {\n  color: #4a586c;\n}\n\n.zmiti-detail-main-ui .zmiti-comment h2 img {\n  width: 30px;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-comment-item {\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  width: 90%;\n  margin: 20px auto;\n  -webkit-box-align: start;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-comment-item > div {\n  margin: 0 10px;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-comment-item > div:nth-of-type(1) {\n  -webkit-box-flex: 1;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-comment-item > div:nth-of-type(2) {\n  -webkit-box-flex: 11;\n  color: #282727;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-comment-item > div:nth-of-type(2) > div {\n  font-size: 28px;\n  line-height: 40px;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-comment-item > div:nth-of-type(2) > div:nth-of-type(1) {\n  color: #a0a0a0;\n  font-size: 24px;\n  margin-top: -5px;\n}\n\n.zmiti-detail-main-ui .zmiti-comment .zmiti-more {\n  border-top: 1px solid #e9e4d8;\n  text-align: center;\n  height: 100px;\n  color: #787878;\n  line-height: 100px;\n}\n\n.zmiti-detail-main-ui .zmiti-image-text {\n  font-size: 28px;\n  line-height: 42px;\n}\n\n.zmiti-detail-main-ui .zmiti-image {\n  width: 90%;\n  margin: 80px auto 20px;\n  background: #ead7a4;\n  padding: 10px;\n  position: relative;\n}\n\n.zmiti-detail-main-ui .zmiti-image:before {\n  content: '';\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  left: 0;\n  top: 0;\n  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);\n}\n", ""]);
 
 	// exports
 

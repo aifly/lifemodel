@@ -1,10 +1,10 @@
 ﻿var imgs = {
 	play: './assets/images/play.png',
-	logo: './assets/images/logo1.png',
+	logo: './assets/images/logo2.png',
 	indexBg: './assets/images/index-bg1.jpg',
 	introduceBg: './assets/images/introduce-bg.jpg',
 	detailBg: './assets/images/detail-bg.jpg',
-	teamBg: './assets/images/team-bg.jpg',
+	teamBg: './assets/images/team-bg1.jpg',
 	introTitle:'./assets/images/intro-title.png',
 	friendTitle:'./assets/images/friend-title.jpg',
 	detailTitle:'./assets/images/detail-title.png',
@@ -19,8 +19,8 @@
 	videoPoster:"./assets/images/video-poster.png",
 	//mask: './assets/images/mask.png',
 	
-	msg:'./assets/images/msg.png',
-	title1:'./assets/images/title1-1.png',
+	msg:'./assets/images/msg1.png',
+	title1:'./assets/images/title1-2.png',
 	zlm:'./assets/images/zlm.jpg',
 	zlm1:'./assets/images/zlm1.jpg',
 	zlm2:'./assets/images/zlm2.jpg',

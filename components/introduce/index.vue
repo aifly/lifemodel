@@ -35,10 +35,14 @@
 				</ul>
 			</nav>
 
+			<div class="zmiti-team-entry" v-tap='[showTeamPage]'>制作团队</div>
+
 			<div class="zmiti-mask" v-if='showMasks' @touchstart='showMasks = false'>
 				<img :src="imgs.arrow">
 			</div>
-	
+			<div>
+				<Team :obserable='obserable'></Team>
+			</div>
 		</div>
 	
 	</transition>
@@ -52,6 +56,7 @@
 	import zmitiUtil from '../lib/util';
 	import $ from 'jquery';
 	import IScroll from 'iscroll';
+	import Team from '../team/index';
 	export default {
 		props: ['obserable', 'pv', 'randomPv', 'nickname', 'headimgurl'],
 		name: 'zmitiindex',
@@ -62,14 +67,16 @@
 				tabIndex:-1,
 				showTeam: false,
 				showQrcode: false,
-				show: false,
+				show: true,
 				viewW: window.innerWidth,
 				viewH: window.innerHeight,
 				showMasks: false,
 			}
 		},
 	
-		components: {},
+		components: {
+			Team
+		},
 		methods: {
 			restart() {
 				window.location.href = window.location.href.split('?')[0];
@@ -89,12 +96,16 @@
 				obserable.trigger({
 					type:"showFriend"
 				})
+			},
+			showTeamPage(){
+				this.obserable.trigger({
+					type:'showTeam'
+				})
 			}
 		},
 	
 		mounted() {
 			window.s = this;
-
 
 			this.scroll = new IScroll(this.$refs['zmiti-introduce-wrap'],{
 				scrollbars:true

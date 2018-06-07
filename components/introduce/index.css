@@ -119,6 +119,15 @@
   background: #8b5e07 !important;
 }
 
+.zmiti-introduce-main-ui .zmiti-team-entry {
+  position: absolute;
+  z-index: 10;
+  bottom: 120px;
+  right: 50px;
+  text-decoration: underline;
+  color: #714a00;
+}
+
 .zmiti-introduce-main-ui .zmiti-nav {
   position: absolute;
   width: 750px;

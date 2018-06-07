@@ -71,7 +71,7 @@
 					</div>
 
 				</div>
-				<div class="zmiti-copyright" v-tap='[showTeamPage]'>
+				<div class="zmiti-copyright" v-tap='[showTeamPage]' v-if='false'>
 					制作团队
 				</div>
 			</section>
@@ -79,7 +79,6 @@
 			<div class="zmiti-back" v-tap='[hidePage]'>
 				<img :src="imgs.back" alt="">
 			</div>
-			<Team :obserable='obserable'></Team>
 		</div>
 	
 	</transition>
