@@ -62,7 +62,7 @@
 
 	var _componentsIntroduceIndex2 = _interopRequireDefault(_componentsIntroduceIndex);
 
-	var _componentsFriendIndex = __webpack_require__(24);
+	var _componentsFriendIndex = __webpack_require__(29);
 
 	var _componentsFriendIndex2 = _interopRequireDefault(_componentsFriendIndex);
 
@@ -22530,7 +22530,7 @@
 
 	var __vue_script__, __vue_template__
 	__vue_script__ = __webpack_require__(19)
-	__vue_template__ = __webpack_require__(23)
+	__vue_template__ = __webpack_require__(28)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -22625,7 +22625,7 @@
 
 	var _iscroll2 = _interopRequireDefault(_iscroll);
 
-	var _teamIndex = __webpack_require__(28);
+	var _teamIndex = __webpack_require__(23);
 
 	var _teamIndex2 = _interopRequireDefault(_teamIndex);
 
@@ -22639,7 +22639,7 @@
 				tabIndex: -1,
 				showTeam: false,
 				showQrcode: false,
-				show: true,
+				show: false,
 				viewW: window.innerWidth,
 				viewH: window.innerHeight,
 				showMasks: false
@@ -24839,257 +24839,11 @@
 
 /***/ }),
 /* 23 */
-/***/ (function(module, exports) {
-
-	module.exports = "\r\n\t<transition name='main'>\r\n\t\r\n\t\t<div class=\"lt-full zmiti-introduce-main-ui \" :class=\"{'show':show}\" :style=\"{background:'url('+imgs.introduceBg+') no-repeat center center',backgroundSize:'cover'}\"  ref='page'>\r\n\t\t\t<div class=\"zmiti-logo\">\r\n\t\t\t\t<img :src=\"imgs.logo\" alt=\"\">\r\n\t\t\t</div>\r\n\t\t\t<div class=\"zmiti-introduce-main\">\r\n\t\t\t\t<div class=\"zmiti-introduce-title\">\r\n\t\t\t\t\t<img :src=\"imgs.introTitle\" alt=\"\">\r\n\t\t\t\t\t<div>{{texts.zlmIntro}}</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"zmiti-introduce-content\">\r\n\t\t\t\t\t<h2 class=\"zmiti-introduce-name\">\r\n\t\t\t\t\t\t{{texts.zlmName}}\r\n\t\t\t\t\t</h2>\r\n\t\t\t\t\t<div class=\"zmiti-introduce-wrap\" ref='zmiti-introduce-wrap'>\r\n\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t<div v-for='(content,i) in texts.zlmIntroContent' :key=\"i\">\r\n\t\t\t\t\t\t\t\t{{content}}\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\r\n\t\t\t<nav class=\"zmiti-nav\">\r\n\t\t\t\t<ul>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 0' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 0}\"  v-tap='[entryDetail,\"aigangjingye\"]'>爱岗敬业</li>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 1' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 1}\" v-tap='[entryDetail,\"yongyuchuangxin\"]'>勇于创新</li>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 2' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 2}\" v-tap='[entryDetail,\"ganyufengxian\"]'>甘于奉献</li>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 3' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 3}\" v-tap='[entryFriend]'>\r\n\t\t\t\t\t\t<img :src=\"imgs.msg\" alt=\"\">\r\n\t\t\t\t\t</li>\r\n\t\t\t\t</ul>\r\n\t\t\t</nav>\r\n\r\n\t\t\t<div class=\"zmiti-team-entry\" v-tap='[showTeamPage]'>制作团队</div>\r\n\r\n\t\t\t<div class=\"zmiti-mask\" v-if='showMasks' @touchstart='showMasks = false'>\r\n\t\t\t\t<img :src=\"imgs.arrow\">\r\n\t\t\t</div>\r\n\t\t\t<div>\r\n\t\t\t\t<Team :obserable='obserable'></Team>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\r\n\t</transition>\r\n";
-
-/***/ }),
-/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(25)
-	__vue_template__ = __webpack_require__(33)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "F:\\xuchang2018\\project\\lifemodel\\components\\friend\\index.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	// <template>
-	// 	<transition name='main'>
-	//
-	// 		<div class="lt-full zmiti-friend-main-ui " :class="{'show':show}"  ref='page'>
-	//
-	// 			<section>
-	// 				<div class="zmiti-index-logo">
-	// 					<img :src="imgs.logo" alt="">
-	// 				</div>
-	// 				<img :src="imgs.friendTitle" alt="">
-	// 				<div class="zmiti-friend-C">
-	// 					<div class="zmiti-head">
-	// 						<img :src="imgs.head1" alt="">
-	// 					</div>
-	// 					<div>
-	// 						<div class="zmiti-friend-nickname">国家电网</div>
-	// 						<div class="zmiti-friend-content">
-	// 							<div class="zmiti-friend-link">
-	// 								<div>
-	// 									<img :src="imgs.head2" alt="">
-	// 								</div>
-	// 								<div>
-	// 									<span>中宣部授予张黎明“时代楷模”称号</span>
-	// 								</div>
-	// 							</div>
-	// 						</div>
-	//
-	// 						<div class="zmiti-friend-time">
-	// 							<div>3分钟前</div>
-	// 							<div><img :src="imgs.like" alt=""></div>
-	// 						</div>
-	//
-	// 						<div class="zmiti-friend-like-list">
-	// 							<img :src="imgs.heart" alt="">
-	// 							滨海新区区委宣传部张宁，国网天津市电力公司党建工作部主任及明，国网天津滨海供电公司员工张斌，马秀环老人，塘沽街道新城家园社区居委会主任何丽，张黎明儿子
-	// 						</div>
-	//
-	// 						<div class="zmiti-friend-comment">
-	// 							<span>滨海新区区委宣传部张宁：</span>
-	// 							张黎明在看似平凡中彰显了一名共产党员的先进本色。
-	// 						</div>
-	// 						<div class="zmiti-friend-comment">
-	// 							<span>国网天津市电力公司党建工作部主任及明：</span>
-	// 							张黎明所展现出的良好的党性修养产生了辐射效应，带动了一批党员群众向他看齐。
-	// 						</div>
-	//
-	// 						<div class="zmiti-friend-comment">
-	// 							<span>国网天津滨海供电公司员工张斌：</span>
-	// 							我很荣幸，能在步入企业之初就找到像张黎明这样的工作标杆。
-	// 						</div>
-	//
-	// 						<div class="zmiti-friend-comment">
-	// 							<span>马秀环老人：</span>
-	// 							张师傅比我自己孩子还上心。
-	// 						</div>
-	//
-	// 						<div class="zmiti-friend-comment">
-	// 							<span>塘沽街道新城家园社区居委会主任何丽：</span>
-	// 							他是我们百姓的贴心人，也是我们身边的榜样。
-	// 						</div>
-	//
-	// 						<div class="zmiti-friend-comment">
-	// 							<span>张黎明儿子：</span>
-	// 							我和爸爸交流不是很多，因为他平时特别忙，但我能感觉到他对周围的人，对家人，甚至不相识的人都非常好，非常负责任。
-	// 						</div>
-	//
-	// 						<div class="zmiti-friend-comment">
-	// 							<span>张黎明</span>回复：党的十九大报告已经给我们指明了方向，知识型、技能型、创新型，就是我们蓝领工人的奋斗目标。作为一名基层党员，我会继续在服务群众上下功夫。
-	// 						</div>
-	//
-	// 					</div>
-	//
-	// 				</div>
-	// 				<div class="zmiti-copyright" v-tap='[showTeamPage]' v-if='false'>
-	// 					制作团队
-	// 				</div>
-	// 			</section>
-	//
-	// 			<div class="zmiti-back" v-tap='[hidePage]'>
-	// 				<img :src="imgs.back" alt="">
-	// 			</div>
-	// 		</div>
-	//
-	// 	</transition>
-	// </template>
-	//
-	// <script>
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-		value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	__webpack_require__(26);
-
-	var _libAssetsJs = __webpack_require__(13);
-
-	var _iscroll = __webpack_require__(22);
-
-	var _iscroll2 = _interopRequireDefault(_iscroll);
-
-	var _jquery = __webpack_require__(15);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	var _libUtil = __webpack_require__(14);
-
-	var _libUtil2 = _interopRequireDefault(_libUtil);
-
-	var _teamIndex = __webpack_require__(28);
-
-	var _teamIndex2 = _interopRequireDefault(_teamIndex);
-
-	exports['default'] = {
-
-		props: ['obserable', 'pv', 'randomPv', 'nickname', 'headimgurl'],
-
-		name: 'zmitiindex',
-
-		data: function data() {
-
-			return {
-				imgs: _libAssetsJs.imgs,
-				showTeam: false,
-				showQrcode: false,
-				show: false,
-				viewW: window.innerWidth,
-				viewH: window.innerHeight,
-				showMasks: false
-			};
-		},
-
-		components: {
-			Team: _teamIndex2['default']
-		},
-		methods: {
-			restart: function restart() {
-				window.location.href = window.location.href.split('?')[0];
-			},
-			share: function share() {
-				this.showMasks = true;
-			},
-			hidePage: function hidePage() {
-				this.show = false;
-			},
-			showTeamPage: function showTeamPage() {
-				this.obserable.trigger({
-					type: 'showTeam'
-				});
-			}
-		},
-
-		mounted: function mounted() {
-			var _this = this;
-
-			window.s = this;
-
-			this.scroll = new _iscroll2['default'](this.$refs['page'], {});
-
-			var obserable = this.obserable;
-
-			obserable.on('showFriend', function () {
-				_this.show = true;
-				_this.scroll.scrollTo(0, 0, 1);
-			});
-		}
-
-	};
-
-	// </script>
-	module.exports = exports['default'];
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(27);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(8)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!../../node_modules/css-loader/index.js!./index.css", function() {
-				var newContent = require("!!../../node_modules/css-loader/index.js!./index.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(7)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".lt-full {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n\n.zmiti-text-overflow {\n  overflow: hidden;\n  white-space: nowrap;\n  word-break: break-all;\n  text-overflow: ellipsis;\n  -webkit-text-overflow: ellipsis;\n}\n\n.zmiti-play {\n  width: .8rem;\n  height: .8rem;\n  border-radius: 50%;\n  position: fixed;\n  z-index: 1000;\n  right: .5rem;\n  top: .5rem;\n}\n\n.zmiti-play.rotate {\n  -webkit-animation: rotate 5s linear infinite;\n  animation: rotate 5s linear infinite;\n}\n\n@-webkit-keyframes rotate {\n  to {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n\n.zmiti-friend-main-ui {\n  opacity: 0;\n  z-index: -1;\n  background: #fdf7eb;\n}\n\n.zmiti-friend-main-ui > section {\n  padding-bottom: 60px;\n}\n\n.zmiti-friend-main-ui > section .zmiti-index-logo {\n  position: absolute;\n  width: 180px;\n  right: 20px;\n  top: 20px;\n}\n\n.zmiti-friend-main-ui.show {\n  z-index: 1230;\n  opacity: 1;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C {\n  width: 96%;\n  margin: 40px auto;\n  position: relative;\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  -webkit-box-pack: start;\n  -webkit-box-align: start;\n  font-size: 28px;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C > div {\n  margin: 0 10px;\n  -webkit-box-flex: 1;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C > div:nth-of-type(1) {\n  width: 172px;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-nickname {\n  color: #2c4a7c;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-link {\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  margin-top: 10px;\n  -webkit-box-pack: start;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-link > div {\n  margin-right: 20px;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-time {\n  margin: 50px 0;\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  -webkit-box-pack: justify;\n  color: #dcc;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-like-list {\n  color: #2c4a7c;\n  line-height: 44px;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-like-list img {\n  width: 30px;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-comment {\n  margin-top: 40px;\n  font-size: 28px;\n  line-height: 40px;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-comment span {\n  color: #2c4a7c;\n}\n\n.zmiti-friend-main-ui .zmiti-copyright {\n  height: 70px;\n  line-height: 70px;\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  text-align: center;\n  border-top: 1px solid #ebd7a4;\n  color: #a2853b;\n  font-size: 26px;\n}\n\n.zmiti-back {\n  width: 100px;\n  height: 100px;\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  z-index: 100;\n}\n", ""]);
-
-	// exports
-
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(29)
-	__vue_template__ = __webpack_require__(32)
+	__vue_script__ = __webpack_require__(24)
+	__vue_template__ = __webpack_require__(27)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -25106,7 +24860,7 @@
 	})()}
 
 /***/ }),
-/* 29 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// <template>
@@ -25189,7 +24943,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	__webpack_require__(30);
+	__webpack_require__(25);
 
 	var _libAssetsJs = __webpack_require__(13);
 
@@ -25233,13 +24987,13 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 30 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(31);
+	var content = __webpack_require__(26);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -25259,7 +25013,7 @@
 	}
 
 /***/ }),
-/* 31 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -25273,16 +25027,262 @@
 
 
 /***/ }),
-/* 32 */
+/* 27 */
 /***/ (function(module, exports) {
 
 	module.exports = "\r\n\t<transition name=\"team\">\r\n\t\t<div v-tap='[hideTeam]' v-show='showTeam' class=\"lt-full zmiti-team-main-ui\" :style=\"{background:'url('+imgs.teamBg+') no-repeat center center',backgroundSize:'cover'}\">\r\n\t\t\t<div class=\"zmiti-team-main\">\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t出品人\r\n\t\t\t\t\t</aside> \r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<span>陈凯星、</span> <span>冯瑛冰、</span><span>杨维成</span>\r\n\t\t\t\t\t</aside>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t总监制\r\n\t\t\t\t\t</aside> \r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<span>葛素表、</span><span>刘元旭</span>\r\n\t\t\t\t\t</aside>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t策<label for=\"\">策</label>划\r\n\t\t\t\t\t</aside> \r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<span>陈知春</span>\r\n\t\t\t\t\t</aside>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t监<label for=\"\">人</label>制\r\n\t\t\t\t\t</aside> \r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<span>牟　帆</span>\r\n\t\t\t\t\t</aside>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t记<label for=\"\">人</label>者\r\n\t\t\t\t\t</aside> \r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<span>毛振华</span>\r\n\t\t\t\t\t</aside>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t文<label for=\"\">人</label>案\r\n\t\t\t\t\t</aside> \r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<span>李京泽</span>\r\n\t\t\t\t\t</aside>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t制<label for=\"\">人</label>作\r\n\t\t\t\t\t</aside> \r\n\t\t\t\t\t<aside>\r\n\t\t\t\t\t\t<span>麟腾传媒</span>\r\n\t\t\t\t\t</aside>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div>\r\n\t\t\t\t\t新华社新媒体中心、新华社天津分社联合出品\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</transition>\r\n";
 
 /***/ }),
+/* 28 */
+/***/ (function(module, exports) {
+
+	module.exports = "\r\n\t<transition name='main'>\r\n\t\r\n\t\t<div class=\"lt-full zmiti-introduce-main-ui \" :class=\"{'show':show}\" :style=\"{background:'url('+imgs.introduceBg+') no-repeat center center',backgroundSize:'cover'}\"  ref='page'>\r\n\t\t\t<div class=\"zmiti-logo\">\r\n\t\t\t\t<img :src=\"imgs.logo\" alt=\"\">\r\n\t\t\t</div>\r\n\t\t\t<div class=\"zmiti-introduce-main\">\r\n\t\t\t\t<div class=\"zmiti-introduce-title\">\r\n\t\t\t\t\t<img :src=\"imgs.introTitle\" alt=\"\">\r\n\t\t\t\t\t<div>{{texts.zlmIntro}}</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"zmiti-introduce-content\">\r\n\t\t\t\t\t<h2 class=\"zmiti-introduce-name\">\r\n\t\t\t\t\t\t{{texts.zlmName}}\r\n\t\t\t\t\t</h2>\r\n\t\t\t\t\t<div class=\"zmiti-introduce-wrap\" ref='zmiti-introduce-wrap'>\r\n\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t<div v-for='(content,i) in texts.zlmIntroContent' :key=\"i\">\r\n\t\t\t\t\t\t\t\t{{content}}\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\r\n\t\t\t<nav class=\"zmiti-nav\">\r\n\t\t\t\t<ul>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 0' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 0}\"  v-tap='[entryDetail,\"aigangjingye\"]'>爱岗敬业</li>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 1' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 1}\" v-tap='[entryDetail,\"yongyuchuangxin\"]'>勇于创新</li>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 2' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 2}\" v-tap='[entryDetail,\"ganyufengxian\"]'>甘于奉献</li>\r\n\t\t\t\t\t<li @touchstart='tabIndex = 3' @touchend='tabIndex = -1' :class=\"{'active':tabIndex === 3}\" v-tap='[entryFriend]'>\r\n\t\t\t\t\t\t<img :src=\"imgs.msg\" alt=\"\">\r\n\t\t\t\t\t</li>\r\n\t\t\t\t</ul>\r\n\t\t\t</nav>\r\n\r\n\t\t\t<div class=\"zmiti-team-entry\" v-tap='[showTeamPage]'>制作团队</div>\r\n\r\n\t\t\t<div class=\"zmiti-mask\" v-if='showMasks' @touchstart='showMasks = false'>\r\n\t\t\t\t<img :src=\"imgs.arrow\">\r\n\t\t\t</div>\r\n\t\t\t<div>\r\n\t\t\t\t<Team :obserable='obserable'></Team>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\r\n\t</transition>\r\n";
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(30)
+	__vue_template__ = __webpack_require__(33)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "F:\\xuchang2018\\project\\lifemodel\\components\\friend\\index.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// <template>
+	// 	<transition name='main'>
+	//
+	// 		<div class="lt-full zmiti-friend-main-ui " :class="{'show':show}"  ref='page'>
+	//
+	// 			<section>
+	// 				<div class="zmiti-index-logo">
+	// 					<img :src="imgs.logo" alt="">
+	// 				</div>
+	// 				<img :src="imgs.friendTitle" alt="">
+	// 				<div class="zmiti-friend-C">
+	// 					<div class="zmiti-head">
+	// 						<img :src="imgs.head1" alt="">
+	// 					</div>
+	// 					<div>
+	// 						<div class="zmiti-friend-nickname">国家电网</div>
+	// 						<div class="zmiti-friend-content">
+	// 							<div class="zmiti-friend-link">
+	// 								<div>
+	// 									<img :src="imgs.head2" alt="">
+	// 								</div>
+	// 								<div>
+	// 									<span>中宣部授予张黎明“时代楷模”称号</span>
+	// 								</div>
+	// 							</div>
+	// 						</div>
+	//
+	// 						<div class="zmiti-friend-time">
+	// 							<div>3分钟前</div>
+	// 							<div><img :src="imgs.like" alt=""></div>
+	// 						</div>
+	//
+	// 						<div class="zmiti-friend-like-list">
+	// 							<img :src="imgs.heart" alt="">
+	// 							滨海新区区委宣传部张宁，国网天津市电力公司党建工作部主任及明，国网天津滨海供电公司员工张斌，马秀环老人，塘沽街道新城家园社区居委会主任何丽，张黎明儿子
+	// 						</div>
+	//
+	// 						<div class="zmiti-friend-comment">
+	// 							<span>滨海新区区委宣传部张宁：</span>
+	// 							张黎明在看似平凡中彰显了一名共产党员的先进本色。
+	// 						</div>
+	// 						<div class="zmiti-friend-comment">
+	// 							<span>国网天津市电力公司党建工作部主任及明：</span>
+	// 							他所展现出的良好的党性修养产生了辐射效应，带动了一批党员群众向他看齐。
+	// 						</div>
+	//
+	// 						<div class="zmiti-friend-comment">
+	// 							<span>国网天津滨海供电公司员工张斌：</span>
+	// 							我很荣幸，能在步入企业之初就找到像张黎明这样的工作标杆。
+	// 						</div>
+	//
+	// 						<div class="zmiti-friend-comment">
+	// 							<span>马秀环老人：</span>
+	// 							张师傅比我自己孩子还上心。
+	// 						</div>
+	//
+	// 						<div class="zmiti-friend-comment">
+	// 							<span>塘沽街道新城家园社区居委会主任何丽：</span>
+	// 							他是我们百姓的贴心人，也是我们身边的榜样。
+	// 						</div>
+	//
+	// 						<div class="zmiti-friend-comment">
+	// 							<span>张黎明儿子：</span>
+	// 							他有时候就会跟我说，儿子，你做事情的时候，一定要踏实，要认真，要钻研。
+	// 						</div>
+	//
+	// 						<div class="zmiti-friend-comment">
+	// 							<span>张黎明</span>回复：党的十九大报告已经给我们指明了方向，知识型、技能型、创新型，就是我们蓝领工人的奋斗目标。作为一名基层党员，我会继续在服务群众上下功夫。
+	// 						</div>
+	//
+	// 					</div>
+	//
+	// 				</div>
+	// 				<div class="zmiti-copyright" v-tap='[showTeamPage]' v-if='false'>
+	// 					制作团队
+	// 				</div>
+	// 			</section>
+	//
+	// 			<div class="zmiti-back" v-tap='[hidePage]'>
+	// 				<img :src="imgs.back" alt="">
+	// 			</div>
+	// 		</div>
+	//
+	// 	</transition>
+	// </template>
+	//
+	// <script>
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+		value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	__webpack_require__(31);
+
+	var _libAssetsJs = __webpack_require__(13);
+
+	var _iscroll = __webpack_require__(22);
+
+	var _iscroll2 = _interopRequireDefault(_iscroll);
+
+	var _jquery = __webpack_require__(15);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _libUtil = __webpack_require__(14);
+
+	var _libUtil2 = _interopRequireDefault(_libUtil);
+
+	var _teamIndex = __webpack_require__(23);
+
+	var _teamIndex2 = _interopRequireDefault(_teamIndex);
+
+	exports['default'] = {
+
+		props: ['obserable', 'pv', 'randomPv', 'nickname', 'headimgurl'],
+
+		name: 'zmitiindex',
+
+		data: function data() {
+
+			return {
+				imgs: _libAssetsJs.imgs,
+				showTeam: false,
+				showQrcode: false,
+				show: false,
+				viewW: window.innerWidth,
+				viewH: window.innerHeight,
+				showMasks: false
+			};
+		},
+
+		components: {
+			Team: _teamIndex2['default']
+		},
+		methods: {
+			restart: function restart() {
+				window.location.href = window.location.href.split('?')[0];
+			},
+			share: function share() {
+				this.showMasks = true;
+			},
+			hidePage: function hidePage() {
+				this.show = false;
+			},
+			showTeamPage: function showTeamPage() {
+				this.obserable.trigger({
+					type: 'showTeam'
+				});
+			}
+		},
+
+		mounted: function mounted() {
+			var _this = this;
+
+			window.s = this;
+
+			this.scroll = new _iscroll2['default'](this.$refs['page'], {});
+
+			var obserable = this.obserable;
+
+			obserable.on('showFriend', function () {
+				_this.show = true;
+				_this.scroll.scrollTo(0, 0, 1);
+			});
+		}
+
+	};
+
+	// </script>
+	module.exports = exports['default'];
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(32);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(8)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../node_modules/css-loader/index.js!./index.css", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!./index.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(7)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".lt-full {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n\n.zmiti-text-overflow {\n  overflow: hidden;\n  white-space: nowrap;\n  word-break: break-all;\n  text-overflow: ellipsis;\n  -webkit-text-overflow: ellipsis;\n}\n\n.zmiti-play {\n  width: .8rem;\n  height: .8rem;\n  border-radius: 50%;\n  position: fixed;\n  z-index: 1000;\n  right: .5rem;\n  top: .5rem;\n}\n\n.zmiti-play.rotate {\n  -webkit-animation: rotate 5s linear infinite;\n  animation: rotate 5s linear infinite;\n}\n\n@-webkit-keyframes rotate {\n  to {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n\n.zmiti-friend-main-ui {\n  opacity: 0;\n  z-index: -1;\n  background: #fdf7eb;\n}\n\n.zmiti-friend-main-ui > section {\n  padding-bottom: 60px;\n}\n\n.zmiti-friend-main-ui > section .zmiti-index-logo {\n  position: absolute;\n  width: 180px;\n  right: 20px;\n  top: 20px;\n}\n\n.zmiti-friend-main-ui.show {\n  z-index: 1230;\n  opacity: 1;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C {\n  width: 96%;\n  margin: 40px auto;\n  position: relative;\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  -webkit-box-pack: start;\n  -webkit-box-align: start;\n  font-size: 28px;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C > div {\n  margin: 0 10px;\n  -webkit-box-flex: 1;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C > div:nth-of-type(1) {\n  width: 172px;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-nickname {\n  color: #2c4a7c;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-link {\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  margin-top: 10px;\n  -webkit-box-pack: start;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-link > div {\n  margin-right: 20px;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-time {\n  margin: 50px 0;\n  display: -webkit-box;\n  -webkit-box-align: center;\n  -webkit-box-pack: center;\n  -webkit-box-orient: horizontal;\n  -webkit-box-pack: justify;\n  color: #dcc;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-like-list {\n  color: #2c4a7c;\n  line-height: 44px;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-like-list img {\n  width: 30px;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-comment {\n  margin-top: 40px;\n  font-size: 28px;\n  line-height: 40px;\n}\n\n.zmiti-friend-main-ui .zmiti-friend-C .zmiti-friend-comment span {\n  color: #2c4a7c;\n}\n\n.zmiti-friend-main-ui .zmiti-copyright {\n  height: 70px;\n  line-height: 70px;\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  text-align: center;\n  border-top: 1px solid #ebd7a4;\n  color: #a2853b;\n  font-size: 26px;\n}\n\n.zmiti-back {\n  width: 100px;\n  height: 100px;\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  z-index: 100;\n}\n", ""]);
+
+	// exports
+
+
+/***/ }),
 /* 33 */
 /***/ (function(module, exports) {
 
-	module.exports = "\r\n\t<transition name='main'>\r\n\t\r\n\t\t<div class=\"lt-full zmiti-friend-main-ui \" :class=\"{'show':show}\"  ref='page'>\r\n\t\t\t\r\n\t\t\t<section>\r\n\t\t\t\t<div class=\"zmiti-index-logo\">\r\n\t\t\t\t\t<img :src=\"imgs.logo\" alt=\"\">\r\n\t\t\t\t</div>\r\n\t\t\t\t<img :src=\"imgs.friendTitle\" alt=\"\">\r\n\t\t\t\t<div class=\"zmiti-friend-C\">\r\n\t\t\t\t\t<div class=\"zmiti-head\">\r\n\t\t\t\t\t\t<img :src=\"imgs.head1\" alt=\"\">\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div>\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-nickname\">国家电网</div>\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-content\">\r\n\t\t\t\t\t\t\t<div class=\"zmiti-friend-link\">\r\n\t\t\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t\t\t<img :src=\"imgs.head2\" alt=\"\">\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t\t\t<span>中宣部授予张黎明“时代楷模”称号</span>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-time\">\r\n\t\t\t\t\t\t\t<div>3分钟前</div>\r\n\t\t\t\t\t\t\t<div><img :src=\"imgs.like\" alt=\"\"></div>\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-like-list\">\r\n\t\t\t\t\t\t\t<img :src=\"imgs.heart\" alt=\"\">\r\n\t\t\t\t\t\t\t滨海新区区委宣传部张宁，国网天津市电力公司党建工作部主任及明，国网天津滨海供电公司员工张斌，马秀环老人，塘沽街道新城家园社区居委会主任何丽，张黎明儿子\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>滨海新区区委宣传部张宁：</span>\r\n\t\t\t\t\t\t\t张黎明在看似平凡中彰显了一名共产党员的先进本色。\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>国网天津市电力公司党建工作部主任及明：</span>\r\n\t\t\t\t\t\t\t张黎明所展现出的良好的党性修养产生了辐射效应，带动了一批党员群众向他看齐。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>国网天津滨海供电公司员工张斌：</span>\r\n\t\t\t\t\t\t\t我很荣幸，能在步入企业之初就找到像张黎明这样的工作标杆。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>马秀环老人：</span>\r\n\t\t\t\t\t\t\t张师傅比我自己孩子还上心。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>塘沽街道新城家园社区居委会主任何丽：</span>\r\n\t\t\t\t\t\t\t他是我们百姓的贴心人，也是我们身边的榜样。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>张黎明儿子：</span>\r\n\t\t\t\t\t\t\t我和爸爸交流不是很多，因为他平时特别忙，但我能感觉到他对周围的人，对家人，甚至不相识的人都非常好，非常负责任。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>张黎明</span>回复：党的十九大报告已经给我们指明了方向，知识型、技能型、创新型，就是我们蓝领工人的奋斗目标。作为一名基层党员，我会继续在服务群众上下功夫。\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t</div>\r\n\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"zmiti-copyright\" v-tap='[showTeamPage]' v-if='false'>\r\n\t\t\t\t\t制作团队\r\n\t\t\t\t</div>\r\n\t\t\t</section>\r\n\t\t\t\r\n\t\t\t<div class=\"zmiti-back\" v-tap='[hidePage]'>\r\n\t\t\t\t<img :src=\"imgs.back\" alt=\"\">\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\r\n\t</transition>\r\n";
+	module.exports = "\r\n\t<transition name='main'>\r\n\t\r\n\t\t<div class=\"lt-full zmiti-friend-main-ui \" :class=\"{'show':show}\"  ref='page'>\r\n\t\t\t\r\n\t\t\t<section>\r\n\t\t\t\t<div class=\"zmiti-index-logo\">\r\n\t\t\t\t\t<img :src=\"imgs.logo\" alt=\"\">\r\n\t\t\t\t</div>\r\n\t\t\t\t<img :src=\"imgs.friendTitle\" alt=\"\">\r\n\t\t\t\t<div class=\"zmiti-friend-C\">\r\n\t\t\t\t\t<div class=\"zmiti-head\">\r\n\t\t\t\t\t\t<img :src=\"imgs.head1\" alt=\"\">\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div>\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-nickname\">国家电网</div>\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-content\">\r\n\t\t\t\t\t\t\t<div class=\"zmiti-friend-link\">\r\n\t\t\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t\t\t<img :src=\"imgs.head2\" alt=\"\">\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t\t\t<span>中宣部授予张黎明“时代楷模”称号</span>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-time\">\r\n\t\t\t\t\t\t\t<div>3分钟前</div>\r\n\t\t\t\t\t\t\t<div><img :src=\"imgs.like\" alt=\"\"></div>\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-like-list\">\r\n\t\t\t\t\t\t\t<img :src=\"imgs.heart\" alt=\"\">\r\n\t\t\t\t\t\t\t滨海新区区委宣传部张宁，国网天津市电力公司党建工作部主任及明，国网天津滨海供电公司员工张斌，马秀环老人，塘沽街道新城家园社区居委会主任何丽，张黎明儿子\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>滨海新区区委宣传部张宁：</span>\r\n\t\t\t\t\t\t\t张黎明在看似平凡中彰显了一名共产党员的先进本色。\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>国网天津市电力公司党建工作部主任及明：</span>\r\n\t\t\t\t\t\t\t他所展现出的良好的党性修养产生了辐射效应，带动了一批党员群众向他看齐。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>国网天津滨海供电公司员工张斌：</span>\r\n\t\t\t\t\t\t\t我很荣幸，能在步入企业之初就找到像张黎明这样的工作标杆。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>马秀环老人：</span>\r\n\t\t\t\t\t\t\t张师傅比我自己孩子还上心。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>塘沽街道新城家园社区居委会主任何丽：</span>\r\n\t\t\t\t\t\t\t他是我们百姓的贴心人，也是我们身边的榜样。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>张黎明儿子：</span>\r\n\t\t\t\t\t\t\t他有时候就会跟我说，儿子，你做事情的时候，一定要踏实，要认真，要钻研。\r\n\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t<div class=\"zmiti-friend-comment\">\r\n\t\t\t\t\t\t\t<span>张黎明</span>回复：党的十九大报告已经给我们指明了方向，知识型、技能型、创新型，就是我们蓝领工人的奋斗目标。作为一名基层党员，我会继续在服务群众上下功夫。\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t</div>\r\n\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"zmiti-copyright\" v-tap='[showTeamPage]' v-if='false'>\r\n\t\t\t\t\t制作团队\r\n\t\t\t\t</div>\r\n\t\t\t</section>\r\n\t\t\t\r\n\t\t\t<div class=\"zmiti-back\" v-tap='[hidePage]'>\r\n\t\t\t\t<img :src=\"imgs.back\" alt=\"\">\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\r\n\t</transition>\r\n";
 
 /***/ }),
 /* 34 */

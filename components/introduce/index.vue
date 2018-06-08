@@ -67,7 +67,7 @@
 				tabIndex:-1,
 				showTeam: false,
 				showQrcode: false,
-				show: true,
+				show: false,
 				viewW: window.innerWidth,
 				viewH: window.innerHeight,
 				showMasks: false,

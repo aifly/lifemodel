@@ -41,7 +41,7 @@
 						</div>
 						<div class="zmiti-friend-comment">
 							<span>国网天津市电力公司党建工作部主任及明：</span>
-							张黎明所展现出的良好的党性修养产生了辐射效应，带动了一批党员群众向他看齐。
+							他所展现出的良好的党性修养产生了辐射效应，带动了一批党员群众向他看齐。
 						</div>
 
 						<div class="zmiti-friend-comment">
@@ -61,7 +61,7 @@
 
 						<div class="zmiti-friend-comment">
 							<span>张黎明儿子：</span>
-							我和爸爸交流不是很多，因为他平时特别忙，但我能感觉到他对周围的人，对家人，甚至不相识的人都非常好，非常负责任。
+							他有时候就会跟我说，儿子，你做事情的时候，一定要踏实，要认真，要钻研。
 						</div>
 
 						<div class="zmiti-friend-comment">
