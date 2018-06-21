@@ -60,7 +60,7 @@ var yongyuchuangxin = { //勇于创新
 	videoPoster: imgs.videoPoster,
 	videoText: '“工作是快乐的。创新让工作更快乐。”张黎明常把这句话挂在嘴边勉励同事、徒弟们。 ',
 	image: imgs.zlm1,
-	videoUrl: './assets/video/yongyuchuangxin1.mp4',
+	videoUrl: './assets/video/yongyuchuangxin2.mp4',
 	imageText: '2011年，以张黎明名字命名的“张黎明创新工作室”应运而生，这是国网天津市电力公司的第一个职工创新工作室。工作室成立以来，张黎明带领同事们开展技术革新400余项，获得国家专利140余个，20多项成果填补智能电网建设空白。'
 }
 
