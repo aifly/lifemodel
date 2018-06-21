@@ -7,7 +7,7 @@
 						出品人
 					</aside> 
 					<aside>
-						<span>陈凯星、</span> <span>冯瑛冰、</span><span>杨维成</span>
+						<span>陈凯星、</span> <span>冯瑛冰</span>
 					</aside>
 				</div>
 				<div>
